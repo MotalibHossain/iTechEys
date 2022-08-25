@@ -1,9 +1,15 @@
 import './App.css';
 
+// Bootstrap library 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+// Components import 
+import Navigation from './components/Navigation/Navigation';
+
 function App() {
   return (
     <div className="App">
-      <h1>my name is motalib</h1>
+      <Navigation />
     </div>
   );
 }

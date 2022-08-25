@@ -1,0 +1,137 @@
+
+/* Navigation all css  */
+.Main-Navbar {
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+  }
+  
+  .LeftNav {
+    width: 60%;
+  }
+  
+  .RightNav {
+    width: 40%;
+  
+  }
+
+  
+  /* navigation item  */
+  .Navbar {
+    display: flex;
+    flex-wrap: nowrap;
+    list-style: none;
+    margin-bottom: 0px;
+    padding-left: 0px;
+  }
+  
+  .RightNav .Navbar {
+    justify-content: flex-end;
+  
+  }
+  
+  .NavItem {
+    position: relative;
+    padding: 10px 10px;
+  }
+  
+  .Navbar .NavItem .NavLink {
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #000000c7;
+    font-size: 12px;
+    font-family: 'Poppins';
+  }
+  
+  /* Icon rotad on hover with transition  */
+  /* .NavLink i{
+    display: inline-block;
+    transition: transform 0.3s ease-in-out;
+  }
+  .NavItem:hover .NavLink i{
+    transform: rotate(180deg);
+    color: red;
+  } */
+  /* ===== */
+  
+  /* Icon roted with transition after dropdown clicking  */
+  .Navbar .NavItem .NavLink #iconDropdown {
+    display: inline-block;
+    transition: transform 0.3s ease-in-out;
+    transform: rotate(180deg);
+    color: red;
+  }
+  
+  /*---------End icon----------*/
+  
+  /* Navbar Hover part  */
+  .NavItem:hover {
+    background-color: aliceblue;
+  }
+  
+  /* Code for dropdown navigation  */
+  .DropDown {
+    top: 46px;
+    left: 0;
+    position: absolute;
+    list-style: none;
+    padding-left: 0px;
+    background-color: aliceblue;
+    border-bottom: 3px solid red;
+  }
+  
+  .DropDown .NavItem {
+    padding: 10px 20px;
+  }
+  
+  .DropDown .NavItem:hover {
+    background: bisque;
+  }
+  /* Responsive navbar code  */
+  @media only screen and (min-width: 992px) {
+    #offcanvasNavbar-expand-sm{
+      display: none;
+    }
+    .DropDown {
+      /* top: 100%; */
+      width: 250px !important;
+      opacity: 0;
+      z-index: -1;
+      visibility: hidden;
+      transform: translateY(-2rem);
+      transition: all 0.3s linear;
+    }
+  
+    #ShowDropDown {
+      opacity: 1;
+      z-index: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+  }
+  
+  @media only screen and (max-width: 992px) {
+    .navbar>.container-fluid{
+      display: block;
+    }
+    .Main-Navbar {
+      flex-direction: column;
+    }
+    .Main-Navbar .LeftNav,
+    .RightNav {
+      width: 100%;
+    }
+    .Navbar {
+      flex-direction: column;
+    }
+  
+    /* Drop-Down menu css  */
+    .DropDown {
+      display: none !important;
+      position: unset;
+    }
+    #ShowDropDown {
+      display: block !important;
+    }
+  }
