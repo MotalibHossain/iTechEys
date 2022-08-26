@@ -26,7 +26,7 @@ const MainNav = () => {
                 <Container fluid>
                     {/* In small device left navigation */}
                     <Navbar.Toggle className="me-sm-3" aria-controls="offcanvasNavbar-expand-lg" onClick={()=>setLeftclose(!leftClose)} />
-                    <Navbar.Brand href="#">Top Tech</Navbar.Brand>
+                    <Navbar.Brand href="#" className="text-light bold">Top Tech</Navbar.Brand>
                     {/* In small device right navigation */}
                     <Navbar.Toggle aria-controls="" className="float-end" onClick={()=>setRightclose(!rightClose)}>
                         <BiDotsVertical />
