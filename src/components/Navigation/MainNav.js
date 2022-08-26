@@ -16,32 +16,31 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 import NavItem from './NavItem'
 
 const MainNav = () => {
-    const [left, leftSet] = useState(false);
-    const [right, rightSet] = useState(false);
-
-    const ShowLeft = () => {
-        leftSet(!left);
-    };
-    const ShowRight = () => {
-        rightSet(!right);
-    };
+    // In small devise navigation are collaps.If need to open and close then need to change in two lines 
+    const [leftClose, setLeftclose] = useState(false);
+    const [rightClose, setRightclose] = useState(false);
 
     return (
         <>
-            <Navbar bg="light" expand="lg" className="mb-3 p-0">
+            <Navbar expand="lg" className="mb-3 p-0">
                 <Container fluid>
-                    <Navbar.Toggle className="me-sm-3" aria-controls="offcanvasNavbar-expand-lg" onClick={ShowLeft} />
-                    <Navbar.Brand href="#">Navbar Offcanvas</Navbar.Brand>
-                    <Navbar.Toggle aria-controls="" className="float-end" onClick={ShowRight}>
+                    {/* In small device left navigation */}
+                    <Navbar.Toggle className="me-sm-3" aria-controls="offcanvasNavbar-expand-lg" onClick={()=>setLeftclose(!leftClose)} />
+                    <Navbar.Brand href="#">Top Tech</Navbar.Brand>
+                    {/* In small device right navigation */}
+                    <Navbar.Toggle aria-controls="" className="float-end" onClick={()=>setRightclose(!rightClose)}>
                         <BiDotsVertical />
                     </Navbar.Toggle>
+                    {/* ----------------------------------------------------
+                                        Left navigation
+                    ------------------------------------------------------*/}
                     <Navbar.Offcanvas
-                        show={left}
+                        show={leftClose}
                         id="offcanvasNavbar-expand-lg"
                         aria-labelledby="offcanvasNavbarLabel-expand-lg"
                         placement="start"
                     >
-                        <Offcanvas.Header closeButton onClick={ShowLeft}>
+                        <Offcanvas.Header closeButton onClick={()=>setLeftclose(!leftClose)}>
                             <Offcanvas.Title id="offcanvasNavbarLabel-expand-lg">Offcanvas</Offcanvas.Title>
                         </Offcanvas.Header>
                         <Offcanvas.Body>
@@ -49,13 +48,16 @@ const MainNav = () => {
                         </Offcanvas.Body>
                     </Navbar.Offcanvas>
 
+                    {/* ----------------------------------------------------
+                                        Right navigation  
+                    ------------------------------------------------------*/}
                     <Navbar.Offcanvas
-                        show={right}
+                        show={rightClose}
                         id="offcanvasNavbar-expand-sm"
                         aria-labelledby="offcanvasNavbarLabel-expand-lg"
                         placement="end"
                     >
-                        <Offcanvas.Header closeButton onClick={ShowRight}>
+                        <Offcanvas.Header closeButton onClick={()=>setRightclose(!rightClose)}>
                             <Offcanvas.Title id="offcanvasNavbarLabel-expand-sm">MH-Blog</Offcanvas.Title>
                         </Offcanvas.Header>
                         <Offcanvas.Body>

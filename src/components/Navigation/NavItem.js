@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 // react icon
-import { BiDotsVertical, BiSearch, BiCaretUp, BiArrowToTop } from "react-icons/bi";
+import {BiSearch, BiCaretUp, BiArrowToTop } from "react-icons/bi";
 
 const NavItem = () => {
     const [dropDown, setDropdown] = useState(false);
