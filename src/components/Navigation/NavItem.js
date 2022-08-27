@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 
 // react icon
-import {BiSearch, BiCaretUp, BiArrowToTop } from "react-icons/bi";
+import { BiSearch, BiCaretUp, BiArrowToTop } from "react-icons/bi";
+import { CgProfile } from "react-icons/cg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const NavItem = () => {
     const [dropDown, setDropdown] = useState(false);
@@ -87,11 +89,13 @@ const NavItem = () => {
                             <BiSearch />
                         </li>
                         <li className="NavItem">
-                            <BiSearch />
+                            <a className="NavLink" href="">
+                                <CgProfile size="25" />
+                            </a>
                         </li>
-                        <li className="NavItem">
+                        {/* <li className="NavItem">
                             <BiSearch />
-                        </li>
+                        </li> */}
                     </ul>
                 </div>
             </div>
