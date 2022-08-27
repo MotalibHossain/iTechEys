@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
-import '../../style/navigation.css'
+import "../../style/navigation.css";
 // react icon
-import { BiDotsVertical} from "react-icons/bi";
+import { BiDotsVertical } from "react-icons/bi";
+
+// import images
+import logo from "../../asset/itecheys-logo.png";
 
 // Bootstraps elements
 import Button from "react-bootstrap/Button";
@@ -12,11 +15,11 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Offcanvas from "react-bootstrap/Offcanvas";
 
-// Components import 
-import NavItem from './NavItem'
+// Components import
+import NavItem from "./NavItem";
 
 const MainNav = () => {
-    // In small devise navigation are collaps.If need to open and close then need to change in two lines 
+    // In small devise navigation are collaps.If need to open and close then need to change in two lines
     const [leftClose, setLeftclose] = useState(false);
     const [rightClose, setRightclose] = useState(false);
 
@@ -25,10 +28,13 @@ const MainNav = () => {
             <Navbar expand="lg" className="mb-3 p-0">
                 <Container fluid>
                     {/* In small device left navigation */}
-                    <Navbar.Toggle className="me-sm-3" aria-controls="offcanvasNavbar-expand-lg" onClick={()=>setLeftclose(!leftClose)} />
-                    <Navbar.Brand href="#" className="text-light bold">Top Tech</Navbar.Brand>
+                    <Navbar.Toggle className="me-sm-3" aria-controls="offcanvasNavbar-expand-lg" onClick={() => setLeftclose(!leftClose)} />
+                    <Navbar.Brand href="/" className="text-light bold Nav-logo">
+                        {/* itech */}
+                        <img src={logo} alt="logo" width="120px"  />
+                    </Navbar.Brand>
                     {/* In small device right navigation */}
-                    <Navbar.Toggle aria-controls="" className="float-end" onClick={()=>setRightclose(!rightClose)}>
+                    <Navbar.Toggle aria-controls="" className="float-end" onClick={() => setRightclose(!rightClose)}>
                         <BiDotsVertical />
                     </Navbar.Toggle>
                     {/* ----------------------------------------------------
@@ -40,7 +46,7 @@ const MainNav = () => {
                         aria-labelledby="offcanvasNavbarLabel-expand-lg"
                         placement="start"
                     >
-                        <Offcanvas.Header closeButton onClick={()=>setLeftclose(!leftClose)}>
+                        <Offcanvas.Header closeButton onClick={() => setLeftclose(!leftClose)}>
                             <Offcanvas.Title id="offcanvasNavbarLabel-expand-lg">Offcanvas</Offcanvas.Title>
                         </Offcanvas.Header>
                         <Offcanvas.Body>
@@ -57,7 +63,7 @@ const MainNav = () => {
                         aria-labelledby="offcanvasNavbarLabel-expand-lg"
                         placement="end"
                     >
-                        <Offcanvas.Header closeButton onClick={()=>setRightclose(!rightClose)}>
+                        <Offcanvas.Header closeButton onClick={() => setRightclose(!rightClose)}>
                             <Offcanvas.Title id="offcanvasNavbarLabel-expand-sm">MH-Blog</Offcanvas.Title>
                         </Offcanvas.Header>
                         <Offcanvas.Body>
