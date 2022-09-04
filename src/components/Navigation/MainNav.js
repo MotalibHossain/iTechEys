@@ -28,10 +28,10 @@ const MainNav = () => {
             <Navbar expand="lg" className="mb-3 p-0">
                 <Container fluid>
                     {/* In small device left navigation */}
-                    <Navbar.Toggle className="me-sm-3" aria-controls="offcanvasNavbar-expand-lg" onClick={() => setLeftclose(!leftClose)} />
+                    <Navbar.Toggle className="me-sm-3" onClick={() => setLeftclose(!leftClose)} />
                     <Navbar.Brand href="/" className="text-light bold Nav-logo">
                         {/* itech */}
-                        <img src={logo} alt="logo" width="120px"  />
+                        <img src={logo} alt="logo" width="120px" />
                     </Navbar.Brand>
                     {/* In small device right navigation */}
                     <Navbar.Toggle aria-controls="" className="float-end" onClick={() => setRightclose(!rightClose)}>
@@ -40,14 +40,12 @@ const MainNav = () => {
                     {/* ----------------------------------------------------
                                         Left navigation
                     ------------------------------------------------------*/}
-                    <Navbar.Offcanvas
-                        show={leftClose}
-                        id="offcanvasNavbar-expand-lg"
-                        aria-labelledby="offcanvasNavbarLabel-expand-lg"
-                        placement="start"
-                    >
+                    <Navbar.Offcanvas show={leftClose} placement="start" onHide={() => setLeftclose(!leftClose)}>
                         <Offcanvas.Header closeButton onClick={() => setLeftclose(!leftClose)}>
-                            <Offcanvas.Title id="offcanvasNavbarLabel-expand-lg">Offcanvas</Offcanvas.Title>
+                            <Offcanvas.Title id="offcanvasNavbarLabel-expand-lg">
+                                iTechEys
+                                {/* <img src={logo} alt="logo" width="120px" /> */}
+                            </Offcanvas.Title>
                         </Offcanvas.Header>
                         <Offcanvas.Body>
                             <NavItem />

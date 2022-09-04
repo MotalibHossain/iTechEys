@@ -90,7 +90,7 @@ const NavItem = () => {
                         </li>
                         <li className="NavItem">
                             <a className="NavLink" href="">
-                                <CgProfile size="25" />
+                                <CgProfile size="20" />
                             </a>
                         </li>
                         {/* <li className="NavItem">
