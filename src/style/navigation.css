@@ -13,11 +13,11 @@
 }
 
 .LeftNav {
-    width: 60%;
+    width: 100%;
 }
 
 .RightNav {
-    width: 40%;
+    width: 4%;
 }
 .RightNav .Navbar {
     justify-content: flex-end;
@@ -39,16 +39,15 @@
 }
 
 .Navbar .NavItem .NavLink {
+    display: block; /*whole li are clickable.*/
     text-decoration: none;
     text-transform: uppercase;
     font-weight: 600;
-    color: #fff; /*This color only for desktop view*/
-    font-size: 12px;
-    font-family: "Poppins";
-}
-
-.Navbar .NavItem:hover > .NavLink {
-    color: bisque !important;
+    /* color: #fff; This color only for desktop view */
+    color: #616161;
+    font-size: 16px;
+    /* font-family: "Poppins"; */
+    font-family: "Kalpurush",sans-serif;
 }
 /*---------After click then added classes-----------*/
 
@@ -56,7 +55,7 @@
     display: inline-block;
     transition: transform 0.3s ease-in-out;
     transform: rotate(180deg);
-    color: red;
+    color: white;
 }
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++
            DropDown Navigation 
@@ -97,6 +96,10 @@
                          Responsive
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 @media only screen and (min-width: 992px) {
+    .Navbar .NavItem:hover > .NavLink {
+        /* color: bisque !important; */
+        color: white !important;
+    }
     #offcanvasNavbar-expand-sm {
         display: none;
     }
@@ -118,6 +121,9 @@
 }
 
 @media only screen and (max-width: 992px) {
+    .navbar {
+        padding: 0px !important;
+    }
     .navbar > .container-fluid {
         display: block;
     }
@@ -125,6 +131,10 @@
     .navbar-toggler {
         border: none;
         color: white !important;
+    }
+    .navbar-toggler.ThreeDot{
+        width: 40px;
+        margin-top: 2px;
     }
     .navbar-toggler svg {
         font-size: xx-large;

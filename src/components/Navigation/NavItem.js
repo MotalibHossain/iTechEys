@@ -15,27 +15,27 @@ const NavItem = () => {
                     <ul className="Navbar">
                         <li className="NavItem">
                             <a className="NavLink" href="#">
-                                Home
+                                হোম
                             </a>
                         </li>
                         <li className="NavItem">
                             <a className="NavLink" href="#">
-                                About
+                                থিম ডাউনলোড
                             </a>
                         </li>
                         <li className="NavItem">
                             <a className="NavLink" href="#">
-                                Service
+                                সার্ভিস সমূহ
                             </a>
                         </li>
                         <li className="NavItem">
                             <a className="NavLink" href="#">
-                                Contact
+                                যোগাযোগ
                             </a>
                         </li>
                         <li className="NavItem" onClick={() => setDropdown(!dropDown)}>
                             <a className="NavLink" href="#">
-                                Blog
+                                সব ক্যাটেগরি
                                 <i className="ms-1 icond" id={dropDown ? "iconDropdown" : ""}>
                                     <BiCaretUp />
                                 </i>
@@ -43,42 +43,42 @@ const NavItem = () => {
                             <ul className="DropDown" id={dropDown ? "ShowDropDown" : ""}>
                                 <li className="NavItem">
                                     <a className="NavLink" href="/home">
-                                        Home
+                                        টেকনলজি
                                     </a>
                                 </li>
                                 <li className="NavItem">
                                     <a className="NavLink" href="/about">
-                                        About
+                                        ফ্রিল্যান্সিং গপ্প
                                     </a>
                                 </li>
                                 <li className="NavItem">
                                     <a className="NavLink" href="/about">
-                                        About
+                                        Programming
                                     </a>
                                 </li>
                                 <li className="NavItem">
                                     <a className="NavLink" href="/about">
-                                        About
+                                        Tips and Tricks
                                     </a>
                                 </li>
                                 <li className="NavItem">
                                     <a className="NavLink" href="/about">
-                                        About
+                                        Tech News
                                     </a>
                                 </li>
                                 <li className="NavItem">
                                     <a className="NavLink" href="/about">
-                                        About
+                                        Web Development
                                     </a>
                                 </li>
                             </ul>
                         </li>
                         <li className="NavItem">
                             <a className="NavLink" href="#">
-                                Portfollio{" "}
-                                <i>
+                                পোস্ট করুন
+                                {/* <i>
                                     <BiArrowToTop />
-                                </i>
+                                </i> */}
                             </a>
                         </li>
                     </ul>
@@ -89,7 +89,7 @@ const NavItem = () => {
                             <BiSearch />
                         </li>
                         <li className="NavItem">
-                            <a className="NavLink" href="">
+                            <a className="NavLink text-light" href="">
                                 <CgProfile size="20" />
                             </a>
                         </li>

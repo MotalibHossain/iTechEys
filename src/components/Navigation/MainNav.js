@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../../style/navigation.css";
 // react icon
 import { BiDotsVertical } from "react-icons/bi";
+import { CgProfile } from "react-icons/cg";
 
 // import images
 import logo from "../../asset/itecheys-logo.png";
@@ -33,8 +34,13 @@ const MainNav = () => {
                         {/* itech */}
                         <img src={logo} alt="logo" width="120px" />
                     </Navbar.Brand>
-                    {/* In small device right navigation */}
-                    <Navbar.Toggle aria-controls="" className="float-end" onClick={() => setRightclose(!rightClose)}>
+                    {/* In small device 3 dot right navigation */}
+                    <Navbar.Toggle aria-controls="" className="float-end mt-1" onClick={() => setRightclose(!rightClose)}>
+                        <a className="NavLink text-light" href="#">
+                            <CgProfile size="28" />
+                        </a>
+                    </Navbar.Toggle>
+                    <Navbar.Toggle aria-controls="" className="float-end ThreeDot" onClick={() => setRightclose(!rightClose)}>
                         <BiDotsVertical />
                     </Navbar.Toggle>
                     {/* ----------------------------------------------------
