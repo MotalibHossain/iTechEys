@@ -49,6 +49,12 @@
     /* font-family: "Poppins"; */
     font-family: "Kalpurush",sans-serif;
 }
+a.NavLink.nav-link.active{
+    color: white;
+}
+a.NavLink.nav-link.active .NavItem{
+    background-color: black;
+}
 /*---------After click then added classes-----------*/
 
 .Navbar .NavItem .NavLink #iconDropdown {

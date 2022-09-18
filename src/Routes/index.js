@@ -1,8 +1,8 @@
 import React from 'react'
-import '../../style/navigation.css'
+import '../style/navigation.css'
+import MainNav from './Navigation'
 
 // components import 
-import MainNav from './MainNav'
 
 const Navigation = () => {
   return (

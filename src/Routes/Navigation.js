@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import "../../style/navigation.css";
+import "../style/navigation.css";
 // react icon
 import { BiDotsVertical } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
 
 // import images
-import logo from "../../asset/itecheys-logo.png";
+import logo from "../asset/itecheys-logo.png";
 
 // Bootstraps elements
 import Button from "react-bootstrap/Button";
