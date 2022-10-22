@@ -2,50 +2,50 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 
 const SubmitPost = () => {
-    // const [image, setImage] = useState(null);
+    const [image, setImage] = useState(null);
 
     const [title, setTitle] = useState("");
-    // const [slug, setSlug] = useState("");
-    // const [description, setDescription] = useState("");
-    // const [categoryy, setCategoryy] = useState("");
-    // const [publish, setPublish] = useState("");
+    const [slug, setSlug] = useState("");
+    const [description, setDescription] = useState("");
+    const [category, setCategory] = useState("");
+    const [publish, setPublish] = useState("");
 
     const HandelChange = (e) => {
         setTitle(e.target.value);
     };
-    // const HandelChange2 = (e) => {
-    //     setSlug(e.target.value);
-    // };
-    // const HandelChange3 = (e) => {
-    //     setDescription(e.target.value);
-    // };
-    // const HandelChange4 = (e) => {
-    //     setCategoryy(e.target.value);
-    // };
-    // const HandelChange5 = (e) => {
-    //     setPublish(e.target.value);
-    // };
-    // const onImageChange = (event) => {
-    //     setImage(event.currentTarget.files[0]);
-    // };
+    const HandelChange2 = (e) => {
+        setSlug(e.target.value);
+    };
+    const HandelChange3 = (e) => {
+        setDescription(e.target.value);
+    };
+    const HandelChange4 = (e) => {
+        setCategory(e.target.value);
+    };
+    const HandelChange5 = (e) => {
+        setPublish(e.target.value);
+    };
+    const onImageChange = (event) => {
+        setImage(event.currentTarget.files[0]);
+    };
     const HandleSubmit =(e)=> {
         e.preventDefault();
         var form_data = new FormData();
         form_data.append("title", title);
-        // form_data.append("slug", slug);
-        // form_data.append("description", description);
-        // form_data.append("categoryy", categoryy);
-        // form_data.append("publish", publish);
-        // form_data.append("blog_image", image);
+        form_data.append("slug", slug);
+        form_data.append("description", description);
+        form_data.append("category", category);
+        form_data.append("publish", publish);
+        form_data.append('image', image);
 
-        for(var[key, value] of form_data.entries()){
-            console.log(key, ":" ,value)
-        }
+        // for(var[key, value] of form_data.entries()){
+        //     console.log(key, ":" ,value)
+        // }
         axios
             .post("http://127.0.0.1:8000/", form_data, {
-                headers: {
-                    "content-type": "multipart/form-data",
-                },
+                // headers: {
+                //     "content-type": "multipart/form-data",
+                // },
             })
             .then((res) => {
                 console.log(res.data);
@@ -71,7 +71,7 @@ const SubmitPost = () => {
                                 />
                             </div>
                         </div>
-                        {/* <div className="col-md-6">
+                        <div className="col-md-6">
                             <div className="form-group">
                                 <label> Slug</label>
                                 <input
@@ -82,8 +82,8 @@ const SubmitPost = () => {
                                     onChange={HandelChange2}
                                 />
                             </div>
-                        </div> */}
-                        {/* <div className="col-md-6">
+                        </div>
+                        <div className="col-md-6">
                             <div className="form-group">
                                 <label> Image</label>
                                 <input
@@ -94,20 +94,20 @@ const SubmitPost = () => {
                                     onChange={onImageChange}
                                 />
                             </div>
-                        </div> */}
+                        </div>
 
-                        {/* <div className="col-md-6">
+                        <div className="col-md-6">
                             <div className="form-group">
                                 <label>Category</label>
                                 <input
                                     type="number"
-                                    name="categoryy"
+                                    name="category"
                                     className="form-control"
                                     placeholder=""
                                     onChange={HandelChange4}
                                 />
                             </div>
-                        </div> */}
+                        </div>
 
                         {/* <div className="col-md-6">
                             <div className="form-group">
@@ -126,7 +126,7 @@ const SubmitPost = () => {
                         </div> */}
                     </div>
                     <div className="row">
-                        {/* <div className="col-md-6">
+                        <div className="col-md-6">
                             <div className="form-group">
                                 <label>Description</label>
                                 <textarea
@@ -138,9 +138,9 @@ const SubmitPost = () => {
                                     onChange={HandelChange3}
                                 />
                             </div>
-                        </div> */}
+                        </div>
                     </div>
-                    {/* <div className="checkbox py-3">
+                    <div className="checkbox py-3">
                         <label>
                             <input
                                 type="checkbox"
@@ -151,7 +151,7 @@ const SubmitPost = () => {
                             />{" "}
                             Published.
                         </label>
-                    </div> */}
+                    </div>
                     <button type="submit" className="btn btn-primary">
                         Submit
                     </button>

@@ -24,7 +24,9 @@ class Article(generics.ListCreateAPIView):
     serializer_class = BlogPostSerializer
     parser_classes = [parsers.FormParser, parsers.MultiPartParser]
 
-
+class BlogCategories(generics.ListCreateAPIView):
+    queryset = BlogPostCategory.objects.all()
+    serializer_class = BlogPostCategorySerializer
 
 # @api_view(['GET', 'POST'])
 # @parser_classes([MultiPartParser, FormParser])
