@@ -18,3 +18,6 @@ class BlogPostSerializer(serializers.ModelSerializer):
     class Meta:
         model = BlogPost
         fields = '__all__'
+        
+    def create(self, validated_data):
+        return BlogPost.objects.create(**validated_data)
