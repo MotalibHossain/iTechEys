@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import TextTruncate from "react-text-truncate";
 import Post from "../components/BlogPost/Post";
+import { Link } from 'react-router-dom'
 
 const Home = () => {
     const [post, setPost] = useState([]);
@@ -45,14 +46,14 @@ const Home = () => {
                                     <div className="post">
                                         <h5 className="post-title mt-2">
                                             {/* <a href='#' >{Item.title}.slice(0,80)</a> */}
-                                            <Link to={Item.slug} state={{ id, title, description }}>
-                                            <TextTruncate
-                                                line={1}
-                                                element="span"
-                                                truncateText="........"
-                                                text={Item.title}
-                                                // textTruncateChild={<a href="#">Read on</a>}
-                                            />
+                                            <Link to={`blog-details/${Item.slug}`} state={{ id, title, description }}>
+                                                <TextTruncate
+                                                    line={1}
+                                                    element="span"
+                                                    truncateText="........"
+                                                    text={Item.title}
+                                                    // textTruncateChild={<a href="#">Read on</a>}
+                                                />
                                             </Link>
                                         </h5>
                                         {/* <h5 className='post-title mt-2'>ইন্টার্নশিপ বা ট্রেনিং বদলে দিবে বেকারদের জীবন</h5> */}
