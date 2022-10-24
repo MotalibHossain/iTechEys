@@ -14,7 +14,7 @@ const NavItem = () => {
             <div className="Main-Navbar">
                 <div className="LeftNav">
                     <ul className="Navbar">
-                        <li className="NavItem"><NavLink className="NavLink nav-link" activeClassName="nav-link--active" to="/home" >হোম</NavLink></li>
+                        <li className="NavItem"><NavLink className="NavLink nav-link" activeClassName="nav-link--active" to="/" >হোম</NavLink></li>
                         <li className="NavItem"><NavLink className="NavLink nav-link" activeClassName="nav-link--active" to="/theam"> থিম ডাউনলোড</NavLink></li>
                         <li className="NavItem"><NavLink className="NavLink nav-link" activeClassName="nav-link--active" to="service">সার্ভিস সমূহ</NavLink></li>
                         <li className="NavItem"><NavLink className="NavLink nav-link" activeClassName="nav-link--active" to="contact">যোগাযোগ</NavLink></li>
