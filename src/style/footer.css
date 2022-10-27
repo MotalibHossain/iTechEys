@@ -1,0 +1,10 @@
+
+a.btn.btn-outline-light.btn-floating.m-1 svg {
+    margin-top: -5px;
+    margin-left: -3px;
+}
+a.btn.btn-outline-light.btn-floating.m-1 {
+    height: 36px;
+    width: 36px;
+    border-radius: 50%;
+}

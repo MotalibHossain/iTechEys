@@ -1,0 +1,200 @@
+.navbar {
+    height: 64px;
+    padding: 0px 30px !important;
+    background-color: #93b874;
+}
+/* ----------------------------------------------------
+                  Main navigation
+------------------------------------------------------*/
+.Main-Navbar {
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.LeftNav {
+    width: 100%;
+}
+
+.RightNav {
+    width: 4%;
+}
+.RightNav .Navbar {
+    justify-content: flex-end;
+}
+/* -------------------------
+      Navigation Item
+---------------------------*/
+.Navbar {
+    display: flex;
+    flex-wrap: nowrap;
+    list-style: none;
+    margin-bottom: 0px;
+    padding-left: 0px;
+}
+
+.NavItem {
+    position: relative;
+    padding: 10px 10px;
+}
+
+.Navbar .NavItem .NavLink {
+    display: block; /*whole li are clickable.*/
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 600;
+    /* color: #fff; This color only for desktop view */
+    color: #616161;
+    font-size: 16px;
+    /* font-family: "Poppins"; */
+    font-family: "Kalpurush",sans-serif;
+}
+a.NavLink.nav-link.active{
+    color: white;
+}
+a.NavLink.nav-link.active .NavItem{
+    background-color: black;
+}
+/*---------After click then added classes-----------*/
+
+.Navbar .NavItem .NavLink #iconDropdown {
+    display: inline-block;
+    transition: transform 0.3s ease-in-out;
+    transform: rotate(180deg);
+    color: white;
+}
+/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++
+           DropDown Navigation 
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+/* sub-menu */
+.DropDown {
+    left: 0;
+    top: 122%;
+    opacity: 0;
+    z-index: 9;
+    width: 220px;
+    padding-left: 0px;
+    position: absolute;
+    visibility: hidden;
+    transition: all 0.5s ease 0s;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.176);
+    background: #ffffff none repeat scroll 0 0;
+    border-bottom: 3px solid #b620b4;
+}
+
+.DropDown li {
+    color: #666666;
+    font-size: 14px;
+    font-weight: 400;
+    margin: 0;
+    padding: 13px 20px;
+    text-transform: capitalize;
+    display: block;
+}
+.DropDown li a {
+    color: #000000c7 !important;
+}
+.DropDown li:hover {
+    color: #fff;
+    background: #b620b4;
+}
+/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++
+                         Responsive
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+@media only screen and (min-width: 992px) {
+    .Navbar .NavItem:hover > .NavLink {
+        /* color: bisque !important; */
+        color: white !important;
+    }
+    #offcanvasNavbar-expand-sm {
+        display: none;
+    }
+    .DropDown {
+        width: 250px !important;
+        opacity: 0;
+        z-index: -1;
+        visibility: hidden;
+        transform: translateY(-2rem);
+        transition: all 0.3s linear;
+    }
+    /*---------After click then added classes-----------*/
+    #ShowDropDown {
+        opacity: 1;
+        z-index: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    .navbar {
+        padding: 0px !important;
+    }
+    .navbar > .container-fluid {
+        display: block;
+    }
+    /*-------Navbar Toggling-------------------*/
+    .navbar-toggler {
+        border: none;
+        color: white !important;
+    }
+    .navbar-toggler.ThreeDot{
+        width: 40px;
+        margin-top: 2px;
+    }
+    .navbar-toggler svg {
+        font-size: xx-large;
+    }
+    .navbar-toggler:focus {
+        /* --bs-navbar-toggler-focus-width: 2px !important; //this is for focus box width */
+        box-shadow: none;
+    }
+    /* If you want to left toggoler icon color then you need to change span tag css background images  */
+
+    /* .navbar-toggler .navbar-toggler-icon{
+    border: none;
+    size: 50px !important;
+    color: white !important;
+    background-color: #93b874 !important;
+  } */
+
+    /* ----------End Navbar Toggling -----------*/
+
+    .Main-Navbar {
+        flex-direction: column;
+    }
+    .Main-Navbar .LeftNav,
+    .RightNav {
+        width: 100%;
+    }
+
+    .Navbar {
+        flex-direction: column;
+    }
+    .Navbar .NavItem .NavLink {
+        color: #666666 !important; /*This color only for mobile view*/
+    }
+
+    /* Hover portion only for mobile view  */
+    .Navbar .NavItem:hover {
+        background-color: #0606060d;
+    }
+    .Navbar .NavItem:hover > .NavLink {
+        color: black !important;
+    }
+    /* Drop-Down menu for mobile  */
+    .DropDown {
+        opacity: 1;
+        width: 100% !important;
+        position: unset;
+        visibility: visible;
+        display: none !important;
+        box-shadow: none;
+        /* background-color: #c8c4c426 ; */
+        /* background: #fff none repeat scroll 0 0 !important; */
+    }
+    /*---------After click then added classes-----------*/
+    #ShowDropDown {
+        display: block !important;
+    }
+}

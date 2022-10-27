@@ -26,7 +26,7 @@ const MainNav = () => {
 
     return (
         <>
-            <Navbar expand="lg" className="p-0">
+            <Navbar expand="lg" className="mb-3 p-0">
                 <Container fluid>
                     {/* In small device left navigation */}
                     <Navbar.Toggle className="me-sm-3" onClick={() => setLeftclose(!leftClose)} />

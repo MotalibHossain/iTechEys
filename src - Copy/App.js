@@ -4,7 +4,6 @@ import "./style/Style.css"
 
 // Components import
 import Header from "./Layout/Header";
-import Footer from "./Layout/Footer.js"
 
 // pages
 import Home from "./Pages/Home";
@@ -31,7 +30,6 @@ function App() {
                     {/* Error page  */}
                     <Route path="*" element={<Error />}></Route>
                 </Routes>
-            <Footer />
             </BrowserRouter>
         </>
     );
