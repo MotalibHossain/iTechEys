@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import TextTruncate from "react-text-truncate";
 import Post from "../components/BlogPost/Post";
-import { Link } from 'react-router-dom'
-// icon 
-import { MdOutlineDoubleArrow, MdOutlineSearch } from 'react-icons/md';
+import { Link } from "react-router-dom";
+// icon
+import { MdOutlineDoubleArrow, MdOutlineSearch } from "react-icons/md";
 
 const Home = () => {
     const [post, setPost] = useState([]);
-    const [latestPost, setLatestPost] = useState([])
+    const [latestPost, setLatestPost] = useState([]);
 
     const FetchDataFromApi = async (e) => {
         const response = await fetch("http://127.0.0.1:9000/");
@@ -18,19 +18,18 @@ const Home = () => {
         FetchDataFromApi().then((data) => {
             setPost(data);
             setLatestPost({
-                "title": data[0].title,
-                "slug": data[0].slug,
-                "description": data[0].description,
-                "image": data[0].image
-            })
+                id: data[0].id,
+                title: data[0].title,
+                slug: data[0].slug,
+                description: data[0].description,
+                image: data[0].image,
+            });
         });
     }, []);
-    const { title, slug, description, image } = latestPost
-
+    const { id, title, slug, description, image } = latestPost;
 
     return (
         <div className="container-fluid">
-
             <section className="Section-1 mt-3">
                 <div className="row">
                     <div className="col-lg-8 col-md-8 col-sm-8">
@@ -42,20 +41,14 @@ const Home = () => {
                             </div>
                             <div className="post-content text-white">
                                 <Link to={`blog-details/${slug}`} state={{ title, description, image }}>
-                                    <TextTruncate
-                                        line={1}
-                                        truncateText="...."
-                                        text={latestPost.title}
-                                    />
+                                    <TextTruncate line={1} truncateText="...." text={latestPost.title} />
                                 </Link>
-                                <p>
-                                    <TextTruncate
-                                        line={2}
-                                        // element="span"
-                                        truncateText="…"
-                                        text={latestPost.description}
-                                    />
-                                </p>
+                                <TextTruncate
+                                    line={2}
+                                    // element="span"
+                                    truncateText="…"
+                                    text={latestPost.description}
+                                />
                             </div>
                         </div>
                     </div>
@@ -66,17 +59,12 @@ const Home = () => {
                                 return (
                                     <li key={id}>
                                         <Link to={`blog-details/${slug}`} state={{ id, title, description, image }}>
-                                            <TextTruncate
-                                                line={1}
-                                                truncateText="...."
-                                                text={title}
-                                            />
+                                            <TextTruncate line={1} truncateText="...." text={title} />
                                         </Link>
                                         <hr className="m-2 ms-0" />
                                     </li>
-                                )
+                                );
                             })}
-
                         </ul>
                     </div>
                 </div>
@@ -132,13 +120,16 @@ const Home = () => {
                                                 <div className="post">
                                                     <h5 className="post-title mt-2">
                                                         {/* <a href='#' >{Item.title}.slice(0,80)</a> */}
-                                                        <Link to={`blog-details/${slug}`} state={{ id, title, description, image }}>
+                                                        <Link
+                                                            to={`blog-details/${slug}`}
+                                                            state={{ id, title, description, image }}
+                                                        >
                                                             <TextTruncate
                                                                 line={2}
                                                                 // element="span"
                                                                 truncateText="........"
                                                                 text={title}
-                                                            // textTruncateChild={<a href="#">Read on</a>}
+                                                                // textTruncateChild={<a href="#">Read on</a>}
                                                             />
                                                         </Link>
                                                     </h5>
@@ -150,22 +141,28 @@ const Home = () => {
                                                             element="span"
                                                             truncateText="…"
                                                             text={description}
-                                                            textTruncateChild={<Link className="readOn" to={`blog-details/${slug}`} state={{ id, title, description, image }}>Read on</Link>}
+                                                            textTruncateChild={
+                                                                <Link
+                                                                    className="readOn"
+                                                                    to={`blog-details/${slug}`}
+                                                                    state={{ id, title, description, image }}
+                                                                >
+                                                                    Read on
+                                                                </Link>
+                                                            }
                                                         />
                                                     </p>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                )
+                                );
                             })}
                         </div>
                     </div>
                     <div className="col-lg-3 col-md-3 col-sm-3"></div>
-
                 </div>
             </section>
-
         </div>
     );
 };
