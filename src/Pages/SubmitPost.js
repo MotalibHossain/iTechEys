@@ -1,7 +1,11 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 const SubmitPost = () => {
+    const effectRan = useRef(false);
+
+
+    const [blogCategory, setblogCategory]=useState([])
     const [image, setImage] = useState(null);
 
     const [title, setTitle] = useState("");
@@ -22,6 +26,7 @@ const SubmitPost = () => {
     const HandelChange4 = (e) => {
         setCategory(e.target.value);
     };
+    console.log("Category",category)
     const HandelChange5 = (e) => {
         setPublish(e.target.value);
     };
@@ -52,6 +57,25 @@ const SubmitPost = () => {
             })
             .catch((err) => console.log("Post request error",err));
     };
+
+    // category fetch data 
+    const FetchDataFromApi = async () => {
+        const response = await fetch("http://127.0.0.1:8000/blog-category/");
+        const data = await response.json();
+        return data;
+    };
+
+    useEffect(() => {
+        if (effectRan.current === false) {
+            // this is for not load two time "Strict mood"
+            FetchDataFromApi().then((data) => {
+                setblogCategory(data);
+            });
+            return () => {
+                effectRan.current = true;
+            };
+        }
+    }, []);
 
     return (
         <>
@@ -96,7 +120,7 @@ const SubmitPost = () => {
                             </div>
                         </div>
 
-                        <div className="col-md-6">
+                        {/* <div className="col-md-6">
                             <div className="form-group">
                                 <label>Category</label>
                                 <input
@@ -107,14 +131,14 @@ const SubmitPost = () => {
                                     onChange={HandelChange4}
                                 />
                             </div>
-                        </div>
+                        </div> */}
 
-                        {/* <div className="col-md-6">
+                        <div className="col-md-6">
                             <div className="form-group">
                                 <label>Catagory</label>
-                                <select className="form-select" name="category" onChange={HandelChange}>
+                                <select className="form-select" name="category" onChange={HandelChange4}>
                                     <option>Catagory</option>
-                                    {category.map((Item, index) => {
+                                    {blogCategory.map((Item, index) => {
                                         return (
                                             <option value={Item.id} key={index}>
                                                 {Item.name}
@@ -123,7 +147,7 @@ const SubmitPost = () => {
                                     })}
                                 </select>
                             </div>
-                        </div> */}
+                        </div>
                     </div>
                     <div className="row">
                         <div className="col-md-6">

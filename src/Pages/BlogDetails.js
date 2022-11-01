@@ -6,12 +6,15 @@ import { useParams, useLocation, json } from "react-router-dom";
 import "../style/blogdetails.css";
 
 const BlogDetails = () => {
-    const [BlogPost, setBlogPost] = useState([]);
-    const [singlePost, setSinglepost] = useState([]);
     const effectRan = useRef(false);
+    const { slug } = useParams();
+
+    const [singlePost, setSinglepost] = useState([]);
+    const [BlogPost, setBlogPost] = useState([]);
+
 
     const FetchDataFromApi = async () => {
-        const response = await fetch("http://127.0.0.1:9000/");
+        const response = await fetch("http://127.0.0.1:8000/");
         const data = await response.json();
         return data;
     };
@@ -29,13 +32,11 @@ const BlogDetails = () => {
     }, []);
 
     // Filter data from apu through url slug
-    const { slug } = useParams();
-    
     useEffect(() => {
-        const filterdata = BlogPost.filter((blogData) => {
-            return blogData.slug == slug;
-        });
-        if (BlogPost.length) {
+        if (BlogPost.length > 0) {
+            const filterdata = BlogPost.filter((blogData) => {
+                return blogData.slug == slug;
+            });
             setSinglepost(filterdata[0]);
         }
     }, [BlogPost]);
