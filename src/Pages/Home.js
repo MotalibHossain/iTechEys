@@ -27,6 +27,7 @@ const Home = () => {
         });
     }, []);
     const { id, title, slug, description, image } = latestPost;
+    console.log("post", post)
 
     return (
         <div className="container-fluid">
@@ -96,6 +97,7 @@ const Home = () => {
                         <div className="row">
                             {post.map((Item, index) => {
                                 const { id, title, slug, description, image, category } = Item;
+                                console.log(category.name)
                                 return (
                                     <div className="col-lg-4 col-md-6 col-sm-6" key={index}>
                                         <div className="post-card pb-0">
@@ -115,7 +117,7 @@ const Home = () => {
                                                         />
                                                         <div className="d-flex mt-1">Motalib Hossain</div>
                                                     </div>
-                                                    <p className="time mb-0 mt-1">{category}</p>
+                                                    <p className="time mb-0 mt-1">{category.name}</p>
                                                 </div>
                                                 <div className="post">
                                                     <h5 className="post-title mt-2">
