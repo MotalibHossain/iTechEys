@@ -12,7 +12,6 @@ const BlogDetails = () => {
     const [singlePost, setSinglepost] = useState([]);
     const [BlogPost, setBlogPost] = useState([]);
 
-
     const FetchDataFromApi = async () => {
         const response = await fetch("http://127.0.0.1:8000/");
         const data = await response.json();
@@ -41,7 +40,8 @@ const BlogDetails = () => {
         }
     }, [BlogPost]);
 
-    const { id, title, description, image, category } = singlePost;
+    const { title, description, image, category } = singlePost;
+    console.log("singlePost", singlePost);
 
     return (
         <>
@@ -55,10 +55,10 @@ const BlogDetails = () => {
                                 </div>
                                 <div className="article-title">
                                     <h6>
-                                        <a href="#">{category}</a>
+                                        <a href="#">{category && category.name}</a>
                                     </h6>
                                     <h2>{title} </h2>
-                                    <div className="media">
+                                    <div className="media d-flex">
                                         <div className="avatar">
                                             <img
                                                 src="https://bootdey.com/img/Content/avatar/avatar1.png"
@@ -66,13 +66,11 @@ const BlogDetails = () => {
                                                 alt=""
                                             />
                                         </div>
-                                        <div className="media-body">
-                                            <label>
-                                                <a href="{{user_profile_info.get_absulate_url}}">
-                                                    {/* {{ user_profile_info }} {{ blog.author }} */}
-                                                </a>
-                                            </label>
-                                            <span>Motalib</span>
+                                        <div className="auth-info">
+                                            <a href="#">
+                                                {/* {{ user_profile_info }} {{ blog.author }} */}
+                                                Motalib Hossain
+                                            </a>
                                         </div>
                                     </div>
                                 </div>

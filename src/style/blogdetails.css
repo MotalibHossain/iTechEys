@@ -213,17 +213,17 @@
   border-radius: 50%;
   overflow: hidden;
 }
-.article .article-title .media .media-body {
+.article .article-title .media .auth-info {
   padding-left: 8px;
 }
-.article .article-title .media .media-body label {
+.article .article-title .media .auth-info label {
   font-weight: 600;
   color: #fc5356;
   margin: 0;
 }
-.article .article-title .media .media-body span {
-  display: block;
-  font-size: 12px;
+.article .article-title .media .auth-info {
+  padding-left: 10px;
+  font-size: 17px;
 }
 .article .article-content h1,
 .article .article-content h2,

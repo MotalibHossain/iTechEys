@@ -30,7 +30,7 @@ const Home = () => {
     console.log("post", post)
 
     return (
-        <div className="container-fluid">
+        <div className="container">
             <section className="Section-1 mt-3">
                 <div className="row">
                     <div className="col-lg-8 col-md-8 col-sm-8">
@@ -70,13 +70,14 @@ const Home = () => {
                     </div>
                 </div>
             </section>
+            
             <section className="Section-2 bg-white">
                 <div className="row">
                     <div className="col-lg-9 col-md-9 col-sm-9 pe-lg-0 pe-md-0">
                         <div className="Sec-2-title d-flex p-2">
                             <MdOutlineDoubleArrow />
                             <h6 className="m-0">
-                                <Link to={`blog-details/${slug}`} state={{ title, description, image }}>
+                                <Link to={`blog-details/${slug}`}>
                                     {latestPost.title}
                                 </Link>
                             </h6>
@@ -123,9 +124,7 @@ const Home = () => {
                                                     <h5 className="post-title mt-2">
                                                         {/* <a href='#' >{Item.title}.slice(0,80)</a> */}
                                                         <Link
-                                                            to={`blog-details/${slug}`}
-                                                            state={{ id, title, description, image }}
-                                                        >
+                                                            to={`blog-details/${slug}`}>
                                                             <TextTruncate
                                                                 line={2}
                                                                 // element="span"
@@ -146,9 +145,7 @@ const Home = () => {
                                                             textTruncateChild={
                                                                 <Link
                                                                     className="readOn"
-                                                                    to={`blog-details/${slug}`}
-                                                                    state={{ id, title, description, image }}
-                                                                >
+                                                                    to={`blog-details/${slug}`}>
                                                                     Read on
                                                                 </Link>
                                                             }

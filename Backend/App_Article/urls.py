@@ -13,5 +13,4 @@ urlpatterns = [
     path('', Article.as_view(), name='article'),
     path('articles/<int:id>',PostPutUpdateDelete, name="PostPutUpdateDelete"),
     path('blog-category/', BlogCategories.as_view(), name='BlogCategories'),
-    # path('article/details/<int:id>', ArticleDetails, name='ArticleDetails'),
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
