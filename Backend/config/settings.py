@@ -33,7 +33,8 @@ INSTALLED_APPS = [
     "corsheaders",
 
     # Install app 
-    'App_Article.apps.AppArticleConfig'
+    'App_Article.apps.AppArticleConfig',
+    'App_UserProfile.apps.AppUserprofileConfig'
 ]
 
 MIDDLEWARE = [
@@ -126,3 +127,6 @@ MEDIA_ROOT=os.path.join(BASE_DIR/ 'media')
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Custom User model 
+AUTH_USER_MODEL = 'App_UserProfile.UserProfile'
