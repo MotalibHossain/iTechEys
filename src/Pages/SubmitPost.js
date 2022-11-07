@@ -4,8 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 const SubmitPost = () => {
     const effectRan = useRef(false);
 
-
-    const [blogCategory, setblogCategory]=useState([])
+    const [blogCategory, setblogCategory] = useState([]);
     const [image, setImage] = useState(null);
 
     const [title, setTitle] = useState("");
@@ -26,14 +25,15 @@ const SubmitPost = () => {
     const HandelChange4 = (e) => {
         setCategory(e.target.value);
     };
-    console.log("Category",category)
+
     const HandelChange5 = (e) => {
         setPublish(e.target.value);
     };
     const onImageChange = (event) => {
         setImage(event.currentTarget.files[0]);
     };
-    const HandleSubmit =(e)=> {
+    
+    const HandleSubmit = (e) => {
         e.preventDefault();
         var form_data = new FormData();
         form_data.append("title", title);
@@ -41,13 +41,13 @@ const SubmitPost = () => {
         form_data.append("description", description);
         form_data.append("category", category);
         form_data.append("publish", publish);
-        form_data.append('image', image);
+        form_data.append("image", image);
 
-        // for(var[key, value] of form_data.entries()){
-        //     console.log(key, ":" ,value)
-        // }
+        for (var [key, value] of form_data.entries()) {
+            console.log(key, ":", value);
+        }
         axios
-            .post("http://127.0.0.1:8000/", form_data, {
+            .post("http://127.0.0.1:8000/blog/", form_data, {
                 // headers: {
                 //     "content-type": "multipart/form-data",
                 // },
@@ -55,10 +55,10 @@ const SubmitPost = () => {
             .then((res) => {
                 console.log(res.data);
             })
-            .catch((err) => console.log("Post request error",err));
+            .catch((err) => console.log("Post request error", err));
     };
 
-    // category fetch data 
+    // category fetch data
     const FetchDataFromApi = async () => {
         const response = await fetch("http://127.0.0.1:8000/blog-category/");
         const data = await response.json();

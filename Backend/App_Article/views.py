@@ -16,12 +16,17 @@ from rest_framework.parsers import MultiPartParser, FormParser
 from App_Article.models import BlogPost, BlogPostCategory
 
 # serializers import 
-from App_Article.serializers import BlogPostSerializer, BlogPostCategorySerializer
+from App_Article.serializers import BlogPostSerializer, BlogPostCategorySerializer, PostSerializer
 
 # Class based views 
 class Article(generics.ListCreateAPIView):
     queryset = BlogPost.objects.all()
     serializer_class = BlogPostSerializer
+    
+# Blog post view 
+class ArticlePost(generics.ListCreateAPIView):
+    queryset = BlogPost.objects.all()
+    serializer_class = PostSerializer
     parser_classes = [parsers.FormParser, parsers.MultiPartParser]
 
 class BlogCategories(generics.ListCreateAPIView):
