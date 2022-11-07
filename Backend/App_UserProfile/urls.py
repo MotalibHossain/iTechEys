@@ -9,5 +9,5 @@ from django.conf.urls.static import static
 from App_UserProfile.views import Profile
 
 urlpatterns = [
-    path('user/', Profile, name='article'),
+    path('user/', Profile.as_view(), name='userinfo'),
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
