@@ -12,6 +12,9 @@ import Service from "./Pages/Service";
 import Contact from "./Pages/Contact";
 import SubmitPost from "./Pages/SubmitPost";
 import BlogDetails from "./Pages/BlogDetails";
+// user system import 
+import Login from "./Pages/Login"
+import Registration from "./Pages/Registration"
 import Error from "./Pages/Error";
 
 function App() {
@@ -24,7 +27,9 @@ function App() {
                     <Route path="/service" element={<Service />}></Route>
                     <Route path="/contact" element={<Contact />}></Route>
                     <Route path="/save-post" element={<SubmitPost />}></Route>
-
+                    {/* User system  */}
+                    <Route path="/login" element={<Login />}></Route>
+                    <Route path="/registration" element={<Registration />}></Route>
                     {/* Subpage route  */}
                     <Route path="/blog-details/:slug" element={<BlogDetails />}></Route>
 

@@ -68,7 +68,7 @@ a.NavLink.nav-link.active .NavItem{
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 /* sub-menu */
 .DropDown {
-    left: 0;
+    /* left: 0; */
     top: 122%;
     opacity: 0;
     z-index: 9;
@@ -80,6 +80,9 @@ a.NavLink.nav-link.active .NavItem{
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.176);
     background: #ffffff none repeat scroll 0 0;
     border-bottom: 3px solid #b620b4;
+}
+.DropDown.Profile-dropdown{
+    right: -18px !important;
 }
 
 .DropDown li {

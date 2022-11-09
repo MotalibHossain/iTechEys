@@ -8,6 +8,7 @@ import { NavLink } from "react-router-dom";
 
 const NavItem = () => {
     const [dropDown, setDropdown] = useState(false);
+    const [dropDown1, setDropdown1] = useState(false);
 
     return (
         <>
@@ -18,7 +19,10 @@ const NavItem = () => {
                         <li className="NavItem"><NavLink className="NavLink nav-link" activeclassname="nav-link--active" to="/theam"> থিম ডাউনলোড</NavLink></li>
                         <li className="NavItem"><NavLink className="NavLink nav-link" activeclassname="nav-link--active" to="service">সার্ভিস সমূহ</NavLink></li>
                         <li className="NavItem"><NavLink className="NavLink nav-link" activeclassname="nav-link--active" to="contact">যোগাযোগ</NavLink></li>
-                        <li className="NavItem" onClick={() => setDropdown(!dropDown)}><NavLink className="NavLink" href="#">সব ক্যাটেগরি<i className="ms-1 icond" id={dropDown ? "iconDropdown" : ""}><BiCaretUp /></i></NavLink>
+                        <li className="NavItem" onClick={() => setDropdown(!dropDown)}>
+                            <NavLink className="NavLink" href="#">
+                                সব ক্যাটেগরি<i className="ms-1 icond" id={dropDown ? "iconDropdown" : ""}><BiCaretUp /></i>
+                                </NavLink>
                             <ul className="DropDown" id={dropDown ? "ShowDropDown" : ""}><li className="NavItem"><NavLink className="NavLink nav-link" href="/home"> টেকনলজি</NavLink></li>
                                 <li className="NavItem"><NavLink className="NavLink nav-link" activeclassname="nav-link--active" to="/about"> ফ্রিল্যান্সিং গপ্প</NavLink></li>
                                 <li className="NavItem"><NavLink className="NavLink nav-link" activeclassname="nav-link--active" to="/about">Programming</NavLink></li>
@@ -35,10 +39,14 @@ const NavItem = () => {
                         <li className="NavItem">
                             <BiSearch />
                         </li>
-                        <li className="NavItem">
-                            <a className="NavLink text-light" href="">
-                                <CgProfile size="20" />
-                            </a>
+                        <li className="NavItem" onClick={() => setDropdown1(!dropDown1)}>
+                            <NavLink className="NavLink d-flex" href="#">
+                            <CgProfile size="20" /><i className="ms-1 icond" id={dropDown1 ? "iconDropdown1" : ""}><BiCaretUp /></i>
+                                </NavLink>
+                            <ul className="DropDown Profile-dropdown" id={dropDown1 ? "ShowDropDown" : ""}>
+                                <li className="NavItem"><NavLink className="NavLink nav-link" to="/login">Login</NavLink></li>
+                                <li className="NavItem"><NavLink className="NavLink nav-link" activeclassname="nav-link--active" to="/registration">Register</NavLink></li>
+                            </ul>
                         </li>
                         {/* <li className="NavItem">
                             <BiSearch />
