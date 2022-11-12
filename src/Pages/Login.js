@@ -1,59 +1,121 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+
+// message framework
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
+    const [message, setMessage] = useState();
+    const navigate = useNavigate();
+    const [loginInfo, setLoginInfo] = useState({
+        email: "",
+        password: "",
+    });
+
+    const HandelChange = (e) => {
+        const { name, value } = e.target;
+        setLoginInfo((prev) => {
+            return { ...prev, [name]: value };
+        });
+    };
+    console.log("loginInfo ", loginInfo);
+
+    const HandelSubmit = (e) => {
+        e.preventDefault();
+        axios({
+            method: "post",
+            url: "http://127.0.0.1:8000/token/",
+            data: loginInfo,
+        })
+            .then(function (response) {
+                console.log("post data response", response)
+                
+                if (response.statusText == "OK") {
+                    toast("Hello"); 
+                    navigate("/");
+                } else {
+                    console.log("post data response", response);
+                    setMessage(response.statusText);
+                }
+            })
+            .catch(function (error) {
+                console.log("post data response", error);
+                let errorValue = Object.values(error.response.data);
+                setMessage(errorValue);
+            });
+        e.target.reset();
+    };
     return (
         <>
-            <section class="login-block">
-                <div class="container login-container">
-                    <div class="row">
-                        <div class="col-md-4 login-sec">
-                            <h2 class="text-center">Login Now</h2>
-                            <form class="login-form">
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1" class="text-uppercase pb-2">
-                                        Email
-                                    </label>
-                                    <input type="text" class="form-control" placeholder="" />
+            <section className="login-block">
+                <div className="container login-container">
+                    <div className="row">
+                        <div className="col-md-4 login-sec">
+                            <h2 className="text-center">Login Now</h2>
+                            {message && <p classNameName="text-danger">{message}</p>}
+                            <form className="login-form" onSubmit={HandelSubmit}>
+                                <div className="form-group">
+                                    <label className="text-uppercase pb-2">Email</label>
+                                    <input
+                                        type="text"
+                                        name="email"
+                                        className="form-control"
+                                        placeholder=""
+                                        onChange={HandelChange}
+                                    />
                                 </div>
-                                <div class="form-group pt-2">
-                                    <label for="exampleInputPassword1" class="text-uppercase pb-2">
-                                        Password
-                                    </label>
-                                    <input type="password" class="form-control" placeholder="" />
+                                <div className="form-group pt-2">
+                                    <label className="text-uppercase pb-2">Password</label>
+                                    <input
+                                        type="password"
+                                        name="password"
+                                        className="form-control"
+                                        placeholder=""
+                                        onChange={HandelChange}
+                                    />
                                 </div>
 
-                                <div class="form-check mb-2 pt-2">
-                                    <label class="form-check-label">
-                                        <input type="checkbox" class="form-check-input" />
+                                <div className="form-check mb-2 pt-2">
+                                    <label className="form-check-label">
+                                        <input type="checkbox" className="form-check-input" />
                                         <small>Remember Me</small>
                                     </label>
                                     <br />
                                 </div>
-                                <button type="submit" class="btn btn-login float-right">
-                                    Submit
+                                <button type="submit" className="btn btn-login float-right">
+                                    Login
                                 </button>
+                                <ToastContainer />
                             </form>
-                            <div class="copy-text">
-                                Created with <i class="fa fa-heart"></i> by{" "}
-                                <a href="http://iTechEys.com" target="_blank">iTechEys Team ❤</a>
+                            <div className="copy-text">
+                                Created with <i className="fa fa-heart"></i> by{" "}
+                                <a href="http://iTechEys.com" target="_blank">
+                                    iTechEys Team ❤
+                                </a>
                             </div>
                         </div>
-                        <div class="col-md-8 banner-sec">
-                            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                                <ol class="carousel-indicators">
-                                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                        <div className="col-md-8 banner-sec">
+                            <div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel">
+                                <ol className="carousel-indicators">
+                                    <li
+                                        data-target="#carouselExampleIndicators"
+                                        data-slide-to="0"
+                                        className="active"
+                                    ></li>
                                     <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
                                     <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
                                 </ol>
-                                <div class="carousel-inner" role="listbox">
-                                    <div class="carousel-item active banner-img-overlay">
+                                <div className="carousel-inner" role="listbox">
+                                    <div className="carousel-item active banner-img-overlay">
                                         <img
-                                            class="d-block img-fluid"
+                                            className="d-block img-fluid"
                                             src="https://static.pexels.com/photos/33972/pexels-photo.jpg"
                                             alt="First slide"
                                         />
-                                        <div class="carousel-caption d-none d-md-block">
-                                            <div class="banner-text">
+                                        <div className="carousel-caption d-none d-md-block">
+                                            <div className="banner-text">
                                                 <h2>This is First Slide</h2>
                                                 <p>
                                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -63,14 +125,14 @@ const Login = () => {
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="carousel-item">
+                                    <div className="carousel-item">
                                         <img
-                                            class="d-block img-fluid"
+                                            className="d-block img-fluid"
                                             src="https://images.pexels.com/photos/7097/people-coffee-tea-meeting.jpg"
                                             alt="Second slide"
                                         />
-                                        <div class="carousel-caption d-none d-md-block">
-                                            <div class="banner-text">
+                                        <div className="carousel-caption d-none d-md-block">
+                                            <div className="banner-text">
                                                 <h2>This is Second Slide</h2>
                                                 <p>
                                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -80,14 +142,14 @@ const Login = () => {
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="carousel-item">
+                                    <div className="carousel-item">
                                         <img
-                                            class="d-block img-fluid"
+                                            className="d-block img-fluid"
                                             src="https://images.pexels.com/photos/872957/pexels-photo-872957.jpeg"
                                             alt="Third slide"
                                         />
-                                        <div class="carousel-caption d-none d-md-block">
-                                            <div class="banner-text">
+                                        <div className="carousel-caption d-none d-md-block">
+                                            <div className="banner-text">
                                                 <h2>This is Heaven</h2>
                                                 <p>
                                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
