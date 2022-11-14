@@ -2,10 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-// message framework
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-
 const Login = () => {
     const [message, setMessage] = useState();
     const navigate = useNavigate();
@@ -87,7 +83,6 @@ const Login = () => {
                                 <button type="submit" className="btn btn-login float-right">
                                     Login
                                 </button>
-                                <ToastContainer />
                             </form>
                             <div className="copy-text">
                                 Created with <i className="fa fa-heart"></i> by{" "}

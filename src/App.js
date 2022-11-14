@@ -2,6 +2,10 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import "./style/Style.css"
 
+// message framework
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 // Components import
 import Header from "./Layout/Header";
 import Footer from "./Layout/Footer.js"
@@ -38,6 +42,8 @@ function App() {
                 </Routes>
             <Footer />
             </BrowserRouter>
+            <ToastContainer />
+
         </>
     );
 }
