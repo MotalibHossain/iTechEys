@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+// message framework
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
     const [message, setMessage] = useState();
@@ -29,7 +32,7 @@ const Login = () => {
                 console.log("post data response", response)
                 
                 if (response.statusText == "OK") {
-                    toast("Hello"); 
+                    toast("Successfully login"); 
                     navigate("/");
                 } else {
                     console.log("post data response", response);
