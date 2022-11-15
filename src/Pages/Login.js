@@ -29,7 +29,7 @@ const Login = () => {
             data: loginInfo,
         })
             .then(function (response) {
-                console.log("post data response", response)
+                console.log("Login Response", response)
                 
                 if (response.statusText == "OK") {
                     toast("Successfully login"); 
