@@ -6,11 +6,11 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 # JWT authentication
+from rest_framework_simplejwt.views import TokenVerifyView
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
-from rest_framework_simplejwt.views import TokenVerifyView
 
 # Views import 
 from App_UserProfile.views import Profile

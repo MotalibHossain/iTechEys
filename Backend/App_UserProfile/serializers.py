@@ -2,7 +2,9 @@ from dataclasses import fields
 from pyexpat import model
 from unicodedata import name
 from rest_framework import serializers
+# jwt
 
+# Custom model 
 from App_UserProfile.models import UserProfile
 
 class UserProfileSerializers(serializers.ModelSerializer):

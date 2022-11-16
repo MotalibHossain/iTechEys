@@ -30,7 +30,7 @@ const Home = () => {
     console.log("post", post)
 
     return (
-        <div className="container">
+        <div className="container-fluid">
             <section className="Section-1 mt-3">
                 <div className="row">
                     <div className="col-lg-8 col-md-8 col-sm-8">

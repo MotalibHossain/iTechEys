@@ -32,6 +32,8 @@ const Login = () => {
                 console.log("Login Response", response)
                 
                 if (response.statusText == "OK") {
+                    localStorage.setItem("access_token",response.data.access)
+                    localStorage.setItem("refresh_token",response.data.refresh)
                     toast("Successfully login"); 
                     navigate("/");
                 } else {
