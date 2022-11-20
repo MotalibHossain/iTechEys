@@ -10,6 +10,9 @@ const NavItem = () => {
     const [dropDown, setDropdown] = useState(false);
     const [dropDown1, setDropdown1] = useState(false);
 
+    const isauthentication=localStorage.getItem("IsAuthenticate")
+    console.log("aithentication",isauthentication)
+
     return (
         <>
             <div className="Main-Navbar">
@@ -44,8 +47,8 @@ const NavItem = () => {
                             <CgProfile size="20" /><i className="ms-1 icond" id={dropDown1 ? "iconDropdown1" : ""}><BiCaretUp /></i>
                                 </NavLink>
                             <ul className="DropDown Profile-dropdown" id={dropDown1 ? "ShowDropDown" : ""}>
-                                <li className="NavItem"><NavLink className="NavLink nav-link" to="/login">Login</NavLink></li>
-                                <li className="NavItem"><NavLink className="NavLink nav-link" activeclassname="nav-link--active" to="/registration">Register</NavLink></li>
+                                { isauthentication ? (<li className="NavItem"><NavLink className="NavLink nav-link" to="/login">Login</NavLink></li>):
+                                (<li className="NavItem"><NavLink className="NavLink nav-link" activeclassname="nav-link--active" to="/registration">Register</NavLink></li>)}
                             </ul>
                         </li>
                         {/* <li className="NavItem">

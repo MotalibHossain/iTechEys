@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { redirect } from "react-router-dom";
 import "./App.css";
 import "./style/Style.css"
 
@@ -22,6 +23,8 @@ import Registration from "./Pages/Registration"
 import Error from "./Pages/Error";
 
 function App() {
+
+    const isauthentication=localStorage.getItem("IsAuthenticate")
     return (
         <>
             <BrowserRouter>
@@ -32,7 +35,11 @@ function App() {
                     <Route path="/contact" element={<Contact />}></Route>
                     <Route path="/save-post" element={<SubmitPost />}></Route>
                     {/* User system  */}
-                    <Route path="/login" element={<Login />}></Route>
+                    {
+                    isauthentication ? <Route path="/login" element={<Login />}></Route>:
+                    <redirect to="/registration" />
+                    }
+                    {/* <Route path="/login" element={<Login />}></Route> */}
                     <Route path="/registration" element={<Registration />}></Route>
                     {/* Subpage route  */}
                     <Route path="/blog-details/:slug" element={<BlogDetails />}></Route>

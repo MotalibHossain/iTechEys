@@ -13,11 +13,11 @@ from rest_framework_simplejwt.views import (
 )
 
 # Views import 
-from App_UserProfile.views import Profile
+from App_UserProfile.views import Profile, MyTokenObtainPairView
 
 urlpatterns = [
     path('user/', Profile.as_view(), name='userinfo'),
-    path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('token/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('token/verify/', TokenVerifyView.as_view(), name='token_verify'),
     

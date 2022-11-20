@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.contrib.auth.models import User
 from App_UserProfile.models import UserProfile
 
 # import serializer 
@@ -15,14 +16,13 @@ class Profile(generics.ListCreateAPIView):
     serializer_class = UserProfileSerializers
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+
     @classmethod
     def get_token(cls, user):
         token = super().get_token(user)
-
-        # Add custom claims
         token['username'] = user.username
-        # ...
-
+        token['email'] = user.email
+        token['description'] = user.description
         return token
 
 class MyTokenObtainPairView(TokenObtainPairView):

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import jwt_decode from "jwt-decode";
 // message framework
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
@@ -19,7 +20,6 @@ const Login = () => {
             return { ...prev, [name]: value };
         });
     };
-    console.log("loginInfo ", loginInfo);
 
     const HandelSubmit = (e) => {
         e.preventDefault();
@@ -29,12 +29,14 @@ const Login = () => {
             data: loginInfo,
         })
             .then(function (response) {
-                console.log("Login Response", response)
-                
+                console.log("Login Response", response);
+
                 if (response.statusText == "OK") {
-                    localStorage.setItem("access_token",response.data.access)
-                    localStorage.setItem("refresh_token",response.data.refresh)
-                    toast("Successfully login"); 
+                    var token = response.data.access;
+                    var decoded = jwt_decode(token);
+                    localStorage.setItem("UserInfo",{decoded});
+                    localStorage.setItem("IsAuthenticate", true);
+                    toast("Successfully login");
                     navigate("/");
                 } else {
                     console.log("post data response", response);
