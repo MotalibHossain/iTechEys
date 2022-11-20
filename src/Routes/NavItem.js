@@ -47,8 +47,18 @@ const NavItem = () => {
                             <CgProfile size="20" /><i className="ms-1 icond" id={dropDown1 ? "iconDropdown1" : ""}><BiCaretUp /></i>
                                 </NavLink>
                             <ul className="DropDown Profile-dropdown" id={dropDown1 ? "ShowDropDown" : ""}>
-                                { isauthentication ? (<li className="NavItem"><NavLink className="NavLink nav-link" to="/login">Login</NavLink></li>):
-                                (<li className="NavItem"><NavLink className="NavLink nav-link" activeclassname="nav-link--active" to="/registration">Register</NavLink></li>)}
+                                {
+                                isauthentication ?
+                                  (<>
+                                  <li className="NavItem"><NavLink className="NavLink nav-link" to="/">Profile</NavLink></li>
+                                  <li className="NavItem"><NavLink className="NavLink nav-link" to="">Logout</NavLink></li>
+                                  </>)
+                                :
+                                (<>
+                                <li className="NavItem"><NavLink className="NavLink nav-link" to="/login">Login</NavLink></li>
+                                <li className="NavItem"><NavLink className="NavLink nav-link" activeclassname="nav-link--active" to="/registration">Register</NavLink></li>
+                                </>)
+                                }
                             </ul>
                         </li>
                         {/* <li className="NavItem">

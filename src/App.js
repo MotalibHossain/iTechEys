@@ -35,11 +35,8 @@ function App() {
                     <Route path="/contact" element={<Contact />}></Route>
                     <Route path="/save-post" element={<SubmitPost />}></Route>
                     {/* User system  */}
-                    {
-                    isauthentication ? <Route path="/login" element={<Login />}></Route>:
-                    <redirect to="/registration" />
-                    }
-                    {/* <Route path="/login" element={<Login />}></Route> */}
+                    
+                    <Route path="/login" element={<Login />}></Route>
                     <Route path="/registration" element={<Registration />}></Route>
                     {/* Subpage route  */}
                     <Route path="/blog-details/:slug" element={<BlogDetails />}></Route>
