@@ -9,9 +9,12 @@ import { NavLink } from "react-router-dom";
 const NavItem = () => {
     const [dropDown, setDropdown] = useState(false);
     const [dropDown1, setDropdown1] = useState(false);
-
+    // Authentication 
     const isauthentication=localStorage.getItem("IsAuthenticate")
-    console.log("aithentication",isauthentication)
+    const Logout=()=>{
+        localStorage.removeItem("IsAuthenticate")
+        localStorage.removeItem("UserInfo")
+    }
 
     return (
         <>
@@ -51,7 +54,7 @@ const NavItem = () => {
                                 isauthentication ?
                                   (<>
                                   <li className="NavItem"><NavLink className="NavLink nav-link" to="/">Profile</NavLink></li>
-                                  <li className="NavItem"><NavLink className="NavLink nav-link" to="">Logout</NavLink></li>
+                                  <li className="NavItem"><NavLink className="NavLink nav-link" to="" onClick={Logout}>Logout</NavLink></li>
                                   </>)
                                 :
                                 (<>

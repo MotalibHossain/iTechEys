@@ -29,22 +29,18 @@ const Login = () => {
             data: loginInfo,
         })
             .then(function (response) {
-                console.log("Login Response", response);
-
                 if (response.statusText == "OK") {
                     var token = response.data.access;
                     var decoded = jwt_decode(token);
-                    localStorage.setItem("UserInfo",{decoded});
+                    localStorage.setItem("UserInfo", JSON.stringify(decoded));
                     localStorage.setItem("IsAuthenticate", true);
                     toast("Successfully login");
                     navigate("/");
                 } else {
-                    console.log("post data response", response);
-                    setMessage(response.statusText);
+                    toast("login fail");
                 }
             })
             .catch(function (error) {
-                console.log("post data response", error);
                 let errorValue = Object.values(error.response.data);
                 setMessage(errorValue);
             });
