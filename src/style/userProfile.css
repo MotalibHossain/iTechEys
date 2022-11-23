@@ -1,0 +1,190 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,700");
+html, body {
+  font-family: "Open Sans", sans-serif;
+  font-size: 14px;
+  background: #e0e0e0;
+  color: #616161;
+}
+
+.cover {
+  height: 200px;
+  background: linear-gradient(176deg, rgba(76,175,80,1) 19%, rgba(76,175,80,0.8467601273908001) 39%, rgba(147,184,116,1) 93%, rgba(147,184,116,1) 99%);
+}
+
+.btn {
+  cursor: pointer;
+}
+.btn.btn-primary {
+  background: #4caf50;
+  border-color: #4caf50;
+}
+.btn.btn-primary:hover {
+  background: #3d8b40;
+  border-color: #2d682f;
+}
+.btn.btn-primary:focus {
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.5);
+}
+.btn.btn-secondary {
+  background: #3d8b40;
+  color: #fff;
+  border-color: #3d8b40;
+}
+.btn.btn-secondary:hover {
+  background: #2d682f;
+  border-color: #1e441f;
+}
+.btn.btn-secondary:focus {
+  box-shadow: 0 0 0 2px rgba(61, 139, 64, 0.5);
+}
+
+.bg-primary {
+  background: #4caf50 !important;
+}
+
+.navbar-nav.actions {
+  flex-direction: row;
+}
+.navbar-nav.actions .nav-link {
+  position: relative;
+  font-size: 16px;
+  padding: 4px 12px;
+}
+.navbar-nav.actions .nav-link .badge {
+  position: absolute;
+  right: 1px;
+  top: 1px;
+  background: #3d8b40;
+}
+
+.small {
+  color: rgba(97, 97, 97, 0.8);
+}
+
+.card {
+  border: none;
+  border-top: 5px solid lightgray;
+  border-radius: 0;
+  margin-bottom: 30px;
+}
+.card .card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 700;
+}
+.card .row {
+  width: 100%;
+}
+
+.alert {
+  margin-bottom: 30px;
+}
+
+a.action {
+  text-transform: uppercase;
+  font-size: 11px;
+  font-weight: 500;
+  color: #03a9f4;
+}
+a.action:hover {
+  color: #0288d1;
+}
+
+#left {
+  margin-top: -150px;
+  flex: 0 0 300px;
+}
+
+#user .fa {
+  font-size: 20px;
+}
+#user #userImage {
+  background: #4caf50;
+  height: 200px;
+}
+#user #renew {
+  display: block;
+  width: 100%;
+}
+#user .row {
+  width: auto;
+}
+
+#connections .list {
+  margin: 15px 30px;
+}
+#connections .list .list-item {
+  width: 30px;
+  height: 30px;
+  margin: 5px;
+  background: #4caf50;
+  color: #fff;
+  cursor: pointer;
+}
+#connections .list .list-item:hover {
+  background: #3d8b40;
+}
+
+#upcomingEvents .view {
+  flex: 0 0 60px;
+}
+
+#goals .row .details {
+  flex: 0 0 60px;
+}
+
+.signup {
+  flex: 0 0 125px;
+}
+
+#recentActivity em {
+  font-style: normal;
+  color: #4caf50;
+}
+#recentActivity .right {
+  flex: 0 0 100px;
+  height: 100%;
+}
+#recentActivity .right .view {
+  display: flex;
+  justify-content: center;
+}
+
+.icon {
+  position: relative;
+  flex: 0 0 40px;
+  text-align: center;
+  flex-shrink: 0;
+  margin-right: 10px;
+  font: normal normal normal 14px/1 FontAwesome;
+}
+.icon.warning:after {
+  content: "";
+  color: #ff9800;
+  position: absolute;
+  font-size: 18px;
+  top: 3px;
+  left: 28px;
+}
+.icon .fa-stack-1x {
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .navbar-nav.actions {
+    position: absolute;
+    right: 70px;
+  }
+}
+
+/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++
+                    Customize css
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+.card-title{
+  text-transform: capitalize;
+}
+.description{
+  text-align: justify;
+}

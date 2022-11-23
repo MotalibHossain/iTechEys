@@ -6,14 +6,16 @@ import { CgProfile } from "react-icons/cg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NavLink } from "react-router-dom";
 
+// utils function
+import RemoveAuthCredintial from "../Routes/authUtils"
+
 const NavItem = () => {
     const [dropDown, setDropdown] = useState(false);
     const [dropDown1, setDropdown1] = useState(false);
     // Authentication 
     const isauthentication=localStorage.getItem("IsAuthenticate")
     const Logout=()=>{
-        localStorage.removeItem("IsAuthenticate")
-        localStorage.removeItem("UserInfo")
+        RemoveAuthCredintial("IsAuthenticate", "UserInfo")
     }
 
     return (
@@ -53,7 +55,7 @@ const NavItem = () => {
                                 {
                                 isauthentication ?
                                   (<>
-                                  <li className="NavItem"><NavLink className="NavLink nav-link" to="/">Profile</NavLink></li>
+                                  <li className="NavItem"><NavLink className="NavLink nav-link" to="/user-profile">Profile</NavLink></li>
                                   <li className="NavItem"><NavLink className="NavLink nav-link" to="" onClick={Logout}>Logout</NavLink></li>
                                   </>)
                                 :
