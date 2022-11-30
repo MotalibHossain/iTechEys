@@ -5,6 +5,9 @@ import { Link } from "react-router-dom";
 // icon
 import { MdOutlineDoubleArrow, MdOutlineSearch } from "react-icons/md";
 
+// Component import
+import Sidebar from "../components/Home/Sidebar.js"
+
 const Home = () => {
     const [post, setPost] = useState([]);
     const [latestPost, setLatestPost] = useState([]);
@@ -27,7 +30,7 @@ const Home = () => {
         });
     }, []);
     const { id, title, slug, description, image } = latestPost;
-    console.log("post", post)
+    console.log("post", post);
 
     return (
         <div className="container-fluid">
@@ -77,9 +80,7 @@ const Home = () => {
                         <div className="Sec-2-title d-flex p-2">
                             <MdOutlineDoubleArrow />
                             <h6 className="m-0">
-                                <Link to={`blog-details/${slug}`}>
-                                    {latestPost.title}
-                                </Link>
+                                <Link to={`blog-details/${slug}`}>{latestPost.title}</Link>
                             </h6>
                         </div>
                     </div>
@@ -98,7 +99,7 @@ const Home = () => {
                         <div className="row">
                             {post.map((Item, index) => {
                                 const { id, title, slug, description, image, category } = Item;
-                                console.log(category.name)
+                                console.log(category.name);
                                 return (
                                     <div className="col-lg-4 col-md-6 col-sm-6" key={index}>
                                         <div className="post-card pb-0">
@@ -123,25 +124,21 @@ const Home = () => {
                                                 <div className="post">
                                                     <h5 className="post-title mt-2">
                                                         {/* <a href='#' >{Item.title}.slice(0,80)</a> */}
-                                                        <Link
-                                                            to={`blog-details/${slug}`}>
+                                                        <Link to={`blog-details/${slug}`}>
                                                             <TextTruncate
                                                                 line={2}
                                                                 // element="span"
                                                                 truncateText="..."
                                                                 text={title}
-                                                            // textTruncateChild={<a href="#">Read on</a>}
+                                                                // textTruncateChild={<a href="#">Read on</a>}
                                                             />
                                                         </Link>
                                                     </h5>
                                                     <p className="post-body">
                                                         {description.slice(0, 40)} &nbsp; &nbsp;
-                                                        <Link
-                                                            className="readOn"
-                                                            to={`blog-details/${slug}`}>
+                                                        <Link className="readOn" to={`blog-details/${slug}`}>
                                                             Read on
                                                         </Link>
-
                                                         {/* <TextTruncate
                                                             line={2}
                                                             element="span"
@@ -164,7 +161,9 @@ const Home = () => {
                             })}
                         </div>
                     </div>
-                    <div className="col-lg-3 col-md-3 col-sm-3"></div>
+                    <div className="col-lg-3 col-md-3 col-sm-3 blog-aside">
+                        <Sidebar />
+                    </div>
                 </div>
             </section>
         </div>

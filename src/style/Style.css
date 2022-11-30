@@ -87,15 +87,21 @@ ul {
                     Section 2
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
-.Section-2 .Sec-2-title,
+.Section-2 {
+    box-shadow: 0 3px 10px rgb(31 45 61 / 13%);
+    border-radius: 5px;
+    padding: 5px 0px;
+}
+
+/* .Section-2 .Sec-2-title,
 .Section-2 .Sec-2-search {
     background: var(--primaryBackground);
     border: 3px solid white;
-}
+} */
 
 .Section-2 .Sec-2-title h6,
 .Section-2 .Sec-2-search h6 {
-    padding-top: 3px;
+    padding-top: 6px;
 }
 
 .Section-2 .Sec-2-title svg,
@@ -195,7 +201,7 @@ ul {
     border-radius: 0 10px 10px 0;
     padding: 0;
 }
-.carousel-inner .carousel-item img{
+.carousel-inner .carousel-item img {
     opacity: 0.4;
 }
 
@@ -285,6 +291,54 @@ ul {
 .banner-text p {
     color: #fff;
 }
+/*========================================================
+                    Side Bar
+=========================================================*/
+.Sidebar {
+    box-shadow: 0 3px 10px rgb(31 45 61 / 13%);
+}
+.Sidebar .Sidebar-body {
+    border-bottom: 1px solid #eee;
+}
+.Sidebar .nav {
+    box-shadow: 0 3px 7px rgb(0 0 0 / 7%);
+    -ms-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.07);
+    -o-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.07);
+    -webkit-box-shadow: 0 3px 7px rgb(0 0 0 / 7%);
+}
+.Sidebar .nav .nav-link {
+    display: block;
+    padding: 10px 10px;
+}
+.nav-tabs .nav-link:focus,
+.nav-tabs .nav-link:hover {
+    border-radius: 0px !important;
+}
+.Sidebar .Sidebar-body .nav-tabs .nav-link {
+    margin: 0px !important;
+    border-top-left-radius:0px !important;
+    border-top-right-radius:0px !important;
+    transition:none !important;
+
+}
+.Sidebar .Sidebar-body .nav-tabs .nav-link.active {
+    border-radius: 0px !important;
+    border-color: #cbcbcb;
+    border-style: solid;
+    border-width: 0px 1px !important;
+}
+.Sidebar .Sidebar-body .nav-tabs #sidebar-title-tab-new-blog.active {
+    border-left: none !important;
+}
+.Sidebar .Sidebar-body .nav-tabs #sidebar-title-tab-others.active {
+    border-right: none !important;
+}
+
+.Sidebar .nav.nav-tabs {
+    border-radius: 0px;
+}
+.Sidebar .Sidebar-body {
+}
 
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++
                     Media Query
@@ -299,7 +353,7 @@ ul {
     }
 }
 @media screen and (max-width: 767px) {
-    .banner-sec{
+    .banner-sec {
         display: none !important;
     }
 }
