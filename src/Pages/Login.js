@@ -6,6 +6,10 @@ import jwt_decode from "jwt-decode";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+// import redux material
+import {IsAuthenticateAction} from "../Redux/actionCreate/Authaction";
+import { useSelector, useDispatch } from "react-redux";
+
 const Login = () => {
     const [message, setMessage] = useState();
     const navigate = useNavigate();
@@ -13,6 +17,8 @@ const Login = () => {
         email: "",
         password: "",
     });
+    // redux
+    const dispatch = useDispatch();
 
     const HandelChange = (e) => {
         const { name, value } = e.target;
@@ -34,6 +40,12 @@ const Login = () => {
                     var decoded = jwt_decode(token);
                     localStorage.setItem("UserInfo", JSON.stringify(decoded));
                     localStorage.setItem("IsAuthenticate", true);
+                    dispatch(
+                        IsAuthenticateAction({
+                            IsAuthenticate: true,
+                            UserInfo: localStorage.setItem("UserInfo", JSON.stringify(decoded)),
+                        })
+                    );
                     toast("Successfully login");
                     navigate("/");
                 } else {

@@ -30,7 +30,7 @@ const Home = () => {
         });
     }, []);
     const { id, title, slug, description, image } = latestPost;
-    console.log("post", post);
+    // console.log("post", post);
 
     return (
         <div className="container-fluid">
@@ -99,7 +99,6 @@ const Home = () => {
                         <div className="row">
                             {post.map((Item, index) => {
                                 const { id, title, slug, description, image, category } = Item;
-                                console.log(category.name);
                                 return (
                                     <div className="col-lg-4 col-md-6 col-sm-6" key={index}>
                                         <div className="post-card pb-0">

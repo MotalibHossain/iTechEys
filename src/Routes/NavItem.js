@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 
+// import redux material
+import {LogoutAction} from "../Redux/actionCreate/Authaction";
+import {useDispatch } from 'react-redux'
+
 // react icon
 import { BiSearch, BiCaretUp, BiArrowToTop } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
@@ -14,8 +18,11 @@ const NavItem = () => {
     const [dropDown1, setDropdown1] = useState(false);
     // Authentication 
     const isauthentication=localStorage.getItem("IsAuthenticate")
+    // redux
+    const dispatch = useDispatch();
     const Logout=()=>{
         RemoveAuthCredintial("IsAuthenticate", "UserInfo")
+        dispatch(LogoutAction())
     }
 
     return (
