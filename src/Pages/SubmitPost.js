@@ -1,8 +1,16 @@
 import axios from "axios";
 import React, { useState, useEffect, useRef } from "react";
+import Alert from "react-bootstrap/Alert";
+import Button from "react-bootstrap/Button";
+// message framework
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SubmitPost = () => {
     const effectRan = useRef(false);
+    // Error alert 
+    const [show, setShow] = useState(true);
+    const [message, setMessage]=useState()
 
     const [blogCategory, setblogCategory] = useState([]);
     const [image, setImage] = useState(null);
@@ -32,7 +40,7 @@ const SubmitPost = () => {
     const onImageChange = (event) => {
         setImage(event.currentTarget.files[0]);
     };
-    
+
     const HandleSubmit = (e) => {
         e.preventDefault();
         var form_data = new FormData();
@@ -53,9 +61,17 @@ const SubmitPost = () => {
                 // },
             })
             .then((res) => {
-                console.log(res.data);
+                console.log(res);
+                // setMessage(res.statusText+" "+" Successfully");
+                toast(res.statusText+" "+" Successfully");
+                e.target.reset()
             })
-            .catch((err) => console.log("Post request error", err));
+            .catch((error) => {
+                let errorKey = Object.keys(error.response.data)[0];
+                let errorValue = Object.values(error.response.data)[0];
+                // setMessage(errorKey+ ":"+ errorValue);
+                toast(errorKey+ ":"+ errorValue);
+            });
     };
 
     // category fetch data
@@ -81,7 +97,18 @@ const SubmitPost = () => {
         <>
             <div className="container">
                 <form className="submit-post" onSubmit={HandleSubmit}>
-                    <h2>Submit your Article</h2>
+                    <div className="row">
+                        <div className="col-lg-4">
+                            <h2>Submit your Article</h2>
+                        </div>
+                        <div className="col-lg-8">
+                            {message && show && (
+                                <Alert className="mb-0 mt-1 p-1" variant="danger" onClose={() => setShow(!show)} dismissible>
+                                    <Alert.Heading className="mb-0 ms-3">{message}</Alert.Heading>
+                                </Alert>
+                            )}
+                        </div>
+                    </div>
                     <div className="row">
                         <div className="col-md-6">
                             <div className="form-group">

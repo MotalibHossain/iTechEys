@@ -174,11 +174,15 @@ ul {
     box-shadow: 0 0 2rem rgb(0 0 0 / 25%);
     /* box-shadow: 2px 3px 0 2px #cbcbcb; */
 }
-
-/* submit post form  */
+/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++
+                    submit post form
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 .submit-post .form-group label,
 .submit-post .form-group input {
     margin-bottom: 11px;
+}
+.submit-post .alert button{
+    height: 0px !important;
 }
 
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++

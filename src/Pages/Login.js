@@ -46,7 +46,7 @@ const Login = () => {
                         })
                     );
                     toast("Successfully login");
-                    navigate("/");
+                    // navigate("/");
                 } else {
                     toast("login fail");
                 }
