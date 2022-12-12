@@ -1,15 +1,12 @@
 import React, { useState } from "react";
-
 // import redux material
 import {LogoutAction} from "../Redux/actionCreate/Authaction";
 import {useDispatch } from 'react-redux'
-
 // react icon
 import { BiSearch, BiCaretUp, BiArrowToTop } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NavLink } from "react-router-dom";
-
 // utils function
 import RemoveAuthCredintial from "../Routes/authUtils"
 

@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
+
 // message framework
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 // import redux material
-import {IsAuthenticateAction} from "../Redux/actionCreate/Authaction";
-import { useSelector, useDispatch } from "react-redux";
+import { IsAuthenticateAction } from "../Redux/actionCreate/Authaction";
+import { useDispatch } from "react-redux";
 
 const Login = () => {
     const [message, setMessage] = useState();
@@ -19,14 +20,12 @@ const Login = () => {
     });
     // redux
     const dispatch = useDispatch();
-
     const HandelChange = (e) => {
         const { name, value } = e.target;
         setLoginInfo((prev) => {
             return { ...prev, [name]: value };
         });
     };
-
     const HandelSubmit = (e) => {
         e.preventDefault();
         axios({

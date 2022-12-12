@@ -22,15 +22,12 @@ import UserProfile from "./Pages/UserProfile";
 import Login from "./Pages/Login";
 import Registration from "./Pages/Registration";
 import Error from "./Pages/Error";
-
 // import redux material
 import { useSelector} from 'react-redux'
 
 function App() {
-    const {IsAuthenticate, UserInfo}=useSelector((state)=>state)
+    const {IsAuthenticate}=useSelector((state)=>state)
     console.log("IsAuthenticate----",IsAuthenticate)
-    console.log("UserInfo----",UserInfo)
-
     return (
         <>
             <BrowserRouter>
@@ -41,7 +38,7 @@ function App() {
                     <Route path="/contact" element={<Contact />}></Route>
                     <Route path="/save-post" element={<SubmitPost />}></Route>
                     {/* Authenticate system  */}
-                    <Route path="/login" element={IsAuthenticate ? <Navigate from="/login" to="/user-profile" /> : <Login />}></Route>
+                    <Route path="/login" element={IsAuthenticate ? <UserProfile /> : <Login />}></Route>
                     <Route path="/registration" element={IsAuthenticate ? <Navigate from="/login" to="/user-profile" /> : <Registration />}></Route>
                     {/* User system  */}
                     <Route path="/user-profile" element={IsAuthenticate ? <UserProfile /> : <Navigate from="/user-profile" to="/login" />}></Route>
