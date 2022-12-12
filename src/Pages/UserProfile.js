@@ -1,11 +1,12 @@
-import React from "react";
+import { React, useState, useEffect } from "react";
 import "../style/userProfile.css";
+// import redux material
+import { useSelector, useDispatch } from "react-redux";
 
 const UserProfile = () => {
-    const userinfo=JSON.parse(localStorage.getItem("UserInfo"))
-    console.log(userinfo)
-    const {username, email, description}=userinfo
-    console.log(username, email, description)
+    const { UserInfo } = useSelector((state) => state);
+    const { username, email, description } = JSON.parse(UserInfo);
+    console.log(username, email, description);
     return (
         <>
             <div className="cover"></div>

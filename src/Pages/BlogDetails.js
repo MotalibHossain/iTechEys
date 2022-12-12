@@ -8,7 +8,6 @@ import "../style/blogdetails.css";
 const BlogDetails = () => {
     const effectRan = useRef(false);
     const { slug } = useParams();
-
     const [singlePost, setSinglepost] = useState([]);
     const [BlogPost, setBlogPost] = useState([]);
 
@@ -41,7 +40,7 @@ const BlogDetails = () => {
     }, [BlogPost]);
 
     const { title, description, image, category } = singlePost;
-    console.log("singlePost", singlePost);
+    // console.log("singlePost", singlePost);
 
     return (
         <>
