@@ -95,7 +95,8 @@ const Home = () => {
 
             <section className="Section-3">
                 <div className="row mb-30">
-                    <div className="col-lg-9 col-md-9 col-sm-9">
+                    <div className="col-lg-9 col-md-9 col-sm-9 Card-container">
+                        <div className="Card-body">
                         <div className="row">
                             {post.map((Item, index) => {
                                 const { id, title, slug, description, image, category } = Item;
@@ -159,9 +160,10 @@ const Home = () => {
                                 );
                             })}
                         </div>
+                        </div>
                     </div>
                     <div className="col-lg-3 col-md-3 col-sm-3 blog-aside">
-                        <Sidebar />
+                        <Sidebar post={post}/>
                     </div>
                 </div>
             </section>

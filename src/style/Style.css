@@ -118,6 +118,7 @@ ul {
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++
                     Blog Post Cart
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
 .post-card {
     background: #fff;
     box-shadow: 2px 3px 0 2px #cbcbcb;
@@ -299,6 +300,8 @@ ul {
                     Side Bar
 =========================================================*/
 .Sidebar {
+    border: 1px solid white;
+    border-radius: 5px 5px 0px 0px;
     box-shadow: 0 3px 10px rgb(31 45 61 / 13%);
 }
 .Sidebar .Sidebar-body {
