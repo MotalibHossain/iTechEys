@@ -12,12 +12,14 @@
 body {
     background: var(--primaryBackground);
 }
+
 .container,
 .container-lg,
 .container-md,
 .container-sm {
     max-width: 1017px !important;
 }
+
 section {
     margin-bottom: 10px;
 }
@@ -83,6 +85,11 @@ ul {
     font-size: 15px;
 }
 
+.side-title ul li svg {
+    width: 20px;
+    height: 20px;
+}
+
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++
                     Section 2
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
@@ -115,6 +122,70 @@ ul {
     height: 27px;
 }
 
+.Sec-2-title .button {
+    position: absolute;
+    right: 26%;
+    padding: 10px;
+    font-weight: 900;
+    color: black;
+    background-color: red;
+    animation-name: example;
+    /* animation: example 0.5s infinite; */
+    animation: example 1s infinite 2s cubic-bezier(0.25, 0, 0, 1);
+    animation-timing-function: ease-out;
+    animation-delay: 2s;
+}
+
+@keyframes example {
+    0% {
+        background-color: red;
+    }
+
+    /* 25% {
+        background-color: yellow;
+    }
+
+    50% {
+        background-color: red;
+        color: white;
+    } */
+
+    100% {
+        background-color: white;
+    }
+}
+
+/* Search box  */
+.search {
+    width: 98%;
+    position: relative;
+    box-shadow: 0 0 40px rgb(51 51 51 / 10%);
+}
+.search input {
+    text-indent: 25px;
+    border: 2px solid #d6d4d4;
+}
+.search input:focus {
+    box-shadow: none;
+    border: 2px solid blue;
+}
+.search .fa-search {
+    position: absolute;
+    top: 7px;
+    left: 10px;
+    height: 25px;
+    width: 25px;
+}
+.search button {
+    position: absolute;
+    top: 4px;
+    right: 6px;
+    height: 27px;
+    font-size: 10px;
+    width: 60px;
+    background-color: var(--primaryColor);
+}
+
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++
                     Blog Post Cart
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
@@ -125,7 +196,7 @@ ul {
     border: 1px solid #cbcbcb;
     border-radius: 10px;
     padding: 10px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     background-clip: border-box;
     transition: 0.25s ease-in-out;
 }
@@ -175,6 +246,7 @@ ul {
     box-shadow: 0 0 2rem rgb(0 0 0 / 25%);
     /* box-shadow: 2px 3px 0 2px #cbcbcb; */
 }
+
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++
                     submit post form
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
@@ -182,7 +254,8 @@ ul {
 .submit-post .form-group input {
     margin-bottom: 11px;
 }
-.submit-post .alert button{
+
+.submit-post .alert button {
     height: 0px !important;
 }
 
@@ -206,6 +279,7 @@ ul {
     border-radius: 0 10px 10px 0;
     padding: 0;
 }
+
 .carousel-inner .carousel-item img {
     opacity: 0.4;
 }
@@ -296,47 +370,56 @@ ul {
 .banner-text p {
     color: #fff;
 }
+
 /*========================================================
                     Side Bar
 =========================================================*/
 .Sidebar {
-    border: 1px solid white;
+    /* border: 1px solid white; */
     border-radius: 5px 5px 0px 0px;
     box-shadow: 0 3px 10px rgb(31 45 61 / 13%);
 }
+
 .Sidebar .Sidebar-body {
     border-bottom: 1px solid #eee;
 }
+
 .Sidebar .nav {
     box-shadow: 0 3px 7px rgb(0 0 0 / 7%);
     -ms-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.07);
     -o-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.07);
     -webkit-box-shadow: 0 3px 7px rgb(0 0 0 / 7%);
 }
+
 .Sidebar .nav .nav-link {
     display: block;
     padding: 10px 10px;
 }
+
 .nav-tabs .nav-link:focus,
 .nav-tabs .nav-link:hover {
     border-radius: 0px !important;
+    border: 0px;
 }
-.Sidebar .Sidebar-body .nav-tabs .nav-link {
-    margin: 0px !important;
-    border-top-left-radius:0px !important;
-    border-top-right-radius:0px !important;
-    transition:none !important;
 
+.Sidebar .Sidebar-body .nav-tabs .nav-link {
+    /* margin: 0px !important; */
+    border-top-left-radius: 0px !important;
+    border-top-right-radius: 0px !important;
+    transition: none !important;
 }
+
 .Sidebar .Sidebar-body .nav-tabs .nav-link.active {
     border-radius: 0px !important;
     border-color: #cbcbcb;
     border-style: solid;
     border-width: 0px 1px !important;
 }
+
 .Sidebar .Sidebar-body .nav-tabs #sidebar-title-tab-new-blog.active {
     border-left: none !important;
 }
+
 .Sidebar .Sidebar-body .nav-tabs #sidebar-title-tab-others.active {
     border-right: none !important;
 }
@@ -344,7 +427,18 @@ ul {
 .Sidebar .nav.nav-tabs {
     border-radius: 0px;
 }
-.Sidebar .Sidebar-body {
+
+.blog-aside .Sidebar .Sidebar-body .tab-content ul li:last-child hr {
+    display: none;
+}
+
+.blog-aside .Sidebar .Sidebar-body .tab-content ul li {
+    padding: 0px 13px;
+}
+
+.blog-aside .Sidebar .Sidebar-body .tab-content ul li svg {
+    width: 20px;
+    height: 20px;
 }
 
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -359,8 +453,30 @@ ul {
         display: none;
     }
 }
+
 @media screen and (max-width: 767px) {
     .banner-sec {
         display: none !important;
+    }
+    .Sec-2-title .button {
+        right: 3% !important;
+    }
+    .search {
+        margin: 0 auto;
+    }
+}
+@media (min-width: 768px) and (max-width: 992px) {
+    .search button {
+        width: 24% !important;
+    }
+    .search input::placeholder {
+        font-weight: bold;
+        font-size: 10px !important;
+    }
+    .Sidebar .nav .nav-link {
+        display: block;
+        font-size: 11px;
+        font-weight: 500;
+        padding: 10px 7px;
     }
 }
