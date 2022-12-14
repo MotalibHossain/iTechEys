@@ -45,7 +45,7 @@ const BlogDetails = () => {
     return (
         <>
             <div className="blog-single gray-bg">
-                <div className="container-fluid">
+                <div className="Main-Container container-fluid">
                     <div className="row align-items-start">
                         <div className="col-lg-9 m-15px-tb">
                             <article className="article">
