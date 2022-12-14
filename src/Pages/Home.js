@@ -34,10 +34,10 @@ const Home = () => {
     // console.log("post", post);
 
     return (
-        <div className="container-fluid">
+        <div className="Main-Container container-fluid ">
             <section className="Section-1 mt-3">
                 <div className="row">
-                    <div className="col-lg-8 col-md-8 col-sm-8">
+                    <div className="col-lg-8 col-md-12 col-sm-12">
                         <div className="main-banner">
                             <div className="banner-img">
                                 <div className="banner-img-overlay">
@@ -45,7 +45,7 @@ const Home = () => {
                                 </div>
                             </div>
                             <div className="post-content text-white">
-                                <Link to={`blog-details/${slug}`} state={{ title, description, image }}>
+                                <Link className="post-title" to={`blog-details/${slug}`} state={{ title, description, image }}>
                                     <TextTruncate line={2} truncateText="...." text={latestPost.title} />
                                 </Link>
                                 <TextTruncate
@@ -65,7 +65,7 @@ const Home = () => {
                                     <li key={id}>
                                         <Link className="d-flex align-items-center" to={`blog-details/${slug}`} state={{ id, title, description, image }}>
                                             <IoChevronForwardOutline />
-                                            <TextTruncate line={1} truncateText="...." text={title.slice(0, 65)} />
+                                            <p className="text-justify m-0">{title.slice(0, 50)} ...</p>
                                         </Link>
                                         <hr className="m-2 ms-0" />
                                     </li>
@@ -90,9 +90,9 @@ const Home = () => {
                         </div>
                     </div>
                     <div className="col-lg-3 col-md-3">
-                        <div class="search mt-sm-2">
+                        <div class="search mt-sm-2 mt-md-0 mt-lg-0">
                             <MdOutlineSearch className="fa fa-search" />
-                            <input type="text" className="form-control" placeholder="Have a question?" />
+                            <input type="text" className="form-control" placeholder="সার্চ করুন iTecheys জুড়ে" />
                             <button class="btn btn-primary p-0">Search</button>
                         </div>
                     </div>
@@ -111,10 +111,6 @@ const Home = () => {
                                             <div className="post-card pb-0">
                                                 <div className="post-card-img">
                                                     <img src={image} alt="post image" />
-                                                    {/* <img
-                                        src="https://images.ctfassets.net/hrltx12pl8hq/7yQR5uJhwEkRfjwMFJ7bUK/dc52a0913e8ff8b5c276177890eb0129/offset_comp_772626-opt.jpg?fit=fill&w=800&h=300"
-                                        alt="post image"
-                                    /> */}
                                                 </div>
                                                 <div className="post-card-body">
                                                     <div className="user-title d-flex justify-content-between pt-1 pb-1 mt-1">
@@ -123,41 +119,23 @@ const Home = () => {
                                                                 src="https://bootdey.com/img/Content/avatar/avatar7.png"
                                                                 alt="Profile Image"
                                                             />
-                                                            <div className="d-flex mt-1">Motalib</div>
+                                                            <div className="d-flex mt-2">Motalib</div>
                                                         </div>
-                                                        <p className="time mb-0 mt-1">{category.name}</p>
+                                                        <p className="time mb-0 mt-2">{category.name}</p>
                                                     </div>
                                                     <div className="post">
-                                                        <h5 className="post-title mt-2">
-                                                            {/* <a href='#' >{Item.title}.slice(0,80)</a> */}
-                                                            <Link to={`blog-details/${slug}`}>
-                                                                <TextTruncate
-                                                                    line={2}
-                                                                    // element="span"
-                                                                    truncateText="..."
-                                                                    text={title}
-                                                                // textTruncateChild={<a href="#">Read on</a>}
-                                                                />
-                                                            </Link>
+                                                        <h5 className="post-title mt-2 mb-3">
+                                                            <a href={`blog-details/${slug}`}>
+                                                                <h4>
+                                                                {title.slice(0, 45)}
+                                                                </h4>
+                                                            </a>
                                                         </h5>
                                                         <p className="post-body">
-                                                            {description.slice(0, 100)} &nbsp; &nbsp;
+                                                            {description.slice(0, 110)} &nbsp; &nbsp;
                                                             <Link className="readOn" to={`blog-details/${slug}`}>
                                                                 Read on
                                                             </Link>
-                                                            {/* <TextTruncate
-                                                            line={2}
-                                                            element="span"
-                                                            truncateText="…"
-                                                            text={description.slice(0,55)}
-                                                            textTruncateChild={
-                                                                <Link
-                                                                    className="readOn"
-                                                                    to={`blog-details/${slug}`}>
-                                                                    Read on
-                                                                </Link>
-                                                            }
-                                                        /> */}
                                                         </p>
                                                     </div>
                                                 </div>

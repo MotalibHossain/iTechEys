@@ -39,7 +39,7 @@ const Sidebar = (props) => {
                                     <li key={id}>
                                         <Link className="d-flex  align-items-center" to={`blog-details/${slug}`} state={{ id, title, description, image }}>
                                             <IoChevronForwardOutline />
-                                            <TextTruncate line={1} truncateText="..." text={title} />
+                                            <TextTruncate line={1} truncateText="..." text={title.slice(0, 40)} />
                                         </Link>
                                         <hr className="m-2 ms-0" />
                                     </li>
