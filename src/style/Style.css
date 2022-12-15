@@ -1,13 +1,3 @@
-/*===================================================================
-
-Common Scripts (All Common codes calling)
-Project:    iTechEys
-Copyright:  iTechEys Corporation.
-Developer:  Motalib Hossain
-Author URI: https://iTechEys.tech/motalib
-
-===================================================================*/
-
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++
                     Common css in whole side
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
@@ -16,6 +6,7 @@ Author URI: https://iTechEys.tech/motalib
     --primaryColor: #93b874;
     /* --primaryBackground:#F5F5F5; */
     --primaryBackground: #e9e9ed;
+    --bodyBackground:#f7f7ff;
     --primaryHover: #bc5b01;
     /* --primaryHover:#93b874; */
 }
@@ -23,7 +14,7 @@ Author URI: https://iTechEys.tech/motalib
 body {
     /* font-size: 1.2rem !important; */
     font-family: 'Kalpurush', sans-serif !important;
-    background: var(--primaryBackground) !important;
+    background: var(--bodyBackground) !important;
 }
 
 .container-lg,
