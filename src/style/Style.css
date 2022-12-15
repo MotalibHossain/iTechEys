@@ -472,6 +472,9 @@ ul {
     .main-banner {
         margin-bottom: 15px;
     }
+    .post-content {
+        bottom: 42%;
+    }
 
     .side-title {
         display: none;
@@ -513,7 +516,7 @@ ul {
 
 @media screen and (min-width: 1200px) {
     .Main-Container{
-        width: 1153px !important;
+        width: 95% !important;
         
     }
 }
