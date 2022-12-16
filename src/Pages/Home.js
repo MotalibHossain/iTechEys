@@ -7,7 +7,7 @@ import { MdOutlineDoubleArrow, MdOutlineSearch } from "react-icons/md";
 import { IoChevronForwardOutline } from "react-icons/io5";
 
 // Component import
-import Sidebar from "../components/Home/Sidebar.js"
+import Sidebar from "../components/Home/Sidebar.js";
 
 const Home = () => {
     const [post, setPost] = useState([]);
@@ -45,7 +45,11 @@ const Home = () => {
                                 </div>
                             </div>
                             <div className="post-content text-white">
-                                <Link className="post-title" to={`blog-details/${slug}`} state={{ title, description, image }}>
+                                <Link
+                                    className="post-title"
+                                    to={`blog-details/${slug}`}
+                                    state={{ title, description, image }}
+                                >
                                     <TextTruncate line={2} truncateText="...." text={latestPost.title} />
                                 </Link>
                                 <TextTruncate
@@ -63,7 +67,11 @@ const Home = () => {
                                 const { id, title, slug, description, image, category } = Item;
                                 return (
                                     <li key={id}>
-                                        <Link className="d-flex align-items-center" to={`blog-details/${slug}`} state={{ id, title, description, image }}>
+                                        <Link
+                                            className="d-flex align-items-center"
+                                            to={`blog-details/${slug}`}
+                                            state={{ id, title, description, image }}
+                                        >
                                             <IoChevronForwardOutline />
                                             <p className="text-justify m-0">{title.slice(0, 50)} ...</p>
                                         </Link>
@@ -82,11 +90,13 @@ const Home = () => {
                         <div className="Sec-2-title d-flex align-items-center p-2">
                             <MdOutlineDoubleArrow />
                             {/* <marquee behavior="scroll" direction="left"> */}
-                                <h6 className="m-0">
-                                    <Link to={`blog-details/${slug}`}>{latestPost.title}</Link>
-                                </h6>
+                            <h6 className="m-0">
+                                <Link to={`blog-details/${slug}`}>{latestPost.title}</Link>
+                            </h6>
                             {/* </marquee> */}
-                            <a href={`blog-details/${slug}`} class="button button-pulse ms-auto">বিস্তারিত</a>
+                            <a href={`blog-details/${slug}`} class="button button-pulse ms-auto">
+                                বিস্তারিত
+                            </a>
                         </div>
                     </div>
                     <div className="col-lg-3 col-md-3">
@@ -125,11 +135,12 @@ const Home = () => {
                                                     </div>
                                                     <div className="post">
                                                         <h5 className="post-title mt-2 mb-3">
-                                                            <a href={`blog-details/${slug}`}>
-                                                                <h4>
-                                                                {title.slice(0, 45)}
-                                                                </h4>
-                                                            </a>
+                                                            {/* <a to={`blog-details/${slug}`}>
+                                                                <h4>{title.slice(0, 45)}</h4>
+                                                            </a> */}
+                                                            <Link className="readOn" to={`blog-details/${slug}`}>
+                                                                <h4>{title.slice(0, 45)}</h4>
+                                                            </Link>
                                                         </h5>
                                                         <p className="post-body">
                                                             {description.slice(0, 110)} &nbsp; &nbsp;

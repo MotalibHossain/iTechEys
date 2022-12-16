@@ -4,6 +4,7 @@ import { useParams, useLocation, json } from "react-router-dom";
 
 // File import
 import "../style/blogdetails.css";
+import Share from "../components/BlogPost/Share";
 
 const BlogDetails = () => {
     const effectRan = useRef(false);
@@ -40,6 +41,9 @@ const BlogDetails = () => {
     }, [BlogPost]);
 
     const { title, description, image, category } = singlePost;
+    const shareUrl=`http://iTechEys/blog-details/${slug}/`
+    // const shareUrl="https://www.facebook.com/"
+    console.log("shareUrl", shareUrl)
     // console.log("singlePost", singlePost);
 
     return (
@@ -85,6 +89,11 @@ const BlogDetails = () => {
                                     <a href="#">Managment</a>
                                 </div>
                                 <hr />
+                                <div className="row">
+                                    <div className=" col-lg-12">
+                                        <Share shareUrl={shareUrl} />
+                                    </div>
+                                </div>
                                 {/* <div className="row">
                     <div className="col-lg-6 like">
                       {% if not liked %}
@@ -107,6 +116,7 @@ const BlogDetails = () => {
                     </div>
                   </div> */}
                             </article>
+
                             <div className="row me-5 ms-5">
                                 {/* {% for i in comments %}
                 <div className="article-comment mb-3">
