@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import TextTruncate from "react-text-truncate";
 import { useParams, useLocation, json } from "react-router-dom";
 
+import { AiFillLike, AiFillDislike, AiOutlineLike, AiOutlineDislike } from "react-icons/ai";
+
 // File import
 import "../style/blogdetails.css";
 import Share from "../components/BlogPost/Share";
@@ -41,9 +43,9 @@ const BlogDetails = () => {
     }, [BlogPost]);
 
     const { title, description, image, category } = singlePost;
-    const shareUrl=`http://iTechEys/blog-details/${slug}/`
+    const shareUrl = `http://iTechEys.com/blog-details/${slug}/`;
     // const shareUrl="https://www.facebook.com/"
-    console.log("shareUrl", shareUrl)
+    console.log("shareUrl", shareUrl);
     // console.log("singlePost", singlePost);
 
     return (
@@ -70,10 +72,7 @@ const BlogDetails = () => {
                                             />
                                         </div>
                                         <div className="auth-info">
-                                            <a href="#">
-                                                {/* {{ user_profile_info }} {{ blog.author }} */}
-                                                Motalib Hossain
-                                            </a>
+                                            <a href="#">Motalib Hossain</a>
                                         </div>
                                     </div>
                                 </div>
@@ -90,62 +89,60 @@ const BlogDetails = () => {
                                 </div>
                                 <hr />
                                 <div className="row">
-                                    <div className=" col-lg-12">
-                                        <Share shareUrl={shareUrl} />
+                                    <div className="col-lg-6 like">
+                                        <a href="#">
+                                            {/* <AiFillLike /> */}
+                                            <AiOutlineLike />
+                                        </a>
+                                        <a href="#">
+                                            {/* <AiFillDislike /> */}
+                                            <AiOutlineDislike className="mt-1" />
+                                        </a>
+                                    </div>
+                                    <div className="col-lg-6">
+                                        <div className="row">
+                                            <div className=" col-lg-12">
+                                                <Share shareUrl={shareUrl} />
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                {/* <div className="row">
-                    <div className="col-lg-6 like">
-                      {% if not liked %}
-                      <a href="{% url 'Articles:liked' pk=blog.pk%}">
-                        <i className="fas fa-thumbs-up"></i>
-                      </a>
-                      {% else %}
-                      <a href="{% url 'Articles:unlike' pk=blog.pk%}">
-                        <i className="fas fa-thumbs-down"></i>
-                      </a>
-                      {% endif %}
-                    </div>
-                    <div className="col-lg-6">
-                      <div className="float-end">
-                        <i className="fas fa-thumbs-up"></i>{{ blog.blog_like.count }} &nbsp;
-                        <i className="fas fa-comment"></i>
-                        {{ blog.blog_comment.count }}
-                      </div>
-
-                    </div>
-                  </div> */}
                             </article>
 
-                            <div className="row me-5 ms-5">
-                                {/* {% for i in comments %}
-                <div className="article-comment mb-3">
-                  <div className="col-lg-6">
-                    {{ i.user }}
-                  </div>
-                  <div className="col-lg-6">
-                    {{ i.comment }}
-                  </div>
-                </div>
-                {% endfor %} */}
+                            <div className="article-comment mb-3">
+                                <div className="row me-5 ms-5">
+                                    <div className="col-lg-6">User Name</div>
+                                    <div className="col-lg-6">Commenter</div>
+                                </div>
                             </div>
                             <div className="contact-form article-comment">
                                 <h4>Leave a Reply</h4>
-                                {/* <form action="{% url 'Articles:aticle_details' slug=blog.slug%}" id="contact-form" method="POST">
-                  {% csrf_token %}
-                  <div className="row">
-                    <div className="col-md-12">
-                      <div className="form-group">
-                        <textarea name="message" id="message" placeholder="Your message *" rows="4" className="form-control"></textarea>
-                      </div>
-                    </div>
-                    <div className="col-md-12">
-                      <div className="send">
-                        <button className="px-btn theme"><span>Submit</span> <i className="arrow"></i></button>
-                      </div>
-                    </div>
-                  </div>
-                </form> */}
+                                <form
+                                    action="{% url 'Articles:aticle_details' slug=blog.slug%}"
+                                    id="contact-form"
+                                    method="POST"
+                                >
+                                    <div className="row">
+                                        <div className="col-md-12">
+                                            <div className="form-group">
+                                                <textarea
+                                                    name="message"
+                                                    id="message"
+                                                    placeholder="Your message *"
+                                                    rows="4"
+                                                    className="form-control"
+                                                ></textarea>
+                                            </div>
+                                        </div>
+                                        <div className="col-md-12">
+                                            <div className="send">
+                                                <button className="px-btn theme">
+                                                    <span>Submit</span> <i className="arrow"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                         <div className="col-lg-3 m-15px-tb blog-aside">
