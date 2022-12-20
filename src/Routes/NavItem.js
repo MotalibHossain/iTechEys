@@ -13,6 +13,7 @@ import RemoveAuthCredintial from "../Routes/authUtils"
 const NavItem = () => {
     const [dropDown, setDropdown] = useState(false);
     const [dropDown1, setDropdown1] = useState(false);
+    const {category, setCategory}=useState()
     // Authentication 
     const isauthentication=localStorage.getItem("IsAuthenticate")
     // redux
@@ -35,12 +36,8 @@ const NavItem = () => {
                             <NavLink className="NavLink" href="#">
                                 সব ক্যাটেগরি<i className="ms-1 icond" id={dropDown ? "iconDropdown" : ""}><BiCaretUp /></i>
                                 </NavLink>
-                            <ul className="DropDown" id={dropDown ? "ShowDropDown" : ""}><li className="NavItem"><NavLink className="NavLink nav-link" href="/home"> টেকনলজি</NavLink></li>
-                                <li className="NavItem"><NavLink className="NavLink nav-link" activeclassname="nav-link--active" to="/about"> ফ্রিল্যান্সিং গপ্প</NavLink></li>
-                                <li className="NavItem"><NavLink className="NavLink nav-link" activeclassname="nav-link--active" to="/about">Programming</NavLink></li>
-                                <li className="NavItem"><NavLink className="NavLink nav-link" activeclassname="nav-link--active" to="/about">Tips and Tricks</NavLink></li>
-                                <li className="NavItem"><NavLink className="NavLink nav-link" activeclassname="nav-link--active" to="/about">Tech News</NavLink></li>
-                                <li className="NavItem"><NavLink className="NavLink nav-link" activeclassname="nav-link--active" to="/about">Web Development</NavLink></li>
+                            <ul className="DropDown" id={dropDown ? "ShowDropDown" : ""}>
+                                <li className="NavItem"><NavLink className="NavLink nav-link" activeclassname="nav-link--active" to="/"> টেকনলজি</NavLink></li>
                             </ul>
                         </li>
                         <li className="NavItem"><NavLink className="NavLink nav-link" activeclassname="nav-link--active" to="/save-post">পোস্ট করুন</NavLink></li>
