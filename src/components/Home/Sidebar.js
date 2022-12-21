@@ -1,10 +1,8 @@
 import React from "react";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
-// import Sonnet from "../../components/Sonnet";
 import { IoChevronForwardOutline } from "react-icons/io5";
 
-import TextTruncate from "react-text-truncate";
 import Post from "../BlogPost/Post";
 import { Link } from "react-router-dom";
 
@@ -21,9 +19,9 @@ const Sidebar = (props) => {
                                 const { id, title, slug, description, image, category } = Item;
                                 return (
                                     <li key={id}>
-                                        <Link className="d-flex  align-items-center" to={`blog-details/${slug}`} state={{ id, title, description, image }}>
+                                        <Link className="d-flex  align-items-center post_title" to={`blog-details/${slug}`} state={{ id, title, description, image }}>
                                             <IoChevronForwardOutline />
-                                            <TextTruncate line={1} truncateText="...." text={title} />
+                                            {title}👉
                                         </Link>
                                         <hr className="m-2 ms-0" />
                                     </li>
@@ -37,9 +35,9 @@ const Sidebar = (props) => {
                                 const { id, title, slug, description, image, category } = Item;
                                 return (
                                     <li key={id}>
-                                        <Link className="d-flex  align-items-center" to={`blog-details/${slug}`} state={{ id, title, description, image }}>
+                                        <Link className="d-flex  align-items-center post_title" to={`blog-details/${slug}`} state={{ id, title, description, image }}>
                                             <IoChevronForwardOutline />
-                                            <TextTruncate line={1} truncateText="..." text={title.slice(0, 40)} />
+                                            {title}👉
                                         </Link>
                                         <hr className="m-2 ms-0" />
                                     </li>
@@ -53,9 +51,9 @@ const Sidebar = (props) => {
                                 const { id, title, slug, description, image, category } = Item;
                                 return (
                                     <li key={id}>
-                                        <Link className="d-flex align-items-center" to={`blog-details/${slug}`} state={{ id, title, description, image }}>
+                                        <Link className="d-flex align-items-center post_title" to={`blog-details/${slug}`} state={{ id, title, description, image }}>
                                             <IoChevronForwardOutline />
-                                            <TextTruncate line={1} truncateText="...." text={title} />
+                                            {title}
                                         </Link>
                                         <hr className="m-2 ms-0" />
                                     </li>
