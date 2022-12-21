@@ -44,6 +44,13 @@ a:hover {
 ul {
     list-style: none;
 }
+.post_title{
+    --max-lines: 1;
+    display: -webkit-box !important;
+    -webkit-line-clamp: var(--max-lines);
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
 
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++
                     Section 1
@@ -76,7 +83,6 @@ ul {
     bottom: 32%;
     padding: 0px 10px;
 }
-
 .main-banner .post-content a {
     font-weight: 900;
     padding-bottom: 5px;
@@ -86,9 +92,16 @@ ul {
 .main-banner .post-content p {
     color: white;
 }
+.latestPostDec{
+    --max-lines: 2;
+    display: -webkit-box !important;
+    -webkit-line-clamp: var(--max-lines);
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
 
-.main-banner .post-content p:hover {
-    color: var(--primaryColor) !important;
+.main-banner .post-content span:hover {
+    color: var(--primaryHover) !important;
 }
 
 .main-banner .post-content p {
@@ -242,15 +255,15 @@ ul {
     margin-left: 5px;
 }
 
-/* .post-card-body .post .post-body,
-.post-title {
-    word-spacing: 3px;
-} */
-
-.post-card-body .post .post-body {
+.post-card-body .post .post-body span{
     text-align: justify;
     word-break: break-word;
     text-justify: inter-word;
+    --max-lines: 4;
+    display: -webkit-box;
+    -webkit-line-clamp: var(--max-lines);
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .post-card-body .post .post-body .readOn {

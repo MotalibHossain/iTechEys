@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import TextTruncate from "react-text-truncate";
 import Post from "../components/BlogPost/Post";
 import { Link } from "react-router-dom";
 // icon
@@ -8,16 +7,15 @@ import { IoChevronForwardOutline } from "react-icons/io5";
 
 // Component import
 import Sidebar from "../components/Home/Sidebar.js";
-import FetchDataFromApi from "../Utils/DataFetch"
+import FetchDataFromApi from "../Utils/DataFetch";
 
 const Home = () => {
     const [post, setPost] = useState([]);
     const [latestPost, setLatestPost] = useState([]);
 
-    const url="http://127.0.0.1:8000/"
+    const url = "http://127.0.0.1:8000/";
     useEffect(() => {
-        FetchDataFromApi(url)
-        .then((data) => {
+        FetchDataFromApi(url).then((data) => {
             setPost(data);
             setLatestPost({
                 id: data[0].id,
@@ -44,18 +42,15 @@ const Home = () => {
                             </div>
                             <div className="post-content text-white">
                                 <Link
-                                    className="post-title"
+                                    className="post-title post_title"
                                     to={`blog-details/${slug}`}
                                     state={{ title, description, image }}
                                 >
-                                    <TextTruncate line={2} truncateText="...." text={latestPost.title} />
+                                    {latestPost.title}
                                 </Link>
-                                <TextTruncate
-                                    line={2}
-                                    // element="span"
-                                    truncateText="…"
-                                    text={latestPost.description}
-                                />
+                                <span className="latestPostDec">
+                                    {latestPost.description}
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -71,7 +66,7 @@ const Home = () => {
                                             state={{ id, title, description, image }}
                                         >
                                             <IoChevronForwardOutline />
-                                            <p className="text-justify m-0">{title.slice(0, 50)} ...</p>
+                                            <p className="text-justify post_title m-0">{title}</p>
                                         </Link>
                                         <hr className="m-2 ms-0" />
                                     </li>
@@ -133,17 +128,14 @@ const Home = () => {
                                                     </div>
                                                     <div className="post">
                                                         <h5 className="post-title mt-2 mb-3">
-                                                            {/* <a to={`blog-details/${slug}`}>
-                                                                <h4>{title.slice(0, 45)}</h4>
-                                                            </a> */}
                                                             <Link className="readOn" to={`blog-details/${slug}`}>
                                                                 <h4>{title.slice(0, 45)}</h4>
                                                             </Link>
                                                         </h5>
                                                         <p className="post-body">
-                                                            {description.slice(0, 110)} &nbsp; &nbsp;
+                                                            <span>{description}</span>
                                                             <Link className="readOn" to={`blog-details/${slug}`}>
-                                                                Read on
+                                                                Read on &nbsp;👉
                                                             </Link>
                                                         </p>
                                                     </div>
