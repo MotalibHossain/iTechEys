@@ -7,30 +7,30 @@ import { AiFillLike, AiFillDislike, AiOutlineLike, AiOutlineDislike } from "reac
 // File import
 import "../style/blogdetails.css";
 import Share from "../components/BlogPost/Share";
+import FetchDataFromApi from "../Utils/DataFetch";
+
 
 const BlogDetails = () => {
     const effectRan = useRef(false);
     const { slug } = useParams();
     const [singlePost, setSinglepost] = useState([]);
     const [BlogPost, setBlogPost] = useState([]);
-
-    const FetchDataFromApi = async () => {
-        const response = await fetch("http://127.0.0.1:8000/");
-        const data = await response.json();
-        return data;
-    };
-
+    
+    const url ="http://127.0.0.1:8000/"
     useEffect(() => {
         if (effectRan.current === false) {
             // this is for not load two time "Strict mood"
-            FetchDataFromApi().then((data) => {
+            FetchDataFromApi(url)
+            .then((data) => {
                 setBlogPost(data);
+                console.log("FetchDataFromApi",data)
             });
             return () => {
                 effectRan.current = true;
             };
         }
     }, []);
+    console.log("BlogPost",BlogPost)
 
     // Filter data from apu through url slug
     useEffect(() => {

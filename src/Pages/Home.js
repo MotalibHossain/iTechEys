@@ -8,18 +8,16 @@ import { IoChevronForwardOutline } from "react-icons/io5";
 
 // Component import
 import Sidebar from "../components/Home/Sidebar.js";
+import FetchDataFromApi from "../Utils/DataFetch"
 
 const Home = () => {
     const [post, setPost] = useState([]);
     const [latestPost, setLatestPost] = useState([]);
 
-    const FetchDataFromApi = async (e) => {
-        const response = await fetch("http://127.0.0.1:8000/");
-        const data = await response.json();
-        return data;
-    };
+    const url="http://127.0.0.1:8000/"
     useEffect(() => {
-        FetchDataFromApi().then((data) => {
+        FetchDataFromApi(url)
+        .then((data) => {
             setPost(data);
             setLatestPost({
                 id: data[0].id,
