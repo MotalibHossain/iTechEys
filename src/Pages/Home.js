@@ -129,7 +129,7 @@ const Home = () => {
                                                     <div className="post">
                                                         <h5 className="post-title mt-2 mb-3">
                                                             <Link className="readOn" to={`blog-details/${slug}`}>
-                                                                <h4>{title.slice(0, 45)}</h4>
+                                                                <h4 className="latestPostDec">{title}</h4>
                                                             </Link>
                                                         </h5>
                                                         <p className="post-body">

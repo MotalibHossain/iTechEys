@@ -528,7 +528,7 @@ ul {
     }
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 992px) {
     .Main-Container{
         width: 95% !important;
         
