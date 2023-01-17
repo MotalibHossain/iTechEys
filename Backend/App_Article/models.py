@@ -1,6 +1,9 @@
 from email.policy import default
 from django.db import models
 
+# model import from another app 
+from App_UserProfile.models import UserProfile
+
 # Create your models here.
 class BlogPostCategory(models.Model):
     name=models.CharField(max_length=15)
@@ -10,8 +13,8 @@ class BlogPostCategory(models.Model):
 
 
 class BlogPost(models.Model):
-    # author=models.ForeignKey(User, on_delete=models.CASCADE, related_name="blog_author")
-    category=models.ForeignKey(BlogPostCategory, on_delete=models.CASCADE, related_name="BlogCategory", default="")
+    author=models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name="blog_author", null=True)
+    category=models.ForeignKey(BlogPostCategory, on_delete=models.CASCADE, related_name="BlogCategory")
     title=models.CharField(max_length=80)
     slug=models.SlugField(max_length=80, unique=True)
     description=models.CharField(max_length=500, default="")
