@@ -4,8 +4,9 @@ from unicodedata import name
 from rest_framework import serializers
 
 from App_Article.models import BlogPost, BlogPostCategory
+from App_UserProfile.serializers import UserProfileSerializers
 
-
+# Blog category serializers
 class BlogPostCategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = BlogPostCategory
@@ -13,9 +14,10 @@ class BlogPostCategorySerializer(serializers.ModelSerializer):
     
     def create(self, validated_data):
         return BlogPost.objects.create(**validated_data)
-
+# Blog post all model relation pass through this serializers
 class BlogPostSerializer(serializers.ModelSerializer):
     category=BlogPostCategorySerializer(read_only=True)
+    author=UserProfileSerializers(read_only=True)
     class Meta:
         model = BlogPost
         fields = '__all__'

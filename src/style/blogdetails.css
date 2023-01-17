@@ -92,8 +92,11 @@
 .blog-aside .widget-author .avatar {
     width: 70px;
     height: 70px;
-    border-radius: 50%;
+    /* border-radius: 50%; */
     overflow: hidden;
+}
+.blog-aside .widget-author p{
+    padding-left: 20px;
 }
 .blog-aside .widget-author h6 {
     font-weight: 600;

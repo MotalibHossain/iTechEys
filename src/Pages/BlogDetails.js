@@ -1,36 +1,35 @@
 import React, { useState, useEffect, useRef } from "react";
-import TextTruncate from "react-text-truncate";
-import { useParams, useLocation, json } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
-import { AiFillLike, AiFillDislike, AiOutlineLike, AiOutlineDislike } from "react-icons/ai";
+import { AiOutlineLike, AiOutlineDislike } from "react-icons/ai";
 
 // File import
 import "../style/blogdetails.css";
 import Share from "../components/BlogPost/Share";
-import FetchDataFromApi from "../Utils/DataFetch";
 
+// Utility function
+import FetchDataFromApi from "../Utils/DataFetch";
 
 const BlogDetails = () => {
     const effectRan = useRef(false);
     const { slug } = useParams();
     const [singlePost, setSinglepost] = useState([]);
     const [BlogPost, setBlogPost] = useState([]);
-    
-    const url ="http://127.0.0.1:8000/"
+
+    const url = "http://127.0.0.1:8000/";
     useEffect(() => {
         if (effectRan.current === false) {
             // this is for not load two time "Strict mood"
-            FetchDataFromApi(url)
-            .then((data) => {
+            FetchDataFromApi(url).then((data) => {
                 setBlogPost(data);
-                console.log("FetchDataFromApi",data)
+                console.log("FetchDataFromApi", data);
             });
             return () => {
                 effectRan.current = true;
             };
         }
     }, []);
-    console.log("BlogPost",BlogPost)
+    console.log("BlogPost", BlogPost);
 
     // Filter data from apu through url slug
     useEffect(() => {
@@ -42,7 +41,7 @@ const BlogDetails = () => {
         }
     }, [BlogPost]);
 
-    const { title, description, image, category } = singlePost;
+    const { title, description, image, category, author } = singlePost;
     const shareUrl = `http://iTechEys.com/blog-details/${slug}/`;
     // const shareUrl="https://www.facebook.com/"
     console.log("shareUrl", shareUrl);
@@ -59,11 +58,10 @@ const BlogDetails = () => {
                                     <img src={image} alt="post image" />
                                 </div>
                                 <div className="article-title">
-                                    <h6>
+                                    {/* <h6>
                                         <a href="#">{category && category.name}</a>
-                                    </h6>
-                                    <h2>{title} </h2>
-                                    <div className="media d-flex">
+                                    </h6> */}
+                                    {/* <div className="media d-flex">
                                         <div className="avatar">
                                             <img
                                                 src="https://bootdey.com/img/Content/avatar/avatar1.png"
@@ -71,10 +69,11 @@ const BlogDetails = () => {
                                                 alt=""
                                             />
                                         </div>
-                                        <div className="auth-info">
-                                            <a href="#">Motalib Hossain</a>
+                                        <div className="auth-info pt-3">
+                                            <a href="#" className="text-capitalize">{author && author.username}</a>
                                         </div>
-                                    </div>
+                                    </div> */}
+                                    <h2>{title} </h2>
                                 </div>
                                 <div className="article-content">
                                     <p>{description}</p>
@@ -161,10 +160,10 @@ const BlogDetails = () => {
                                             />
                                         </div>
                                         <div className="media-body">
-                                            {/* <h6>Hello, I'm<br>{{ blog.author }}</h6> */}
+                                            <h6 className="text-capitalize">{author && author.username}</h6>
                                         </div>
                                     </div>
-                                    {/* <p>{{ current_user.bio }} ki</p> */}
+                                    <span className="text-justify">{author && author.description}</span>
                                 </div>
                             </div>
                             {/* <!-- End Author -->
