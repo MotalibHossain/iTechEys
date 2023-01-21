@@ -7,10 +7,13 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const SubmitPost = () => {
+    const authorName = useRef();
     const effectRan = useRef(false);
+    const user=JSON.parse(localStorage.getItem("UserInfo"));
+    console.log(user);
     // Error alert 
     const [show, setShow] = useState(true);
-    const [message, setMessage]=useState()
+    const [message, setMessage]=useState();
 
     const [blogCategory, setblogCategory] = useState([]);
     const [image, setImage] = useState(null);
@@ -37,6 +40,7 @@ const SubmitPost = () => {
     const HandelChange5 = (e) => {
         setPublish(e.target.value);
     };
+    
     const onImageChange = (event) => {
         setImage(event.currentTarget.files[0]);
     };
@@ -48,6 +52,7 @@ const SubmitPost = () => {
         form_data.append("slug", slug);
         form_data.append("description", description);
         form_data.append("category", category);
+        form_data.append("author", authorName.current.value);
         form_data.append("publish", publish);
         form_data.append("image", image);
 
@@ -62,14 +67,12 @@ const SubmitPost = () => {
             })
             .then((res) => {
                 console.log(res);
-                // setMessage(res.statusText+" "+" Successfully");
                 toast(res.statusText+" "+" Successfully");
                 e.target.reset()
             })
             .catch((error) => {
                 let errorKey = Object.keys(error.response.data)[0];
                 let errorValue = Object.values(error.response.data)[0];
-                // setMessage(errorKey+ ":"+ errorValue);
                 toast(errorKey+ ":"+ errorValue);
             });
     };
@@ -179,6 +182,20 @@ const SubmitPost = () => {
                     <div className="row">
                         <div className="col-md-6">
                             <div className="form-group">
+                                <label>Author</label>
+                                <input
+                                    ref={authorName}
+                                    type="text"
+                                    name="author"
+                                    className="form-control"
+                                    placeholder=""
+                                    value={user.user_id}
+                                    readOnly
+                                />
+                            </div>
+                        </div>
+                        <div className="col-md-6">
+                            <div className="form-group">
                                 <label>Description</label>
                                 <textarea
                                     type="text"
@@ -191,6 +208,7 @@ const SubmitPost = () => {
                             </div>
                         </div>
                     </div>
+
                     <div className="checkbox py-3">
                         <label>
                             <input
