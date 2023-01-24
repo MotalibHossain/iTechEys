@@ -8,6 +8,7 @@ import { IoChevronForwardOutline } from "react-icons/io5";
 // Component import
 import Sidebar from "../components/Home/Sidebar.js";
 import FetchDataFromApi from "../Utils/DataFetch";
+import { AuthorProfile } from "./AuthorProfile";
 
 const Home = () => {
     const [post, setPost] = useState([]);
@@ -108,7 +109,7 @@ const Home = () => {
                         <div className="Card-body">
                             <div className="row">
                                 {post.map((Item, index) => {
-                                    const { id, title, slug, description, image, category } = Item;
+                                    const { id, title, slug, description, image, author, category } = Item;
                                     return (
                                         <div className="col-lg-4 col-md-6 col-sm-6" key={index}>
                                             <div className="post-card pb-0">
@@ -122,7 +123,7 @@ const Home = () => {
                                                                 src="https://bootdey.com/img/Content/avatar/avatar7.png"
                                                                 alt="Profile Image"
                                                             />
-                                                            <div className="d-flex mt-2">Motalib</div>
+                                                            <div className="d-flex mt-2 text-capitalize">{author.username}</div>
                                                         </div>
                                                         <p className="time mb-0 mt-2">{category.name}</p>
                                                     </div>
