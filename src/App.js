@@ -18,6 +18,7 @@ import Contact from "./Pages/Contact";
 import SubmitPost from "./Pages/SubmitPost";
 import BlogDetails from "./Pages/BlogDetails";
 import UserProfile from "./Pages/UserProfile";
+import AuthorProfile  from "./Pages/AuthorProfile";
 // user system import
 import Login from "./Pages/Login";
 import Registration from "./Pages/Registration";
@@ -43,6 +44,7 @@ function App() {
                     <Route path="/registration" element={IsAuthenticate ? <Navigate from="/login" to="/user-profile" /> : <Registration />}></Route>
                     {/* User system  */}
                     <Route path="/user-profile" element={IsAuthenticate ? <UserProfile /> : <Navigate from="/user-profile" to="/login" />}></Route>
+                    <Route path="/author-profile" element={<AuthorProfile />}></Route>
                     {/* Subpage route  */}
                     <Route path="/blog-details/:slug" element={<BlogDetails />}></Route>
                     {/* Error page  */}
