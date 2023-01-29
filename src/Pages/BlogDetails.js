@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { AiOutlineLike, AiOutlineDislike } from "react-icons/ai";
 
@@ -41,7 +42,7 @@ const BlogDetails = () => {
         }
     }, [BlogPost]);
 
-    const { title, description, image, category, author } = singlePost;
+    const { title, description, image, category, author } = singlePost
     const shareUrl = `http://iTechEys.com/blog-details/${slug}/`;
     // const shareUrl="https://www.facebook.com/"
     console.log("shareUrl", shareUrl);
@@ -160,7 +161,11 @@ const BlogDetails = () => {
                                             />
                                         </div>
                                         <div className="media-body">
-                                            <h6 className="text-capitalize">{author && author.username}</h6>
+                                            <h6 className="text-capitalize">
+                                                <Link to="/author-profile" state={author}>
+                                                    {author && author.username}
+                                                </Link>
+                                            </h6>
                                         </div>
                                     </div>
                                     <span className="text-justify">{author && author.description}</span>

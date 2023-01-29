@@ -1,6 +1,10 @@
 import React from "react";
+import { useLocation } from 'react-router-dom'
 
-export const AuthorProfile = () => {
+
+const AuthorProfile = () => {
+    const AuthorInfo = useLocation()
+    const {username,email,description}=AuthorInfo.state
     return (
         <>
             <div className="cover"></div>
@@ -16,10 +20,10 @@ export const AuthorProfile = () => {
                             </div>
                             <img id="userImage" />
                             <div className="card-block px-4 py-3">
-                                {/* <h4 className="card-title">{username}</h4> */}
+                                <h4 className="card-title">{username}</h4>
                                 <div className="row">
                                     <div className="col">
-                                        {/* <div className="description font-weight-bold">{description}</div> */}
+                                        <div className="description font-weight-bold">{description}</div>
                                     </div>
                                 </div>
                                 <div className="mt-3">
@@ -306,3 +310,4 @@ export const AuthorProfile = () => {
         </>
     );
 };
+export default AuthorProfile
