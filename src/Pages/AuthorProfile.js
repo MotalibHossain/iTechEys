@@ -1,10 +1,9 @@
 import React from "react";
-import { useLocation } from 'react-router-dom'
-
+import { useLocation } from "react-router-dom";
 
 const AuthorProfile = () => {
-    const AuthorInfo = useLocation()
-    const {username,email,description}=AuthorInfo.state
+    const AuthorInfo = useLocation();
+    const { username, email, description } = AuthorInfo.state;
     return (
         <>
             <div className="cover"></div>
@@ -310,4 +309,4 @@ const AuthorProfile = () => {
         </>
     );
 };
-export default AuthorProfile
+export default AuthorProfile;
