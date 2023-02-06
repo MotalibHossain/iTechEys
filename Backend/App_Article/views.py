@@ -12,22 +12,33 @@ from rest_framework import status
 from rest_framework.decorators import parser_classes
 from rest_framework.parsers import MultiPartParser, FormParser
 
-# Models import 
-from App_Article.models import BlogPost, BlogPostCategory
+# Models import
+from App_Article.models import BlogPost, BlogPostCategory, BlogLike, BlogComment
 
-# serializers import 
-from App_Article.serializers import BlogPostSerializer, BlogPostCategorySerializer, PostSerializer
+# serializers import
+from App_Article.serializers import (
+    BlogPostSerializer,
+    BlogPostCategorySerializer,
+    PostSerializer,
+    BlogLikedSerializer,
+    BlogCommentSerializer
+)
 
-# Class based views 
+# Class based views
+
+
 class Article(generics.ListCreateAPIView):
     queryset = BlogPost.objects.all()
     serializer_class = BlogPostSerializer
-    
-# Blog post view 
+
+# Blog post view
+
+
 class ArticlePost(generics.ListCreateAPIView):
     queryset = BlogPost.objects.all()
     serializer_class = PostSerializer
     parser_classes = [parsers.FormParser, parsers.MultiPartParser]
+
 
 class BlogCategories(generics.ListCreateAPIView):
     queryset = BlogPostCategory.objects.all()
@@ -40,7 +51,7 @@ class BlogCategories(generics.ListCreateAPIView):
 #         articles=BlogPost.objects.all()
 #         serializer=BlogPostSerializer(articles, many=True)
 #         return Response(serializer.data)
-    
+
 #     if request.method =='POST':
 #         serializer=BlogPostSerializer(data=request.data)
 #         if serializer.is_valid():
@@ -49,7 +60,21 @@ class BlogCategories(generics.ListCreateAPIView):
 #             # return Response({'received data': request.data})
 #         return Response(serializer.errors)
 
+
 @api_view(['GET', 'POST'])
 def PostPutUpdateDelete(request, id):
     pass
 
+
+# ------------------------------------
+#      Post like and Comment part
+# ------------------------------------
+
+class BlogLiked(generics.ListCreateAPIView):
+    queryset = BlogLike.objects.all()
+    serializer_class = BlogLikedSerializer
+
+
+class BlogComment(generics.ListCreateAPIView):
+    queryset = BlogComment.objects.all()
+    serializer_class = BlogCommentSerializer
