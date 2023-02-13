@@ -18,9 +18,10 @@ class BlogLikedSerializer(serializers.ModelSerializer):
 
 
 class BlogCommentSerializer(serializers.ModelSerializer):
+    user=UserProfileSerializers(read_only=True, source="")
     class Meta:
         model = BlogComment
-        fields = "__all__"
+        fields = ['comment','publish_date', 'user']
 
 
 # ------------------------------------
@@ -39,8 +40,7 @@ class BlogPostCategorySerializer(serializers.ModelSerializer):
 class BlogPostSerializer(serializers.ModelSerializer):
     category = BlogPostCategorySerializer(read_only=True)
     author = UserProfileSerializers(read_only=True)
-    # post=BlogLikedSerializer(many=True, read_only=True)
-    # comment=BlogCommentSerializer(many=True, read_only=True)
+    Post_Comment=BlogCommentSerializer(many=True, read_only=True)
 
     class Meta:
         model = BlogPost
