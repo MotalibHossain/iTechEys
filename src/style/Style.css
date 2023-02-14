@@ -55,12 +55,10 @@ ul {
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++
                     Section 1
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-.main-banner {
+.home-slider .carousel .carousel-inner .carousel-item img{
     height: 265px;
-    width: 100%;
 }
-
-.banner-img-overlay {
+.home-slider .carousel .carousel-inner .carousel-item .banner-img-overla{
     height: 100%;
     width: 100%;
     background: black;
@@ -68,30 +66,24 @@ ul {
     border-radius: 5px;
 }
 
-.banner-img,
-.banner-img .banner-img-overlay img {
-    height: 100%;
-    width: 100%;
-}
-
-.banner-img .banner-img-overlay img {
+.home-slider .carousel .carousel-inner .carousel-item img {
     opacity: 0.4;
 }
 
-.post-content {
+/* .post-content {
     position: relative;
     bottom: 32%;
     padding: 0px 10px;
-}
-.main-banner .post-content a {
+} */
+/* .home-slider .post-content a {
     font-weight: 900;
     padding-bottom: 5px;
-}
+} */
 
-.main-banner .post-content a,
-.main-banner .post-content p {
+/* .home-slider .post-content a,
+.home-slider .post-content p {
     color: white;
-}
+} */
 .latestPostDec{
     --max-lines: 2;
     display: -webkit-box !important;
@@ -100,13 +92,13 @@ ul {
     overflow: hidden;
 }
 
-.main-banner .post-content span:hover {
+/* .home-slider .post-content span:hover {
     color: var(--primaryHover) !important;
-}
+} */
 
-.main-banner .post-content p {
+/* .home-slider .post-content p {
     font-size: 15px;
-}
+} */
 
 .side-title ul li p {
     text-align: justify;
@@ -315,7 +307,7 @@ ul {
     padding: 0;
 }
 
-.carousel-inner .carousel-item img {
+.banner-sec .carousel-inner .carousel-item img {
     opacity: 0.4;
 }
 
@@ -325,7 +317,7 @@ ul {
     box-shadow: 15px 20px 0px rgba(0, 0, 0, 0.1);
 }
 
-.carousel-inner {
+.banner-sec .carousel-inner {
     border-radius: 0 10px 10px 0;
 }
 
@@ -483,12 +475,12 @@ ul {
                     Media Query
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 @media screen and (max-width: 575px) {
-    .main-banner {
+    /* .home-slider {
         margin-bottom: 15px;
-    }
-    .post-content {
+    } */
+    /* .post-content {
         bottom: 42%;
-    }
+    } */
 
     .side-title {
         display: none;
