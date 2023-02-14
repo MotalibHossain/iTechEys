@@ -42,7 +42,7 @@ const BlogDetails = () => {
         }
     }, [BlogPost]);
 
-    const { title, description, image, category, author, Post_Comment } = singlePost
+    const { title, description, image, category, author, Post_Comment } = singlePost;
     console.log("whole blog post", Post_Comment);
     const shareUrl = `http://iTechEys.com/blog-details/${slug}/`;
     // const shareUrl="https://www.facebook.com/"
@@ -115,17 +115,17 @@ const BlogDetails = () => {
                                     <div className="col-lg-6">Commenter</div>
                                 </div>
                             </div>
-                            {Post_Comment && Post_Comment.map((item)=>{
-                                return(
-
-                                    <div className="article-comment mb-3">
-                                        <div className="row me-5 ms-5">
-                                            <div className="col-lg-6">{item.user}</div>
-                                            <div className="col-lg-6">{item.comment}</div>
+                            {Post_Comment &&
+                                Post_Comment.map((item) => {
+                                    return (
+                                        <div className="article-comment mb-3">
+                                            <div className="row me-5 ms-5">
+                                                <div className="col-lg-6">{item.user.username}</div>
+                                                <div className="col-lg-6">{item.comment}</div>
+                                            </div>
                                         </div>
-                                    </div>
-                                )
-                            })}
+                                    );
+                                })}
                             <div className="contact-form article-comment">
                                 <h4>Leave a Reply</h4>
                                 <form

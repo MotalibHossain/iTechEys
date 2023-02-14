@@ -18,7 +18,7 @@ class BlogLikedSerializer(serializers.ModelSerializer):
 
 
 class BlogCommentSerializer(serializers.ModelSerializer):
-    user=UserProfileSerializers(read_only=True, source="")
+    user=UserProfileSerializers(read_only=True)
     class Meta:
         model = BlogComment
         fields = ['comment','publish_date', 'user']
