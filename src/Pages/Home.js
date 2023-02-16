@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Post from "../components/BlogPost/Post";
 import { Link } from "react-router-dom";
 import Carousel from "react-bootstrap/Carousel";
 // icon
@@ -9,7 +8,6 @@ import { IoChevronForwardOutline } from "react-icons/io5";
 // Component import
 import Sidebar from "../components/Home/Sidebar.js";
 import FetchDataFromApi from "../Utils/DataFetch";
-import { AuthorProfile } from "./AuthorProfile";
 
 const Home = () => {
     const [post, setPost] = useState([]);
@@ -98,9 +96,9 @@ const Home = () => {
                 </div>
             </section>
 
-            <section className="Section-2 bg-white">
+            <section className="Section-2">
                 <div className="row">
-                    <div className="col-lg-9 col-md-9">
+                    <div className="col-lg-8 col-md-8">
                         <div className="Sec-2-title d-flex align-items-center p-2">
                             <MdOutlineDoubleArrow />
                             {/* <marquee behavior="scroll" direction="left"> */}
@@ -113,7 +111,7 @@ const Home = () => {
                             </a>
                         </div>
                     </div>
-                    <div className="col-lg-3 col-md-3">
+                    <div className="col-lg-4 col-md-4">
                         <div class="search mt-sm-2 mt-md-0 mt-lg-0">
                             <MdOutlineSearch className="fa fa-search" />
                             <input type="text" className="form-control" placeholder="সার্চ করুন iTecheys জুড়ে" />

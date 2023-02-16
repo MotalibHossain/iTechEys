@@ -145,7 +145,7 @@ ul {
 
 .Sec-2-title .button {
     position: absolute;
-    right: 27%;
+    right: 35%;
     padding: 10px;
     font-weight: 900;
     color: black;
@@ -183,6 +183,7 @@ ul {
     box-shadow: 0 0 40px rgb(51 51 51 / 10%);
 }
 .search input {
+    padding: 7px;
     text-indent: 25px;
     border: 2px solid #d6d4d4;
 }
@@ -199,10 +200,10 @@ ul {
 }
 .search button {
     position: absolute;
-    top: 4px;
+    top: 5px;
     right: 6px;
-    height: 27px;
-    font-size: 10px;
+    height: 28px;
+    font-size: 13px;
     width: 60px;
     background-color: var(--primaryColor);
 }
@@ -488,7 +489,9 @@ ul {
 }
 
 @media screen and (max-width: 767px) {
-    
+    .Sec-2-title{
+        display: none !important;
+    }
     .banner-sec {
         display: none !important;
     }
@@ -498,6 +501,18 @@ ul {
     .search {
         margin: 0 auto;
     }
+    /* .search input{
+        padding: 10px;
+    }
+    .search .fa-search{
+        top: 10px !important;
+    }
+    .search button {
+        top: 10px;
+        right: 10px;
+        height: 30px;
+        font-size: 15px;
+    } */
 }
 @media screen and (max-width: 992px) {
     .side-title{
