@@ -12,7 +12,8 @@ from App_Article.views import (
     BlogCategories, 
     ArticlePost, 
     BlogLiked, 
-    BlogComment
+    BlogComment,
+    BlogCommentView
 )
 # from App_Article.views import Article, ArticleDetails, BlogCategories
 
@@ -25,5 +26,6 @@ urlpatterns = [
     # Post like and Comment part
     path('liked/', BlogLiked.as_view(), name='BlogCategories'),
     path('comment/', BlogComment.as_view(), name='BlogCategories'),
+    path('comment-view/', BlogCommentView.as_view(), name='BlogCategories'),
 
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

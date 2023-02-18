@@ -21,7 +21,8 @@ from App_Article.serializers import (
     BlogPostCategorySerializer,
     PostSerializer,
     BlogLikedSerializer,
-    BlogCommentSerializer
+    BlogCommentSerializer,
+    BlogCommentViewSerializer
 )
 
 # Class based views
@@ -75,6 +76,11 @@ class BlogLiked(generics.ListCreateAPIView):
     serializer_class = BlogLikedSerializer
 
 
+class BlogCommentView(generics.ListCreateAPIView):
+    queryset = BlogComment.objects.all()
+    serializer_class = BlogCommentViewSerializer
+
+    
 class BlogComment(generics.ListCreateAPIView):
     queryset = BlogComment.objects.all()
     serializer_class = BlogCommentSerializer
