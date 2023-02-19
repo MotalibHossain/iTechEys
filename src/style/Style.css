@@ -235,6 +235,7 @@ ul {
     border-radius: 12px 12px 0px 0px;
 }
 
+.article-comment img,
 .post-card-body .user-title img {
     height: 30px;
     width: 30px;

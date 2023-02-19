@@ -1,6 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import axios from "axios";
+
+// import redux material
+import { useSelector, useDispatch } from "react-redux";
 
 import { AiOutlineLike, AiOutlineDislike } from "react-icons/ai";
 
@@ -23,14 +27,12 @@ const BlogDetails = () => {
             // this is for not load two time "Strict mood"
             FetchDataFromApi(url).then((data) => {
                 setBlogPost(data);
-                console.log("FetchDataFromApi", data);
             });
             return () => {
                 effectRan.current = true;
             };
         }
     }, []);
-    console.log("BlogPost", BlogPost);
 
     // Filter data from apu through url slug
     useEffect(() => {
@@ -42,12 +44,46 @@ const BlogDetails = () => {
         }
     }, [BlogPost]);
 
-    const { title, description, image, category, author, Post_Comment } = singlePost;
-    console.log("whole blog post", Post_Comment);
+    const { id, title, description, image, category, author, Post_Comment } = singlePost;
     const shareUrl = `http://iTechEys.com/blog-details/${slug}/`;
     // const shareUrl="https://www.facebook.com/"
-    console.log("shareUrl", shareUrl);
-    // console.log("singlePost", singlePost);
+
+    // Post comment
+    const [PostComment, setPostComment] = useState([])
+    const { UserInfo } = useSelector((state) => state);
+    const { user_id } = JSON.parse(UserInfo);
+    const [comment, setComment] = useState("")
+
+    const CommentUrl = "http://127.0.0.1:8000/comment/";
+    useEffect(() => {
+
+        FetchDataFromApi(CommentUrl).then((data) => {
+            setPostComment(data);
+        });
+
+    }, []);
+    const handleComment = (e) => {
+        setComment(e.target.value);
+    }
+    const HandelSubmit = (e) => {
+        e.preventDefault();
+        axios({
+            method: "post",
+            url: "http://127.0.0.1:8000/comment/",
+            data: { "user": user_id, "post": id, "comment": comment },
+        })
+            .then(function (response) {
+                console.log("comment data response", response);
+                // setMessage("Registration successfull")
+            })
+            .catch(function (error) {
+                // let errorValue=Object.values(error.response.data)[0]
+                // setMessage(errorValue[0])
+            })
+        e.target.reset()
+    };
+
+    console.log("Post_Comment", Post_Comment)
 
     return (
         <>
@@ -109,39 +145,37 @@ const BlogDetails = () => {
                                     </div>
                                 </div>
                             </article>
-                            <div className="article-comment mb-3">
-                                <div className="row me-5 ms-5">
-                                    <div className="col-lg-6">User Name</div>
-                                    <div className="col-lg-6">Commenter</div>
-                                </div>
-                            </div>
-                            {Post_Comment &&
-                                Post_Comment.map((item) => {
+                            
+                            {Post_Comment && Post_Comment.map((item) => {
+                                console.log("item", item)
                                     return (
-                                        <div className="article-comment mb-3">
-                                            <div className="row me-5 ms-5">
-                                                <div className="col-lg-6">{item.user.username}</div>
-                                                <div className="col-lg-6">{item.comment}</div>
+                                        <div className="article-comment user-title mb-3">
+                                        <div className="user d-flex mb-0 ">
+                                            <img
+                                                src="https://bootdey.com/img/Content/avatar/avatar7.png"
+                                                alt="Profile Image"
+                                            />
+                                            <div className="d-flex mt-2 text-capitalize ps-2">
+                                            {item.user.username}
                                             </div>
                                         </div>
+                                        <p className="time mb-0 mt-2 ps-5">{item.comment}</p>
+                                    </div>
                                     );
                                 })}
                             <div className="contact-form article-comment">
                                 <h4>Leave a Reply</h4>
-                                <form
-                                    action="{% url 'Articles:aticle_details' slug=blog.slug%}"
-                                    id="contact-form"
-                                    method="POST"
-                                >
+                                <form id="contact-form" method="POST" onSubmit={HandelSubmit}>
                                     <div className="row">
                                         <div className="col-md-12">
                                             <div className="form-group">
                                                 <textarea
-                                                    name="message"
+                                                    name="comment"
                                                     id="message"
-                                                    placeholder="Your message *"
-                                                    rows="4"
+                                                    placeholder="Your Comment *"
+                                                    rows="2"
                                                     className="form-control"
+                                                    onChange={handleComment}
                                                 ></textarea>
                                             </div>
                                         </div>
