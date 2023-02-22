@@ -3,6 +3,7 @@ from pyexpat import model
 from unicodedata import name
 from rest_framework import serializers
 
+from App_UserProfile.models import UserProfile
 from App_Article.models import BlogPost, BlogPostCategory, BlogComment, BlogLike
 from App_UserProfile.serializers import UserProfileSerializers
 
@@ -18,11 +19,16 @@ class BlogLikedSerializer(serializers.ModelSerializer):
 
 
 class BlogCommentViewSerializer(serializers.ModelSerializer):
-    user = UserProfileSerializers(read_only=True)
+    # user = UserProfileSerializers(read_only=True)
+    class CommentUserSerial(serializers.ModelSerializer):
+        class Meta:
+            model = UserProfile
+            fields = ('username',)
+    user = CommentUserSerial()
 
     class Meta:
         model = BlogComment
-        fields = ['comment', 'publish_date', 'user']
+        fields = ['comment', 'publish_date', 'user',]
 
 
 # ------------------------------------
@@ -65,6 +71,11 @@ class PostSerializer(serializers.ModelSerializer):
 #      Post like and Comment part create
 # -------------------------------------------
 class BlogCommentSerializer(serializers.ModelSerializer):
+    class CommentUserSerial(serializers.ModelSerializer):
+        class Meta:
+            model = UserProfile
+            fields = ('username',)
+    user = CommentUserSerial()
 
     class Meta:
         model = BlogComment
