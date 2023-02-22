@@ -49,7 +49,7 @@ const BlogDetails = () => {
     // const shareUrl="https://www.facebook.com/"
 
     // Post comment
-    const [PostComment, setPostComment] = useState([])
+    const [PostComment, setPostComment] = useState(Post_Comment)
     const { UserInfo } = useSelector((state) => state);
     const { user_id } = JSON.parse(UserInfo);
     const [comment, setComment] = useState("")
@@ -74,6 +74,7 @@ const BlogDetails = () => {
         })
             .then(function (response) {
                 console.log("comment data response", response);
+                setPostComment([{ "user": user_id, "post": id, "comment": comment }, ...PostComment])
                 // setMessage("Registration successfull")
             })
             .catch(function (error) {
@@ -83,7 +84,7 @@ const BlogDetails = () => {
         e.target.reset()
     };
 
-    console.log("Post_Comment", Post_Comment)
+    console.log("Post_Comment", PostComment)
 
     return (
         <>
@@ -146,7 +147,7 @@ const BlogDetails = () => {
                                 </div>
                             </article>
                             
-                            {Post_Comment && Post_Comment.map((item) => {
+                            {Post_Comment && PostComment.map((item) => {
                                 console.log("item", item)
                                     return (
                                         <div className="article-comment user-title mb-3">
