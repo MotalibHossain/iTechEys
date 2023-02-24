@@ -18,7 +18,7 @@ class BlogLikedSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class BlogCommentViewSerializer(serializers.ModelSerializer):
+class BlogCommentSerializer(serializers.ModelSerializer):
     # user = UserProfileSerializers(read_only=True)
     class CommentUserSerial(serializers.ModelSerializer):
         class Meta:
@@ -47,7 +47,7 @@ class BlogPostCategorySerializer(serializers.ModelSerializer):
 class BlogPostSerializer(serializers.ModelSerializer):
     category = BlogPostCategorySerializer(read_only=True)
     author = UserProfileSerializers(read_only=True)
-    Post_Comment = BlogCommentViewSerializer(many=True, read_only=True)
+    Post_Comment = BlogCommentSerializer(many=True, read_only=True)
 
     class Meta:
         model = BlogPost
@@ -65,21 +65,3 @@ class PostSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         return BlogPost.objects.create(**validated_data)
-
-
-# -------------------------------------------
-#      Post like and Comment part create
-# -------------------------------------------
-class BlogCommentSerializer(serializers.ModelSerializer):
-    class CommentUserSerial(serializers.ModelSerializer):
-        class Meta:
-            model = UserProfile
-            fields = ('username',)
-    user = CommentUserSerial()
-
-    class Meta:
-        model = BlogComment
-        fields = '__all__'
-
-    def create(self, validated_data):
-        return BlogComment.objects.create(**validated_data)
