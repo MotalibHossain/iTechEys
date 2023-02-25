@@ -49,42 +49,36 @@ const BlogDetails = () => {
     // const shareUrl="https://www.facebook.com/"
 
     // Post comment
-    const [PostComment, setPostComment] = useState(Post_Comment)
+    const [PostComment, setPostComment] = useState(Post_Comment);
     const { UserInfo } = useSelector((state) => state);
     const { user_id } = JSON.parse(UserInfo);
-    const [comment, setComment] = useState("")
+    const [comment, setComment] = useState("");
 
     const CommentUrl = "http://127.0.0.1:8000/comment/";
     useEffect(() => {
-
         FetchDataFromApi(CommentUrl).then((data) => {
             setPostComment(data);
         });
-
     }, []);
     const handleComment = (e) => {
         setComment(e.target.value);
-    }
+    };
     const HandelSubmit = (e) => {
         e.preventDefault();
         axios({
             method: "post",
             url: "http://127.0.0.1:8000/comment/",
-            data: { "user": user_id, "post": id, "comment": comment },
+            data: { user: user_id, post: id, comment: comment },
         })
             .then(function (response) {
                 console.log("comment data response", response);
-                setPostComment([{ "user": user_id, "post": id, "comment": comment }, ...PostComment])
-                // setMessage("Registration successfull")
+                setPostComment([{ user: user_id, post: id, comment: comment }, ...PostComment]);
             })
-            .catch(function (error) {
-                // let errorValue=Object.values(error.response.data)[0]
-                // setMessage(errorValue[0])
-            })
-        e.target.reset()
+            .catch(function (error) {});
+        e.target.reset();
     };
 
-    console.log("Post_Comment", PostComment)
+    console.log("Post_Comment", PostComment);
 
     return (
         <>
@@ -146,25 +140,8 @@ const BlogDetails = () => {
                                     </div>
                                 </div>
                             </article>
-                            
-                            {Post_Comment && PostComment.map((item) => {
-                                console.log("item", item)
-                                    return (
-                                        <div className="article-comment user-title mb-3">
-                                        <div className="user d-flex mb-0 ">
-                                            <img
-                                                src="https://bootdey.com/img/Content/avatar/avatar7.png"
-                                                alt="Profile Image"
-                                            />
-                                            <div className="d-flex mt-2 text-capitalize ps-2">
-                                            {item.user.username}
-                                            </div>
-                                        </div>
-                                        <p className="time mb-0 mt-2 ps-5">{item.comment}</p>
-                                    </div>
-                                    );
-                                })}
-                            <div className="contact-form article-comment">
+
+                            <div className="contact-form article-comment mb-3">
                                 <h4>Leave a Reply</h4>
                                 <form id="contact-form" method="POST" onSubmit={HandelSubmit}>
                                     <div className="row">
@@ -190,6 +167,25 @@ const BlogDetails = () => {
                                     </div>
                                 </form>
                             </div>
+
+                            {Post_Comment &&
+                                PostComment.map((item) => {
+                                    console.log("item", item);
+                                    return (
+                                        <div className="article-comment user-title mb-3">
+                                            <div className="user d-flex mb-0 ">
+                                                <img
+                                                    src="https://bootdey.com/img/Content/avatar/avatar7.png"
+                                                    alt="Profile Image"
+                                                />
+                                                <div className="d-flex mt-2 text-capitalize ps-2">
+                                                    {item.user.username}
+                                                </div>
+                                            </div>
+                                            <p className="time mb-0 mt-2 ps-5">{item.comment}</p>
+                                        </div>
+                                );
+                            })}
                         </div>
                         <div className="col-lg-3 m-15px-tb blog-aside">
                             {/* <!-- Author --> */}
