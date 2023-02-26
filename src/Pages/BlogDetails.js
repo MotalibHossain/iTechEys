@@ -71,14 +71,13 @@ const BlogDetails = () => {
             data: { user: user_id, post: id, comment: comment },
         })
             .then(function (response) {
-                console.log("comment data response", response);
-                setPostComment([{ user: user_id, post: id, comment: comment }, ...PostComment]);
+                setPostComment([{ user: user_id, post: id, comment: comment }, ...Post_Comment]);
             })
             .catch(function (error) {});
         e.target.reset();
     };
 
-    console.log("Post_Comment", PostComment);
+    console.log("PostComment==", PostComment);
 
     return (
         <>
@@ -170,7 +169,6 @@ const BlogDetails = () => {
 
                             {Post_Comment &&
                                 PostComment.map((item) => {
-                                    console.log("item", item);
                                     return (
                                         <div className="article-comment user-title mb-3">
                                             <div className="user d-flex mb-0 ">
