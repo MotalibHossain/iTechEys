@@ -48,18 +48,23 @@ const BlogDetails = () => {
     const shareUrl = `http://iTechEys.com/blog-details/${slug}/`;
     // const shareUrl="https://www.facebook.com/"
 
-    // Post comment
+    // ============================================================
+    //                Post comment and fetch comment
+    // =============================================================
     const [PostComment, setPostComment] = useState(Post_Comment);
     const { UserInfo } = useSelector((state) => state);
-    const { user_id } = JSON.parse(UserInfo);
+    const { user_id, username } = JSON.parse(UserInfo);
     const [comment, setComment] = useState("");
 
-    const CommentUrl = "http://127.0.0.1:8000/comment/";
+    // fetch comment 
+    const CommentUrl = "http://127.0.0.1:8000/comment-view/";
     useEffect(() => {
         FetchDataFromApi(CommentUrl).then((data) => {
             setPostComment(data);
         });
     }, []);
+
+    // Post commen 
     const handleComment = (e) => {
         setComment(e.target.value);
     };
@@ -71,13 +76,11 @@ const BlogDetails = () => {
             data: { user: user_id, post: id, comment: comment },
         })
             .then(function (response) {
-                setPostComment([{ user: user_id, post: id, comment: comment }, ...Post_Comment]);
+                setPostComment([{ user:{"username":username}, post: id, comment: comment }, ...Post_Comment]);
             })
             .catch(function (error) {});
         e.target.reset();
     };
-
-    console.log("PostComment==", PostComment);
 
     return (
         <>
