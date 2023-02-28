@@ -24,6 +24,7 @@ const BlogDetails = () => {
     const { slug } = useParams();
     const [singlePost, setSinglepost] = useState([]);
     const [BlogPost, setBlogPost] = useState([]);
+    const [PostComment, setPostComment] = useState();
 
     const url = "http://127.0.0.1:8000/";
     useEffect(() => {
@@ -38,13 +39,18 @@ const BlogDetails = () => {
         }
     }, []);
 
-    // Filter data from apu through url slug
+    // Filter data from api through url slug
     useEffect(() => {
         if (BlogPost.length > 0) {
             const filterdata = BlogPost.filter((blogData) => {
                 return blogData.slug == slug;
             });
             setSinglepost(filterdata[0]);
+
+            // Comment section 
+            // const findCurrentUser = filterdata[0].Post_Comment.findIndex(r=>r.user.username === username)
+            // const SortedComment = filterdata[0].Post_Comment.splice(findCurrentUser)
+            setPostComment(filterdata[0].Post_Comment)
         }
     }, [BlogPost]);
 
@@ -55,7 +61,6 @@ const BlogDetails = () => {
     // ============================================================
     //                Post comment and fetch comment
     // =============================================================
-    const [PostComment, setPostComment] = useState(Post_Comment);
     const { UserInfo } = useSelector((state) => state);
     const [user_id, setUserId]=useState("")
     const [username, setUsername]=useState("")
@@ -70,14 +75,6 @@ const BlogDetails = () => {
         }
     },[])
 
-    // fetch comment 
-    // const CommentUrl = "http://127.0.0.1:8000/comment-view/";
-    // useEffect(() => {
-    //     FetchDataFromApi(CommentUrl).then((data) => {
-    //         setPostComment(data);
-    //     });
-    // }, []);
-
     // write commen 
     const handleComment = (e) => {
         setComment(e.target.value);
@@ -91,14 +88,14 @@ const BlogDetails = () => {
             data: { user: user_id, post: id, comment: comment },
         })
             .then(function (response) {
-                setPostComment([{ user:{"username":username}, post: id, comment: comment }, ...Post_Comment]);
+                setPostComment([{ user:{"username":username}, post: id, comment: comment }, ...PostComment]);
             })
             .catch(function (error) {
                 toast("Without login, you can't write comment.");
             });
         e.target.reset();
     };
-    console.log("debug_ comment******************", PostComment);
+    console.log("debug_ comment***********************", PostComment);
     console.log("debug_ Post_Comment-----------------", Post_Comment);
 
     return (
@@ -189,8 +186,8 @@ const BlogDetails = () => {
                                 </form>
                             </div>
 
-                            {Post_Comment &&
-                                Post_Comment.map((item) => {
+                            {PostComment &&
+                                PostComment.map((item) => {
                                     console.log("item--------------", item);
                                     return (
                                         <div className="article-comment user-title mb-3">
