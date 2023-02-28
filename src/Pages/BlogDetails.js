@@ -3,6 +3,10 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
+// message framework
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 // import redux material
 import { useSelector, useDispatch } from "react-redux";
 
@@ -53,21 +57,32 @@ const BlogDetails = () => {
     // =============================================================
     const [PostComment, setPostComment] = useState(Post_Comment);
     const { UserInfo } = useSelector((state) => state);
-    const { user_id, username } = JSON.parse(UserInfo);
+    const [user_id, setUserId]=useState("")
+    const [username, setUsername]=useState("")
     const [comment, setComment] = useState("");
 
-    // fetch comment 
-    const CommentUrl = "http://127.0.0.1:8000/comment-view/";
-    useEffect(() => {
-        FetchDataFromApi(CommentUrl).then((data) => {
-            setPostComment(data);
-        });
-    }, []);
+    // avoid error like the way when user is not login
+    useEffect(()=>{
+        if( UserInfo !== null ){
+            const { user_id, username } = JSON.parse(UserInfo);
+            setUserId(user_id)
+            setUsername(username)
+        }
+    },[])
 
-    // Post commen 
+    // fetch comment 
+    // const CommentUrl = "http://127.0.0.1:8000/comment-view/";
+    // useEffect(() => {
+    //     FetchDataFromApi(CommentUrl).then((data) => {
+    //         setPostComment(data);
+    //     });
+    // }, []);
+
+    // write commen 
     const handleComment = (e) => {
         setComment(e.target.value);
     };
+    // Do comment 
     const HandelSubmit = (e) => {
         e.preventDefault();
         axios({
@@ -78,9 +93,13 @@ const BlogDetails = () => {
             .then(function (response) {
                 setPostComment([{ user:{"username":username}, post: id, comment: comment }, ...Post_Comment]);
             })
-            .catch(function (error) {});
+            .catch(function (error) {
+                toast("Without login, you can't write comment.");
+            });
         e.target.reset();
     };
+    console.log("debug_ comment******************", PostComment);
+    console.log("debug_ Post_Comment-----------------", Post_Comment);
 
     return (
         <>
@@ -171,7 +190,8 @@ const BlogDetails = () => {
                             </div>
 
                             {Post_Comment &&
-                                PostComment.map((item) => {
+                                Post_Comment.map((item) => {
+                                    console.log("item--------------", item);
                                     return (
                                         <div className="article-comment user-title mb-3">
                                             <div className="user d-flex mb-0 ">

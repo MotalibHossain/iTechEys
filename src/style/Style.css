@@ -6,7 +6,8 @@
     --primaryColor: #93b874;
     /* --primaryBackground:#F5F5F5; */
     --primaryBackground: #e9e9ed;
-    --bodyBackground:#f7f7ff;
+    /* --bodyBackground:#f7f7ff; */
+    --bodyBackground:#dbd9d9 none repeat scroll top left;
     --primaryHover: #bc5b01;
     /* --primaryHover:#93b874; */
 }
@@ -119,6 +120,7 @@ ul {
     box-shadow: 0 3px 10px rgb(31 45 61 / 13%);
     border-radius: 5px;
     padding: 5px 0px;
+    background: white;
 }
 
 /* .Section-2 .Sec-2-title,
