@@ -50,7 +50,12 @@ const BlogDetails = () => {
             // Comment section 
             // const findCurrentUser = filterdata[0].Post_Comment.findIndex(r=>r.user.username === username)
             // const SortedComment = filterdata[0].Post_Comment.splice(findCurrentUser)
-            setPostComment(filterdata[0].Post_Comment)
+            // setPostComment(filterdata[0].Post_Comment)
+            const users = filterdata[0].Post_Comment
+            const findCurrentUser = users.findIndex(r=>r.user.username === username)
+            const idx = findCurrentUser
+            const SortedComment = users.splice(idx, 1)
+            setPostComment(SortedComment[0], ...Post_Comment)
         }
     }, [BlogPost]);
 
