@@ -48,14 +48,12 @@ const BlogDetails = () => {
             setSinglepost(filterdata[0]);
 
             // Comment section 
-            // const findCurrentUser = filterdata[0].Post_Comment.findIndex(r=>r.user.username === username)
-            // const SortedComment = filterdata[0].Post_Comment.splice(findCurrentUser)
-            // setPostComment(filterdata[0].Post_Comment)
-            const users = filterdata[0].Post_Comment
-            const findCurrentUser = users.findIndex(r=>r.user.username === username)
-            const idx = findCurrentUser
-            const SortedComment = users.splice(idx, 1)
-            setPostComment(SortedComment[0], ...Post_Comment)
+            const thisBlogComment = filterdata[0].Post_Comment
+            const findCurrentUser = thisBlogComment.findIndex(r=>r.user.username === username)
+            const SortedComment = thisBlogComment.splice(findCurrentUser)
+            // marge sorted and all comments array
+            const comments = SortedComment.concat(thisBlogComment)
+            setPostComment(comments)
         }
     }, [BlogPost]);
 
