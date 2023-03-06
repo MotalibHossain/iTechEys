@@ -240,7 +240,6 @@ const BlogDetails = () => {
                                     }
                             })}       
                         </div>
-                        {/* </div> */}
                         <div className="col-lg-3 m-15px-tb blog-aside">
                             {/* <!-- Author --> */}
                             <div className="widget widget-author">
