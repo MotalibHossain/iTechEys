@@ -3,6 +3,10 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
+// icons
+import { FiEdit } from "react-icons/fi";
+import { RiDeleteBin5Line } from "react-icons/ri";
+
 // message framework
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -47,13 +51,13 @@ const BlogDetails = () => {
             });
             setSinglepost(filterdata[0]);
 
-            // Comment section 
-            const thisBlogComment = filterdata[0].Post_Comment
-            const findCurrentUser = thisBlogComment.findIndex(r=>r.user.username === username)
-            const SortedComment = thisBlogComment.splice(findCurrentUser)
+            // Comment section
+            const thisBlogComment = filterdata[0].Post_Comment;
+            const findCurrentUser = thisBlogComment.findIndex((r) => r.user.username === username);
+            const SortedComment = thisBlogComment.splice(findCurrentUser);
             // marge sorted and all comments array
-            const comments = SortedComment.concat(thisBlogComment)
-            setPostComment(comments)
+            const comments = SortedComment.concat(thisBlogComment);
+            setPostComment(comments);
         }
     }, [BlogPost]);
 
@@ -65,24 +69,24 @@ const BlogDetails = () => {
     //                Post comment and fetch comment
     // =============================================================
     const { UserInfo } = useSelector((state) => state);
-    const [user_id, setUserId]=useState("")
-    const [username, setUsername]=useState("")
+    const [user_id, setUserId] = useState("");
+    const [username, setUsername] = useState("");
     const [comment, setComment] = useState("");
 
     // avoid error like the way when user is not login
-    useEffect(()=>{
-        if( UserInfo !== null ){
+    useEffect(() => {
+        if (UserInfo !== null) {
             const { user_id, username } = JSON.parse(UserInfo);
-            setUserId(user_id)
-            setUsername(username)
+            setUserId(user_id);
+            setUsername(username);
         }
-    },[])
+    }, []);
 
-    // write commen 
+    // write commen
     const handleComment = (e) => {
         setComment(e.target.value);
     };
-    // Do comment 
+    // Do comment
     const HandelSubmit = (e) => {
         e.preventDefault();
         axios({
@@ -91,7 +95,7 @@ const BlogDetails = () => {
             data: { user: user_id, post: id, comment: comment },
         })
             .then(function (response) {
-                setPostComment([{ user:{"username":username}, post: id, comment: comment }, ...PostComment]);
+                setPostComment([{ user: { username: username }, post: id, comment: comment }, ...PostComment]);
             })
             .catch(function (error) {
                 toast("Without login, you can't write comment.");
@@ -189,25 +193,54 @@ const BlogDetails = () => {
                                 </form>
                             </div>
 
-                            {PostComment &&
-                                PostComment.map((item) => {
-                                    console.log("item--------------", item);
-                                    return (
-                                        <div className="article-comment user-title mb-3">
-                                            <div className="user d-flex mb-0 ">
-                                                <img
-                                                    src="https://bootdey.com/img/Content/avatar/avatar7.png"
-                                                    alt="Profile Image"
-                                                />
-                                                <div className="d-flex mt-2 text-capitalize ps-2">
-                                                    {item.user.username}
+                            {PostComment && PostComment.map((item) => {
+                                // return 
+                                    if(item.user.username === username){
+                                        return(
+                                            <div className="article-comment user-title mb-3">
+                                                <div className="row">
+                                                    <div className="col-lg-9 col-md-9 col-sm-9">
+                                                        <div className="user d-flex mb-0 ">
+                                                            <img
+                                                                src="https://bootdey.com/img/Content/avatar/avatar7.png"
+                                                                alt="Profile Image"
+                                                            />
+                                                            <div className="d-flex mt-2 text-capitalize ps-2">
+                                                                {item.user.username}
+                                                            </div>
+                                                        </div>
+                                                        <p className="time mb-0 mt-2 ps-5">{item.comment}</p>
+                                                    </div>
+                                                    <div className="col-lg-3 col-md-3 col-sm-3 text-end">
+                                                        <FiEdit />
+                                                        <RiDeleteBin5Line />
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <p className="time mb-0 mt-2 ps-5">{item.comment}</p>
-                                        </div>
-                                );
-                            })}
+                                        )
+                                    }else{
+                                        return(
+                                            <div className="article-comment user-title mb-3">
+                                                <div className="row">
+                                                    <div className="col-lg-9 col-md-9 col-sm-9">
+                                                        <div className="user d-flex mb-0 ">
+                                                            <img
+                                                                src="https://bootdey.com/img/Content/avatar/avatar7.png"
+                                                                alt="Profile Image"
+                                                            />
+                                                            <div className="d-flex mt-2 text-capitalize ps-2">
+                                                                {item.user.username}
+                                                            </div>
+                                                        </div>
+                                                        <p className="time mb-0 mt-2 ps-5">{item.comment}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        )
+                                    }
+                            })}       
                         </div>
+                        {/* </div> */}
                         <div className="col-lg-3 m-15px-tb blog-aside">
                             {/* <!-- Author --> */}
                             <div className="widget widget-author">
@@ -235,7 +268,7 @@ const BlogDetails = () => {
                                 </div>
                             </div>
                             {/* <!-- End Author -->
-              <!-- Trending Post --> */}
+                            <!-- Trending Post --> */}
                             <div className="widget widget-post">
                                 <div className="widget-title">
                                     <h3>Trending Now</h3>
@@ -243,7 +276,7 @@ const BlogDetails = () => {
                                 <div className="widget-body"></div>
                             </div>
                             {/* <!-- End Trending Post -->
-              <!-- Latest Post --> */}
+                             <!-- Latest Post --> */}
                             <div className="widget widget-latest-post">
                                 <div className="widget-title">
                                     <h3>Latest Post</h3>
@@ -330,7 +363,7 @@ const BlogDetails = () => {
                                 </div>
                             </div>
                             {/* <!-- End Latest Post -->
-              <!-- widget Tags --> */}
+                            <!-- widget Tags --> */}
                             <div className="widget widget-tags">
                                 <div className="widget-title">
                                     <h3>Latest Tags</h3>
