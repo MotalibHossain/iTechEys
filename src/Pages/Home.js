@@ -126,7 +126,7 @@ const Home = () => {
 					<div className='col-lg-8 col-md-8 Card-container'>
 						<div className='Card-body'>
 							<div className='row'>
-								{post.map((Item, index) => (
+								{post.slice(0, 4).map((Item, index) => (
 									<PostCard item={Item} key={index} />
 								))}
 							</div>
