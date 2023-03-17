@@ -78,3 +78,9 @@ class BlogCommentPostSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         return BlogComment.objects.create(**validated_data)
+    
+    def create(self, validated_data):
+        instance, created = self.Meta.model.objects.get_or_create(**validated_data)
+        if not created:
+            raise ValidationError('instance alreaady exists..')
+        return instance

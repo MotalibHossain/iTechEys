@@ -72,6 +72,7 @@ const BlogDetails = () => {
     const [user_id, setUserId] = useState("");
     const [username, setUsername] = useState("");
     const [comment, setComment] = useState("");
+    const [isComment, setIscomment]=useState(false)
 
     // avoid error like the way when user is not login
     useEffect(() => {
