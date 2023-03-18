@@ -13,7 +13,6 @@ import "react-toastify/dist/ReactToastify.css";
 
 // import redux material
 import { useSelector, useDispatch } from "react-redux";
-
 import { AiOutlineLike, AiOutlineDislike } from "react-icons/ai";
 
 // File import

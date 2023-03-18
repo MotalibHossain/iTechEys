@@ -279,6 +279,11 @@
     background: #ffffff;
     padding: 10px 20px;
 }
+.article-comment .user img{
+    width: 30px;
+    height: 30px;
+}
+
 .article-comment h4 {
     color: #20247b;
     font-weight: 700;
