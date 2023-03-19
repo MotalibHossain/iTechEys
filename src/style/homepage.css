@@ -1,4 +1,102 @@
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++
+                    Section 2
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+.Section-2 {
+	box-shadow: 0 3px 10px rgb(31 45 61 / 13%);
+	border-radius: 5px;
+	padding: 5px 0px;
+	background: white;
+}
+
+/* .Section-2 .Sec-2-title,
+.Section-2 .Sec-2-search {
+    background: var(--primaryBackground);
+    border: 3px solid white;
+} */
+
+.Section-2 .Sec-2-title h6,
+.Section-2 .Sec-2-search h6 {
+	padding-top: 6px;
+}
+
+.Section-2 .Sec-2-title svg,
+.Section-2 .Sec-2-search svg {
+	width: 30px;
+	height: 25px;
+}
+
+.Section-2 .Sec-2-search .search-input {
+	margin-top: -2px;
+	height: 27px;
+}
+
+.Sec-2-title .button {
+	position: absolute;
+	right: 35%;
+	padding: 10px;
+	font-weight: 900;
+	color: black;
+	background-color: red;
+	animation-name: example;
+	/* animation: example 0.5s infinite; */
+	animation: example 1s infinite 2s cubic-bezier(0.25, 0, 0, 1);
+	animation-timing-function: ease-out;
+	animation-delay: 2s;
+}
+
+@keyframes example {
+	0% {
+		background-color: red;
+	}
+
+	/* 25% {
+        background-color: yellow;
+    }
+
+    50% {
+        background-color: red;
+        color: white;
+    } */
+
+	100% {
+		background-color: white;
+	}
+}
+
+/* Search box  */
+.search {
+	width: 98%;
+	position: relative;
+	box-shadow: 0 0 40px rgb(51 51 51 / 10%);
+}
+.search input {
+	padding: 7px;
+	text-indent: 25px;
+	border: 2px solid #d6d4d4;
+}
+.search input:focus {
+	box-shadow: none;
+	border: 2px solid blue;
+}
+.search .fa-search {
+	position: absolute;
+	top: 7px;
+	left: 10px;
+	height: 25px;
+	width: 25px;
+}
+.search button {
+	position: absolute;
+	top: 5px;
+	right: 6px;
+	height: 28px;
+	font-size: 13px;
+	width: 60px;
+	background-color: var(--primaryColor);
+}
+
+/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++
                     Blog Post Card
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 

@@ -112,6 +112,7 @@ const Home = () => {
 							</a>
 						</div>
 					</div>
+
 					<div className='col-lg-4 col-md-4'>
 						<div class='search mt-sm-2 mt-md-0 mt-lg-0'>
 							<MdOutlineSearch className='fa fa-search' />
@@ -138,6 +139,15 @@ const Home = () => {
 					</div>
 				</div>
 			</section>
+
+			<section className='Section-4'>
+				<div className='row mb-30'>
+					<div className='col-lg-8 col-md-8'>
+						<div className='boxes'>Category Boxes Goes Here</div>
+					</div>
+					<div className='col-lg-4 col-md-4'></div>
+				</div>
+			</section>
 		</div>
 	)
 }
@@ -151,12 +161,17 @@ const PostCard = ({ item }) => {
 					<div className='post-card-img'>
 						<img className='post-banner' src={image} alt='post image' />
 						<div className='post-card-meta'>
-							<div className='post-card-author'>
-								<div className='post-author-image'>
-									<img src='https://bootdey.com/img/Content/avatar/avatar7.png' alt='' />
+							<Link to={`/author-profile/${author.username}`}>
+								<div className='post-card-author'>
+									<div className='post-author-image'>
+										<img
+											src='https://bootdey.com/img/Content/avatar/avatar7.png'
+											alt='author profile image'
+										/>
+									</div>
+									<div className='post-author-username'>{author.username}</div>
 								</div>
-								<div className='post-author-username'>{author.username}</div>
-							</div>
+							</Link>
 							<p className='post-tag'>{category.name}</p>
 						</div>
 					</div>
