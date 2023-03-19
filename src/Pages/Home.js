@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Carousel from 'react-bootstrap/Carousel'
+import '../style/homepage.css'
 // icon
 import { MdOutlineDoubleArrow, MdOutlineSearch } from 'react-icons/md'
 import { IoChevronForwardOutline } from 'react-icons/io5'
@@ -96,7 +97,7 @@ const Home = () => {
 				</div>
 			</section>
 
-			<section className='Section-2'>
+			<section className='Section-2 my-4'>
 				<div className='row'>
 					<div className='col-lg-8 col-md-8'>
 						<div className='Sec-2-title d-flex align-items-center p-2'>
