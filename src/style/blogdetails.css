@@ -279,6 +279,13 @@
     background: #ffffff;
     padding: 10px 20px;
 }
+.article-comment .edit svg:first-child{
+    margin-right: 6px;
+}
+.article-comment .edit svg{
+    height: 20px;
+    width: 20px;
+}
 .article-comment .user img{
     width: 30px;
     height: 30px;
@@ -434,4 +441,15 @@ img {
 }
 .share .Demo__container .Demo__some-network {
     margin-right: 7px;
+}
+
+/* modal form  */
+.modal-body{
+    padding-inline: 25px !important;
+}
+.modal-header{
+    padding: 5px 30px 5px 25px !important;
+}
+.modal-content{
+    background-color: #dbd9d9 !important;
 }

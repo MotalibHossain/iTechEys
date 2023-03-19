@@ -40,7 +40,7 @@ class BlogComment(models.Model):
         UserProfile, on_delete=models.CASCADE, related_name="commenter_user")
     post = models.ForeignKey(
         BlogPost, on_delete=models.CASCADE, related_name="Post_Comment")
-    comment = models.CharField(max_length=150)
+    comment = models.CharField(max_length=500)
     publish_date = models.DateField(auto_now_add=True)
     update_date = models.DateField(auto_now=True)
 

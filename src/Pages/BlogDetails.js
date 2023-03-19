@@ -3,6 +3,9 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
+// bootstrap
+import Modal from "react-bootstrap/Modal";
+
 // icons
 import { FiEdit } from "react-icons/fi";
 import { RiDeleteBin5Line } from "react-icons/ri";
@@ -23,11 +26,16 @@ import Share from "../components/BlogPost/Share";
 import FetchDataFromApi from "../Utils/DataFetch";
 
 const BlogDetails = () => {
+    // modal
+    const [edit, setEdit] = useState(false);
+    const [dalete, setDelete] = useState(false);
+
     const effectRan = useRef(false);
     const { slug } = useParams();
     const [singlePost, setSinglepost] = useState([]);
     const [BlogPost, setBlogPost] = useState([]);
     const [PostComment, setPostComment] = useState();
+    const [isComment, setIscomment] = useState(false);
 
     const url = "http://127.0.0.1:8000/";
     useEffect(() => {
@@ -54,15 +62,23 @@ const BlogDetails = () => {
             const thisBlogComment = filterdata[0].Post_Comment;
             const findCurrentUser = thisBlogComment.findIndex((r) => r.user.username === username);
             const SortedComment = thisBlogComment.splice(findCurrentUser);
+
             // marge sorted and all comments array
             const comments = SortedComment.concat(thisBlogComment);
             setPostComment(comments);
+
+            // User comment already exits or not
+            if (comments !== null) {
+                const UserAlreadyComment = comments.filter((item) => item.user.username === username);
+                if (UserAlreadyComment.length > 0) {
+                    setIscomment(true);
+                }
+            }
         }
     }, [BlogPost]);
 
-    const { id, title, description, image, category, author, Post_Comment } = singlePost;
+    const { id, title, description, image, author } = singlePost;
     const shareUrl = `http://iTechEys.com/blog-details/${slug}/`;
-    // const shareUrl="https://www.facebook.com/"
 
     // ============================================================
     //                Post comment and fetch comment
@@ -71,7 +87,6 @@ const BlogDetails = () => {
     const [user_id, setUserId] = useState("");
     const [username, setUsername] = useState("");
     const [comment, setComment] = useState("");
-    const [isComment, setIscomment]=useState(false)
 
     // avoid error like the way when user is not login
     useEffect(() => {
@@ -96,14 +111,21 @@ const BlogDetails = () => {
         })
             .then(function (response) {
                 setPostComment([{ user: { username: username }, post: id, comment: comment }, ...PostComment]);
+                // Comment button disable and enable
+                const isCommentExits = PostComment.filter((item) => item.user.username === username);
+                if (isCommentExits !== null) {
+                    setIscomment(true);
+                }
             })
             .catch(function (error) {
+                // toast(error.message);
                 toast("Without login, you can't write comment.");
             });
         e.target.reset();
     };
-    console.log("debug_ comment***********************", PostComment);
-    console.log("debug_ Post_Comment-----------------", Post_Comment);
+    // console.log("debug_ comment***********************", PostComment);
+    // console.log("debug_ Post_Comment-----------------", Post_Comment);
+    // console.log("debug_ isComment-----------------", isComment);
 
     return (
         <>
@@ -179,12 +201,13 @@ const BlogDetails = () => {
                                                     rows="2"
                                                     className="form-control"
                                                     onChange={handleComment}
+                                                    required
                                                 ></textarea>
                                             </div>
                                         </div>
                                         <div className="col-md-12">
                                             <div className="send">
-                                                <button className="px-btn theme">
+                                                <button className="px-btn theme" disabled={isComment}>
                                                     <span>Submit</span> <i className="arrow"></i>
                                                 </button>
                                             </div>
@@ -193,10 +216,40 @@ const BlogDetails = () => {
                                 </form>
                             </div>
 
-                            {PostComment && PostComment.map((item) => {
-                                // return 
-                                    if(item.user.username === username){
-                                        return(
+                            {PostComment &&
+                                PostComment.map((item) => {
+                                    // return
+                                    if (item.user.username === username) {
+                                        return (
+                                            <div className="article-comment user-title mb-3">
+                                                <div className="row">
+                                                    <div className="col-lg-9 col-md-9 col-sm-9">
+                                                        <div className="user d-flex mb-0 ">
+                                                            <img
+                                                                src="https://bootdey.com/img/Content/avatar/avatar7.png"
+                                                                alt="Profile Image"
+                                                            />
+                                                            <div className="d-flex mt-2 text-capitalize ps-2">
+                                                                {item.user.username}
+                                                            </div>
+                                                        </div>
+                                                        <p className="time text-justify mb-0 mt-2 ps-5">
+                                                            {item.comment}
+                                                        </p>
+                                                    </div>
+                                                    <div className="col-lg-3 col-md-3 col-sm-3 edit text-end">
+                                                        <a onClick={() => setEdit(true)}>
+                                                            <FiEdit />
+                                                        </a>
+                                                        <a onClick={() => setDelete(true)}>
+                                                            <RiDeleteBin5Line />
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        );
+                                    } else {
+                                        return (
                                             <div className="article-comment user-title mb-3">
                                                 <div className="row">
                                                     <div className="col-lg-9 col-md-9 col-sm-9">
@@ -211,34 +264,11 @@ const BlogDetails = () => {
                                                         </div>
                                                         <p className="time mb-0 mt-2 ps-5">{item.comment}</p>
                                                     </div>
-                                                    <div className="col-lg-3 col-md-3 col-sm-3 text-end">
-                                                        <FiEdit />
-                                                        <RiDeleteBin5Line />
-                                                    </div>
                                                 </div>
                                             </div>
-                                        )
-                                    }else{
-                                        return(
-                                            <div className="article-comment user-title mb-3">
-                                                <div className="row">
-                                                    <div className="col-lg-9 col-md-9 col-sm-9">
-                                                        <div className="user d-flex mb-0 ">
-                                                            <img
-                                                                src="https://bootdey.com/img/Content/avatar/avatar7.png"
-                                                                alt="Profile Image"
-                                                            />
-                                                            <div className="d-flex mt-2 text-capitalize ps-2">
-                                                                {item.user.username}
-                                                            </div>
-                                                        </div>
-                                                        <p className="time mb-0 mt-2 ps-5">{item.comment}</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        )
+                                        );
                                     }
-                            })}       
+                                })}
                         </div>
                         <div className="col-lg-3 m-15px-tb blog-aside">
                             {/* <!-- Author --> */}
@@ -383,6 +413,36 @@ const BlogDetails = () => {
                         </div>
                     </div>
                 </div>
+            </div>
+            {/* <!-- Edit Modal --> */}
+            <div className="EditModal">
+                <Modal show={edit} onHide={() => setEdit(false)}>
+                    <Modal.Header className="bg-primary text-white" closeButton>
+                        <Modal.Title>Edit</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+                    <Modal.Footer className="pt-0 pe-4 border-0">
+                        <button className="btn btn-xs btn-primary" variant="primary" onClick={() => setEdit(false)}>
+                            Edit
+                        </button>
+                    </Modal.Footer>
+                </Modal>
+            </div>
+            {/* <!-- Delete Modal --> */}
+            <div id="DeleteModal">
+                <Modal show={dalete} onHide={() => setDelete(false)}>
+                    <Modal.Header closeButton className="bg-warning">
+                        <Modal.Title>Delete</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body className="pt-4">
+                        <b className="text-danger">Are you sure ? You want to delete this comment.</b>
+                    </Modal.Body>
+                    <Modal.Footer className="pt-0 pe-4 border-0">
+                        <button className="btn btn-xs btn-danger" variant="primary" onClick={() => setDelete(false)}>
+                            Delete
+                        </button>
+                    </Modal.Footer>
+                </Modal>
             </div>
         </>
     );
