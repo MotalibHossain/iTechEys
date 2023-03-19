@@ -161,7 +161,9 @@ const PostCard = ({ item }) => {
 						</div>
 					</div>
 					<div className='post-card-body'>
-						<h4 className='post-title'>{title}</h4>
+						<abbr title={title}>
+							<h4 className='post-title'>{title}</h4>
+						</abbr>
 						<p className='post-body'>{description}</p>
 					</div>
 				</div>
