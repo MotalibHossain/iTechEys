@@ -13,7 +13,8 @@ from App_Article.views import (
     ArticlePost, 
     BlogLiked, 
     BlogCommentPost,
-    BlogCommentView
+    BlogCommentView,
+    BlogCommentEditDelete
 )
 # from App_Article.views import Article, ArticleDetails, BlogCategories
 
@@ -27,5 +28,6 @@ urlpatterns = [
     path('liked/', BlogLiked.as_view(), name='BlogCategories'),
     path('comment/', BlogCommentPost.as_view(), name='BlogCategories'),
     path('comment-view/', BlogCommentView.as_view(), name='BlogCategories'),
+    path('comment/delete/<int:id>', BlogCommentEditDelete.as_view(), name='BlogCommentEditDelete'),
 
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

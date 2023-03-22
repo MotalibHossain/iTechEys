@@ -8,6 +8,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.views import APIView
 
 from rest_framework.decorators import parser_classes
 from rest_framework.parsers import MultiPartParser, FormParser
@@ -80,7 +81,25 @@ class BlogCommentView(generics.ListCreateAPIView):
     queryset = BlogComment.objects.all()
     serializer_class = BlogCommentViewSerializer
 
-    
+
 class BlogCommentPost(generics.ListCreateAPIView):
     queryset = BlogComment.objects.all()
     serializer_class = BlogCommentPostSerializer
+
+
+class BlogCommentEditDelete(APIView):
+    def get(self, request, pk):
+        articles = BlogComment.objects.filter(pk=pk)
+        # serializer=BlogCommentViewSerializer(articles, many=True)
+        # return Response(serializer.data)
+        return Response(articles)
+
+    def delete(self, request, pk):
+
+        # deleteiItem=BlogComment.objects.filter(pk = id)
+        # deleteiItem.delete()
+        # response={"message":"Comment delete successfully."}
+        # return Response(response)
+        deleteiItem = self.get_object(pk)
+        deleteiItem.delete()
+        return Response(status=status.HTTP_400_BAD_REQUEST)
