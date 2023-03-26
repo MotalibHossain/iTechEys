@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { v4 as uuid } from 'uuid';
 
 // bootstrap
 import Modal from "react-bootstrap/Modal";
@@ -87,6 +88,7 @@ const BlogDetails = () => {
     const [user_id, setUserId] = useState("");
     const [username, setUsername] = useState("");
     const [comment, setComment] = useState("");
+    const [commentEdit, setCommentEdit] = useState("");
 
     // avoid error like the way when user is not login
     useEffect(() => {
@@ -101,35 +103,70 @@ const BlogDetails = () => {
     const handleComment = (e) => {
         setComment(e.target.value);
     };
+    // edit comment
+    const handleCommentEdit = (e, prev) => {
+        setCommentEdit(e.target.value);
+    };
     // Do comment
     const HandelSubmit = (e) => {
         e.preventDefault();
         axios({
             method: "post",
             url: "http://127.0.0.1:8000/comment/",
-            data: { user: user_id, post: id, comment: comment },
+            data: { CId:uuid(), user: user_id, post: id, comment: comment },
         })
-            .then(function (response) {
-                setPostComment([{ user: { username: username }, post: id, comment: comment }, ...PostComment]);
-                // Comment button disable and enable
-                const isCommentExits = PostComment.filter((item) => item.user.username === username);
-                if (isCommentExits !== null) {
-                    setIscomment(true);
-                }
-            })
-            .catch(function (error) {
-                // toast(error.message);
-                toast("Without login, you can't write comment.");
-            });
+        .then(function (response) {
+            setPostComment([{CId:uuid(), user: { username: username }, post: id, comment: comment }, ...PostComment]);
+            // Comment button disable and enable
+            const isCommentExits = PostComment.filter((item) => item.user.username === username);
+            if (isCommentExits !== null) {
+                setIscomment(true);
+            }
+        })
+        .catch(function (error) {
+            toast("Without login, you can't write comment.");
+        });
         e.target.reset();
     };
-    // console.log("debug_ comment***********************", PostComment);
-    // console.log("debug_ Post_Comment-----------------", Post_Comment);
+    // Comment update
+    let URL = `http://127.0.0.1:8000/comment/delete/${PostComment?.[0]?.CId}`;
+    const HandelEdit = (e) => {
+        axios({
+            method: "PUT",
+            url: URL,
+            data: {CId:uuid(), user: user_id, post: id, comment: commentEdit },
+        })
+        .then(function (response) {
+            setEdit(false);
+            toast("Comment update successfully.");
+            window.location.reload(false);
+        })
+        .catch(function (error) {
+            // toast(error.message);
+        });
+        e.target.reset();
+    };
+    // Comment delete 
+    const HandleDelete=(e)=>{
+        axios({
+            method: "DELETE",
+            url: URL,
+            // data: { user: user_id, post: id, comment: commentEdit },
+        })
+        .then(function (response) {
+            setDelete(false);
+            toast("Comment delete successfully.");
+            window.location.reload(false);
+        })
+    }
+    // console.log("debug_ comment***********************", uuid().slice(0,4));
+    console.log("debug_ comment***********************", PostComment?.[0]?.CId);
+    console.log("debug_ Post_Comment-----------------", PostComment);
     // console.log("debug_ isComment-----------------", isComment);
 
     return (
         <>
-            <div className="blog-single gray-bg">
+            <div className="blog-single gray-bg pb-0">
                 <div className="Main-Container container-fluid">
                     <div className="row align-items-start">
                         <div className="col-lg-9 m-15px-tb">
@@ -217,11 +254,11 @@ const BlogDetails = () => {
                             </div>
 
                             {PostComment &&
-                                PostComment.map((item) => {
+                                PostComment.map((item, index) => {
                                     // return
                                     if (item.user.username === username) {
                                         return (
-                                            <div className="article-comment user-title mb-3">
+                                            <div key={index} className="article-comment user-title mb-3">
                                                 <div className="row">
                                                     <div className="col-lg-9 col-md-9 col-sm-9">
                                                         <div className="user d-flex mb-0 ">
@@ -250,7 +287,7 @@ const BlogDetails = () => {
                                         );
                                     } else {
                                         return (
-                                            <div className="article-comment user-title mb-3">
+                                            <div key={index} className="article-comment user-title mb-3">
                                                 <div className="row">
                                                     <div className="col-lg-9 col-md-9 col-sm-9">
                                                         <div className="user d-flex mb-0 ">
@@ -420,12 +457,27 @@ const BlogDetails = () => {
                     <Modal.Header className="bg-primary text-white" closeButton>
                         <Modal.Title>Edit</Modal.Title>
                     </Modal.Header>
-                    <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
-                    <Modal.Footer className="pt-0 pe-4 border-0">
-                        <button className="btn btn-xs btn-primary" variant="primary" onClick={() => setEdit(false)}>
-                            Edit
-                        </button>
-                    </Modal.Footer>
+                    <form onSubmit={HandelEdit}>
+                        <Modal.Body>
+                            <div className="form-group">
+                                <label className="pb-2"> Comment</label>
+                                <input
+                                    type="text"
+                                    name="comment-edit"
+                                    defaultValue={PostComment?.[0]?.comment}
+                                    onChange={handleCommentEdit}
+                                    className="form-control"
+                                    placeholder=""
+                                    required
+                                />
+                            </div>
+                        </Modal.Body>
+                        <Modal.Footer className="pt-0 pe-4 border-0">
+                            <button type="submit" className="btn btn-xs btn-primary" variant="primary">
+                                Edit
+                            </button>
+                        </Modal.Footer>
+                    </form>
                 </Modal>
             </div>
             {/* <!-- Delete Modal --> */}
@@ -438,7 +490,7 @@ const BlogDetails = () => {
                         <b className="text-danger">Are you sure ? You want to delete this comment.</b>
                     </Modal.Body>
                     <Modal.Footer className="pt-0 pe-4 border-0">
-                        <button className="btn btn-xs btn-danger" variant="primary" onClick={() => setDelete(false)}>
+                        <button className="btn btn-xs btn-danger" variant="primary" onClick={HandleDelete}>
                             Delete
                         </button>
                     </Modal.Footer>
