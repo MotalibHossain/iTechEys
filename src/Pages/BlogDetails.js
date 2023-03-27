@@ -108,15 +108,16 @@ const BlogDetails = () => {
         setCommentEdit(e.target.value);
     };
     // Do comment
+    const uid=uuid().slice(0,8)
     const HandelSubmit = (e) => {
         e.preventDefault();
         axios({
             method: "post",
             url: "http://127.0.0.1:8000/comment/",
-            data: { CId:uuid(), user: user_id, post: id, comment: comment },
+            data: { custom_id:uid, user: user_id, post: id, comment: comment },
         })
         .then(function (response) {
-            setPostComment([{CId:uuid(), user: { username: username }, post: id, comment: comment }, ...PostComment]);
+            setPostComment([{custom_id:uid, user: { username: username }, post: id, comment: comment }, ...PostComment]);
             // Comment button disable and enable
             const isCommentExits = PostComment.filter((item) => item.user.username === username);
             if (isCommentExits !== null) {
@@ -129,12 +130,13 @@ const BlogDetails = () => {
         e.target.reset();
     };
     // Comment update
-    let URL = `http://127.0.0.1:8000/comment/delete/${PostComment?.[0]?.CId}`;
+    let URL = `http://127.0.0.1:8000/comment/delete/${PostComment?.[0]?.custom_id}`;
     const HandelEdit = (e) => {
+        e.preventDefault();
         axios({
             method: "PUT",
             url: URL,
-            data: {CId:uuid(), user: user_id, post: id, comment: commentEdit },
+            data: {custom_id:PostComment?.[0]?.custom_id, user: user_id, post: id, comment: commentEdit },
         })
         .then(function (response) {
             setEdit(false);
@@ -142,9 +144,10 @@ const BlogDetails = () => {
             window.location.reload(false);
         })
         .catch(function (error) {
-            // toast(error.message);
+            alert("edit")
+            toast(error.message);
         });
-        e.target.reset();
+        // e.target.reset();
     };
     // Comment delete 
     const HandleDelete=(e)=>{
@@ -154,13 +157,14 @@ const BlogDetails = () => {
             // data: { user: user_id, post: id, comment: commentEdit },
         })
         .then(function (response) {
+            console.log("delete", response);
             setDelete(false);
             toast("Comment delete successfully.");
-            window.location.reload(false);
+            // window.location.reload(false);
         })
     }
-    // console.log("debug_ comment***********************", uuid().slice(0,4));
-    console.log("debug_ comment***********************", PostComment?.[0]?.CId);
+    console.log("debug_ comment***********************", URL);
+    console.log("debug_ comment***********************", PostComment?.[0]?.custom_id);
     console.log("debug_ Post_Comment-----------------", PostComment);
     // console.log("debug_ isComment-----------------", isComment);
 

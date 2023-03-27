@@ -28,6 +28,6 @@ urlpatterns = [
     path('liked/', BlogLiked.as_view(), name='BlogCategories'),
     path('comment/', BlogCommentPost.as_view(), name='BlogCategories'),
     path('comment-view/', BlogCommentView.as_view(), name='BlogCategories'),
-    path('comment/delete/<int:CId>', BlogCommentEditDelete.as_view(), name='BlogCommentEditDelete'),
+    path('comment/delete/<str:cid>', BlogCommentEditDelete.as_view(), name='BlogCommentEditDelete'),
 
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

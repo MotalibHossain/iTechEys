@@ -88,24 +88,22 @@ class BlogCommentPost(generics.ListCreateAPIView):
 
 
 class BlogCommentEditDelete(APIView):
-    def get(self, request, id):
-        articles = BlogComment.objects.filter(pk=id)
+    def get(self, request, cid):
+        articles = BlogComment.objects.filter(custom_id=cid)
         serializer=BlogCommentViewSerializer(articles, many=True)
         return Response(serializer.data)
     
-    def put(self, request, id):
-        editItem = BlogComment.objects.filter(pk=id).first()
+    def put(self, request, cid):
+        editItem = BlogComment.objects.filter(custom_id=cid).first()
         serializer = BlogCommentPostSerializer(editItem, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
 
-    def delete(self, request, id):
+    def delete(self, request, cid):
         comments=BlogComment.objects.all()
         serializer=BlogCommentViewSerializer(comments, many=True)
-        deleteiItem = BlogComment.objects.get(pk=id)
+        deleteiItem = BlogComment.objects.get(custom_id=cid)
         deleteiItem.delete()
-        # msg={"status":"Comment delete successfully"}
-        # return Response(msg)
         return Response(serializer.data)

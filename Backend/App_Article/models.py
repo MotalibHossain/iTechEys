@@ -1,5 +1,7 @@
 from email.policy import default
 from django.db import models
+import uuid
+# uuid=str(uuid.uuid4)
 
 # model import from another app
 from App_UserProfile.models import UserProfile
@@ -40,7 +42,7 @@ class BlogComment(models.Model):
         UserProfile, on_delete=models.CASCADE, related_name="commenter_user")
     post = models.ForeignKey(
         BlogPost, on_delete=models.CASCADE, related_name="Post_Comment")
-    CId=models.UUIDField(max_length=100)
+    custom_id = models.CharField(max_length=8, primary_key=True)
     comment = models.CharField(max_length=500)
     publish_date = models.DateField(auto_now_add=True)
     update_date = models.DateField(auto_now=True)
@@ -48,8 +50,8 @@ class BlogComment(models.Model):
     def __str__(self) -> str:
         return self.user.username + "--- comment on ---" + self.post.title
 
-    class Meta:
-        ordering = ['-id',]
+    # class Meta:
+    #     ordering = ['-id',]
 
 
 class BlogLike(models.Model):

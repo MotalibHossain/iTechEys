@@ -28,7 +28,7 @@ class BlogCommentViewSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = BlogComment
-        fields = ['id', 'CId','comment', 'publish_date', 'user', 'post']
+        fields = ['custom_id','comment', 'publish_date', 'user', 'post']
 
 
 # ------------------------------------
