@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Carousel from 'react-bootstrap/Carousel'
+import axios from "axios";
 import '../style/homepage.css'
 // icon
 import { MdOutlineDoubleArrow, MdOutlineSearch } from 'react-icons/md'
@@ -8,7 +9,6 @@ import { IoChevronForwardOutline } from 'react-icons/io5'
 
 // Component import
 import Sidebar from '../components/Home/Sidebar.js'
-import FetchDataFromApi from '../Utils/DataFetch'
 
 const Home = () => {
 	const [post, setPost] = useState([])
@@ -16,19 +16,16 @@ const Home = () => {
 
 	const url = 'http://127.0.0.1:8000/'
 	useEffect(() => {
-		FetchDataFromApi(url).then(data => {
-			setPost(data)
-			setLatestPost({
-				id: data[0].id,
-				title: data[0].title,
-				slug: data[0].slug,
-				description: data[0].description,
-				image: data[0].image,
-			})
-		})
+		axios({
+            method: "get",
+            url: url,
+        })
+        .then(function (response) {
+			setPost(response.data)
+			setLatestPost(response.data[0])
+        })
 	}, [])
 	const { id, title, slug, description, image } = latestPost
-	// console.log("post", post);
 
 	return (
 		<div className='Main-Container container-fluid '>
