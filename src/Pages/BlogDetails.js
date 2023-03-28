@@ -51,7 +51,7 @@ const BlogDetails = () => {
         }
     }, []);
 
-    // Filter data from api through url slug
+    // Filter data from api through url slug and post comment sorting
     useEffect(() => {
         if (BlogPost.length > 0) {
             const filterdata = BlogPost.filter((blogData) => {
@@ -107,7 +107,7 @@ const BlogDetails = () => {
     const handleCommentEdit = (e, prev) => {
         setCommentEdit(e.target.value);
     };
-    // Do comment
+    // Submit comment
     const uid=uuid().slice(0,8)
     const HandelSubmit = (e) => {
         e.preventDefault();
@@ -144,7 +144,6 @@ const BlogDetails = () => {
             window.location.reload(false);
         })
         .catch(function (error) {
-            alert("edit")
             toast(error.message);
         });
         // e.target.reset();
@@ -154,18 +153,18 @@ const BlogDetails = () => {
         axios({
             method: "DELETE",
             url: URL,
-            // data: { user: user_id, post: id, comment: commentEdit },
         })
         .then(function (response) {
-            console.log("delete", response);
+            setPostComment(response.data)
             setDelete(false);
             toast("Comment delete successfully.");
-            // window.location.reload(false);
         })
+        .catch(function (error) {
+            toast(error.message);
+        });
     }
-    console.log("debug_ comment***********************", URL);
-    console.log("debug_ comment***********************", PostComment?.[0]?.custom_id);
-    console.log("debug_ Post_Comment-----------------", PostComment);
+    // console.log("debug_ comment***********************", PostComment?.[0]?.custom_id);
+    // console.log("debug_ Post_Comment-----------------", PostComment);
     // console.log("debug_ isComment-----------------", isComment);
 
     return (
