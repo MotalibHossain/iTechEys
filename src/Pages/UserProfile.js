@@ -1,12 +1,36 @@
 import { React, useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import moment from "moment";
+
 import "../style/userProfile.css";
+// icon
+import { ImBlog } from "react-icons/im";
 // import redux material
 import { useSelector, useDispatch } from "react-redux";
 
 const UserProfile = () => {
     const { UserInfo } = useSelector((state) => state);
-    const { username, email, description } = JSON.parse(UserInfo);
-    console.log(username, email, description);
+    const { user_id, username, email, description } = JSON.parse(UserInfo);
+
+    // Blog post fetch
+    const [Post, setPost] = useState([]);
+    const url = "http://127.0.0.1:8000/";
+    useEffect(() => {
+        axios({
+            method: "get",
+            url: url,
+        }).then(function (response) {
+            setPost(
+                response.data.filter((post) => {
+                    return post.author.id === user_id;
+                })
+            );
+        });
+    }, []);
+
+    console.log("Post", Post);
+    console.log(user_id, username, email, description);
     return (
         <>
             <div className="cover"></div>
@@ -62,10 +86,75 @@ const UserProfile = () => {
                             </div>
                         </div>
                     </div>
+
                     <div className="col-md">
-                        {/* <div className="row mt-4">
-                            <div className="col font-weight-bold">[Association Name]</div>
-                        </div> */}
+                        <div className="row mt-2">
+                            <div className="col">
+                                <div className="card" id="recentActivity">
+                                    <div className="card-header">
+                                        Your Post
+                                        <a className="action" href="#">
+                                            All Activity
+                                        </a>
+                                    </div>
+                                    <ul className="list-group">
+                                        {Post &&
+                                            Post.map((item, index) => {
+                                                const { title, slug, image, update_date } = item;
+                                                const timestamp = item.update_date;
+                                                const timeAgo = moment(timestamp).fromNow();
+                                                return (
+                                                    <li key={index} className="list-group-item">
+                                                        <div className="row">
+                                                            <div className="col-lg-1 col-md-1 col-sm-1 col-xs-12 pe-lg-0 text-center">
+                                                                <ImBlog />
+                                                            </div>
+                                                            <div className="col-lg-8 col-md-7 col-sm-8 ps-lg-0">
+                                                                {title}
+                                                            </div>
+                                                            <div className="col-lg-2 col-md-2 col-sm-2  text-lg-end">
+                                                                {timeAgo}
+                                                            </div>
+                                                            <div className="col-lg-1 col-md-2 col-sm-1  text-lg-end">
+                                                                <Link
+                                                                    className="btn btn-primary"
+                                                                    to={`../blog-details/${slug}`}
+                                                                >
+                                                                    View
+                                                                </Link>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                );
+                                            })}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col">
+                                <div className="alert bg-primary text-white mb-0">
+                                <button type="button" data-dismiss="alert" aria-hidden="true" class="close">×</button>
+                                    <div className="row">
+                                        <div className="col-lg">
+                                            <div className="row">
+                                                <div className="col">2015 Innovation Conference</div>
+                                            </div>
+                                            <div className="row my-2">
+                                                <div className="col small text-white">
+                                                    Interesting speakers, delicious food, do not miss this event!
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="col-lg signup">
+                                            <button className="btn btn-secondary" href="#">
+                                                Sign up Today!
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div className="row mt-4">
                             <div className="col-lg-6">
                                 <div className="card" id="upcomingEvents">
@@ -163,142 +252,6 @@ const UserProfile = () => {
                                                     <a className="action" href="#">
                                                         Details
                                                     </a>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col">
-                                <div className="alert bg-primary text-white">
-                                    <button className="close" data-dismiss="alert">
-                                        <span>&times;</span>
-                                    </button>
-                                    <div className="row">
-                                        <div className="col-lg">
-                                            <div className="row">
-                                                <div className="col">2015 Innovation Conference</div>
-                                            </div>
-                                            <div className="row my-2">
-                                                <div className="col small text-white">
-                                                    Interesting speakers, delicious food, do not miss this event!
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-lg signup">
-                                            <button className="btn btn-secondary" href="#">
-                                                Sign up Today!
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col">
-                                <div className="card" id="recentActivity">
-                                    <div className="card-header">
-                                        Recent Activity
-                                        <a className="action" href="#">
-                                            All Activity
-                                        </a>
-                                    </div>
-                                    <ul className="list-group">
-                                        <li className="list-group-item">
-                                            <div className="row no-gutters">
-                                                <div className="col">
-                                                    <div className="row no-gutters align-content-center">
-                                                        <div className="col icon warning">
-                                                            <span className="fa-stack fa-lg">
-                                                                <i className="fa fa-circle fa-stack-2x"></i>
-                                                                <i className="fa fa-usd fa-stack-1x"></i>
-                                                            </span>
-                                                        </div>
-                                                        <div className="col">
-                                                            You have a recent payment that did not process
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="col right">
-                                                    <div className="row no-gutters justify-content-center align-items-center">
-                                                        <div className="view">
-                                                            <button className="btn btn-primary">View</button>
-                                                        </div>
-                                                        <div className="text-center">4 Hours Ago</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li className="list-group-item">
-                                            <div className="row no-gutters">
-                                                <div className="col">
-                                                    <div className="row no-gutters align-content-center">
-                                                        <div className="col icon">
-                                                            <i className="fa fa-calendar-o fa-2x"></i>
-                                                        </div>
-                                                        <div className="col">
-                                                            You registered for an event, Greater Atlanta Champer of
-                                                            Commerce 2015
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="col right">
-                                                    <div className="row no-gutters justify-content-center align-items-center">
-                                                        <div className="view">
-                                                            <button className="btn btn-primary">View</button>
-                                                        </div>
-                                                        <div className="text-center">2 Days Ago</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li className="list-group-item">
-                                            <div className="row no-gutters">
-                                                <div className="col">
-                                                    <div className="row no-gutters align-content-center">
-                                                        <div className="col icon">
-                                                            <span className="fa-stack fa-lg">
-                                                                <i className="fa fa-circle fa-stack-2x"></i>
-                                                                <i className="fa fa-usd fa-stack-1x"></i>
-                                                            </span>
-                                                        </div>
-                                                        <div className="col">
-                                                            You made a payment in the amount of <em>$34.99</em> to your
-                                                            membership account
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="col right">
-                                                    <div className="row no-gutters justify-content-center align-items-center">
-                                                        <div className="view">
-                                                            <button className="btn btn-primary">View</button>
-                                                        </div>
-                                                        <div className="text-center">5 Days Ago</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li className="list-group-item">
-                                            <div className="row no-gutters">
-                                                <div className="col">
-                                                    <div className="row no-gutters align-content-center">
-                                                        <div className="col icon">
-                                                            <i className="fa fa-envelope fa-2x"></i>
-                                                        </div>
-                                                        <div className="col">
-                                                            You received a message from Bill Jones
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="col right">
-                                                    <div className="row no-gutters justify-content-center align-items-center">
-                                                        <div className="view">
-                                                            <button className="btn btn-primary">View</button>
-                                                        </div>
-                                                        <div className="text-center">7 Days Ago</div>
-                                                    </div>
                                                 </div>
                                             </div>
                                         </li>
