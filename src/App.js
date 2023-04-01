@@ -44,7 +44,7 @@ function App() {
                     <Route path="/registration" element={IsAuthenticate ? <Navigate from="/login" to="/user-profile" /> : <Registration />}></Route>
                     {/* User system  */}
                     <Route path="/user-profile" element={IsAuthenticate ? <UserProfile /> : <Navigate from="/user-profile" to="/login" />}></Route>
-                    <Route path="/author-profile" element={<AuthorProfile />}></Route>
+                    <Route path="/author/:authname" element={<AuthorProfile />}></Route>
                     {/* Subpage route  */}
                     <Route path="/blog-details/:slug" element={<BlogDetails />}></Route>
                     {/* Error page  */}

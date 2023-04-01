@@ -327,7 +327,7 @@ const BlogDetails = () => {
                                         </div>
                                         <div className="media-body">
                                             <h6 className="text-capitalize">
-                                                <Link to="/author-profile" state={author}>
+                                                <Link to={`/author/${author && author.username}`}>
                                                     {author && author.username}
                                                 </Link>
                                             </h6>

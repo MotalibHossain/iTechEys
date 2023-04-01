@@ -15,7 +15,7 @@ const UserProfile = () => {
 
     // Blog post fetch
     const [Post, setPost] = useState([]);
-    const url = "http://127.0.0.1:8000/";
+    const url = "http://127.0.0.1:8000/blog";
     useEffect(() => {
         axios({
             method: "get",
@@ -23,7 +23,7 @@ const UserProfile = () => {
         }).then(function (response) {
             setPost(
                 response.data.filter((post) => {
-                    return post.author.id === user_id;
+                    return post.author === user_id;
                 })
             );
         });
