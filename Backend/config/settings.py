@@ -1,4 +1,3 @@
-
 from pathlib import Path
 import os
 
@@ -16,6 +15,11 @@ SECRET_KEY = 'django-insecure-j)07$y+7n-y+8-5uddp2p@zm=e*7-gy104@#$fg18om(kh=ex@
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
+
+# CORS_ALLOWED_ORIGINS = [
+#     'place_webspace_name_here',
+# ]
+
 CORS_ORIGIN_ALLOW_ALL = True
 
 
@@ -38,11 +42,11 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    # Crose header for react devops
+    # Cros header for react devops
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     # /cross header
+    'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
