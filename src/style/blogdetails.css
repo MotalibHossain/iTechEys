@@ -436,7 +436,7 @@ img {
 .share .Demo__container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: end;
+    justify-content: flex-end;
     padding-top: 5px;
 }
 .share .Demo__container .Demo__some-network {
