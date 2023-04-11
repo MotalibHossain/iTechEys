@@ -117,6 +117,7 @@ const BlogDetails = () => {
             data: { custom_id:uid, user: user_id, post: id, comment: comment },
         })
         .then(function (response) {
+            console.log("response", response)
             setPostComment([{custom_id:uid, user: { username: username }, post: id, comment: comment }, ...PostComment]);
             // Comment button disable and enable
             const isCommentExits = PostComment.filter((item) => item.user.username === username);
@@ -155,6 +156,7 @@ const BlogDetails = () => {
             url: URL,
         })
         .then(function (response) {
+            setIscomment(false)
             setPostComment(response.data)
             setDelete(false);
             toast("Comment delete successfully.");
