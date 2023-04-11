@@ -165,10 +165,11 @@
 }
 .post-card .post-card-body {
 	padding: 10px;
+	min-height: 135px;
 }
 .post-card .post-card-body abbr {
 	text-decoration: none;
-    cursor: pointer;
+	cursor: pointer;
 }
 .post-card .post-card-body h4.post-title {
 	font-weight: 700;
