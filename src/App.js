@@ -12,6 +12,7 @@ import Header from "./Layout/Header";
 import Footer from "./Layout/Footer.js";
 
 // pages
+import Dashboard from "./Pages/Dashboard";
 import Home from "./Pages/Home";
 import Service from "./Pages/Service";
 import Contact from "./Pages/Contact";
@@ -34,6 +35,7 @@ function App() {
             <BrowserRouter>
                 <Header />
                 <Routes>
+                    <Route path="/Dashboard" element={<Dashboard />}></Route>
                     <Route path="/" element={<Home />}></Route>
                     <Route path="/service" element={<Service />}></Route>
                     <Route path="/contact" element={<Contact />}></Route>
