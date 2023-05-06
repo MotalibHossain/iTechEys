@@ -1,8 +1,14 @@
 import React from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import logo from "../asset/itecheys-logo.png";
+// Icon 
+import { RiArrowDownSLine, RiListCheck2 } from "react-icons/ri";
+import { FaThumbsUp } from "react-icons/fa";
+
 import logo1 from "../asset/itecheys-logo-2.png";
 import "../style/Dashboard.css";
+import "../style/Dashboardmin.css";
+
 const Dashboard = () => {
     return (
         <>
@@ -10,7 +16,7 @@ const Dashboard = () => {
                 <div className="app-header header-shadow">
                     <div className="app-header__logo">
                         <div className="logo-src">
-                            <img src={logo} alt="logo" width="120px" />
+                            <img src={logo1} alt="logo" width="120px" />
                         </div>
                         <div className="header__pane ml-auto">
                             <div>
@@ -73,7 +79,7 @@ const Dashboard = () => {
                                 </li>
                                 <li className="dropdown nav-item">
                                     <a href="javascript:void(0);" className="nav-link">
-                                        <i className="nav-link-icon fa fa-cog"></i>
+                                        <FaThumbsUp className="nav-link-icon"/>
                                         Settings
                                     </a>
                                 </li>
@@ -638,70 +644,41 @@ const Dashboard = () => {
                                     </span>
                                 </button>
                             </span>
-                        </div>{" "}
+                        </div>
                         <div className="scrollbar-sidebar">
                             <div className="app-sidebar__inner">
                                 <ul className="vertical-nav-menu">
                                     <li className="app-sidebar__heading">Dashboards</li>
                                     <li>
-                                        <a href="index.html" className="mm-active">
-                                            <i className="metismenu-icon pe-7s-rocket"></i>
-                                            Dashboard Example 1
+                                        <a href="elements-utilities.html" className="mm-active">
+                                        <FontAwesomeIcon icon="fa-solid fa-thumbs-up" style={{color: "#1f60d1",}} />
+                                            Dashboard
                                         </a>
                                     </li>
-                                    <li className="app-sidebar__heading">UI Components</li>
+                                    <li className="app-sidebar__heading">Blog Post</li>
                                     <li>
-                                        <a href="#">
-                                            <i className="metismenu-icon pe-7s-diamond"></i>
-                                            Elements
-                                            <i className="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                                        <a href="elements-utilities.html">
+                                            <RiListCheck2 className="metismenu-icon"/>
+                                            Post List
+                                            <RiArrowDownSLine className="metismenu-state-icon caret-left"/>
+                                            
                                         </a>
                                         <ul>
                                             <li>
                                                 <a href="elements-buttons-standard.html">
                                                     <i className="metismenu-icon"></i>
-                                                    Buttons
+                                                    Post Comment
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="elements-dropdowns.html">
-                                                    <i className="metismenu-icon"></i>Dropdowns
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="elements-icons.html">
-                                                    <i className="metismenu-icon"></i>Icons
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="elements-badges-labels.html">
-                                                    <i className="metismenu-icon"></i>Badges
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="elements-cards.html">
-                                                    <i className="metismenu-icon"></i>Cards
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="elements-list-group.html">
-                                                    <i className="metismenu-icon"></i>List Groups
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="elements-navigation.html">
-                                                    <i className="metismenu-icon"></i>Navigation Menus
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="elements-utilities.html">
-                                                    <i className="metismenu-icon"></i>Utilities
+                                                Post Like
                                                 </a>
                                             </li>
                                         </ul>
                                     </li>
                                     <li>
-                                        <a href="#">
+                                        <a href="elements-utilities.html">
                                             <i className="metismenu-icon pe-7s-car"></i>
                                             Components
                                             <i className="metismenu-state-icon pe-7s-angle-down caret-left"></i>
