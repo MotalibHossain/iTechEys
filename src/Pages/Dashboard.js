@@ -11,7 +11,7 @@ import "../style/Dashboardmin.css";
 
 const Dashboard = () => {
     return (
-        <>
+        <div className="Dashboard">
             <div className="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
                 <div className="app-header header-shadow">
                     <div className="app-header__logo">
@@ -1758,7 +1758,7 @@ const Dashboard = () => {
                     <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 
