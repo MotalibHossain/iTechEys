@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // Icon 
 import { RiArrowDownSLine, RiListCheck2 } from "react-icons/ri";
 import { FaThumbsUp } from "react-icons/fa";
+import { MdDashboard } from "react-icons/md";
 
 import logo1 from "../asset/itecheys-logo-2.png";
 import "../style/Dashboard.css";
@@ -52,7 +53,7 @@ const Dashboard = () => {
                                 </span>
                             </button>
                         </span>
-                    </div>{" "}
+                    </div>
                     <div className="app-header__content">
                         <div className="app-header-left">
                             <div className="search-wrapper">
@@ -144,7 +145,7 @@ const Dashboard = () => {
                                         </div>
                                     </div>
                                 </div>
-                            </div>{" "}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -195,7 +196,7 @@ const Dashboard = () => {
                                     <li className="app-sidebar__heading">Dashboards</li>
                                     <li>
                                         <a href="elements-utilities.html" className="mm-active">
-                                        <FontAwesomeIcon icon="fa-solid fa-thumbs-up" style={{color: "#1f60d1",}} />
+                                        <MdDashboard className="metismenu-icon text-center"/>
                                             Dashboard
                                         </a>
                                     </li>
@@ -221,7 +222,7 @@ const Dashboard = () => {
                                             </li>
                                         </ul>
                                     </li>
-                                    <li>
+                                    {/* <li>
                                         <a href="elements-utilities.html">
                                             <i className="metismenu-icon pe-7s-car"></i>
                                             Components
@@ -329,7 +330,7 @@ const Dashboard = () => {
                                             <i className="metismenu-icon pe-7s-graph2"></i>
                                             Upgrade to PRO
                                         </a>
-                                    </li>
+                                    </li> */}
                                 </ul>
                             </div>
                         </div>
