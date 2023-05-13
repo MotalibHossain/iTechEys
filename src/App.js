@@ -29,13 +29,20 @@ import Error from "./Pages/Error";
 import { useSelector } from "react-redux";
 
 function App() {
+    const { UserInfo } = useSelector((state) => state);
     const { IsAuthenticate } = useSelector((state) => state);
-    console.log("IsAuthenticate----", IsAuthenticate);
+    const isAdmin= JSON.parse(UserInfo);
+
+    console.log("UserInfo----", isAdmin?.is);
     return (
         <>
             <BrowserRouter>
                 <Routes>
-                    <Route path="/Dashboard" element={<Dashboard />} />
+                    {/* <Route path="/Dashboard" element={<Dashboard />} /> */}
+                    <Route
+                        path="/Dashboard"
+                        element={isAdmin?.is ? <Dashboard /> : <Navigate from="/Dashboard" to="/login" />}
+                    />
                     <Route element={<Layout />}>
                         <Route path="/" element={<Home />} />
                         <Route path="/service" element={<Service />} />
