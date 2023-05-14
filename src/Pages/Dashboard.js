@@ -1,16 +1,25 @@
 import React from "react";
+
+// import redux material
+import { useSelector } from "react-redux";
+
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 // Icon 
 import { RiArrowDownSLine, RiListCheck2 } from "react-icons/ri";
-import { FaThumbsUp } from "react-icons/fa";
-import { MdDashboard } from "react-icons/md";
+import { FaThumbsUp, FaUserCog, FaEllipsisV } from "react-icons/fa";
+import { MdDashboard} from "react-icons/md";
 
 import logo1 from "../asset/itecheys-logo-2.png";
 import "../style/Dashboard.css";
 import "../style/Dashboardmin.css";
 
 const Dashboard = () => {
+    const { UserInfo } = useSelector((state) => state);
+    const { user_id, username, email, description } = JSON.parse(UserInfo);
+
+
     return (
         <div className="Dashboard">
             <div className="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
@@ -49,7 +58,8 @@ const Dashboard = () => {
                                 className="btn-icon btn-icon-only btn btn-primary btn-sm mobile-toggle-header-nav"
                             >
                                 <span className="btn-icon-wrapper">
-                                    <i className="fa fa-ellipsis-v fa-w-6"></i>
+                                    {/* <i className="fa fa-ellipsis-v fa-w-6"></i> */}
+                                    <FaEllipsisV className="fa-w-6" />
                                 </span>
                             </button>
                         </span>
@@ -65,7 +75,7 @@ const Dashboard = () => {
                                 </div>
                                 <button className="close"></button>
                             </div>
-                            <ul className="header-menu nav">
+                            {/* <ul className="header-menu nav">
                                 <li className="nav-item">
                                     <a href="javascript:void(0);" className="nav-link">
                                         <i className="nav-link-icon fa fa-database"> </i>
@@ -84,7 +94,7 @@ const Dashboard = () => {
                                         Settings
                                     </a>
                                 </li>
-                            </ul>{" "}
+                            </ul>{" "} */}
                         </div>
                         <div className="app-header-right">
                             <div className="header-btn-lg pr-0">
@@ -92,26 +102,11 @@ const Dashboard = () => {
                                     <div className="widget-content-wrapper">
                                         <div className="widget-content-left">
                                             <div className="btn-group">
-                                                <a
-                                                    data-toggle="dropdown"
-                                                    aria-haspopup="true"
-                                                    aria-expanded="false"
-                                                    className="p-0 btn"
-                                                >
-                                                    <img
-                                                        width="42"
-                                                        className="rounded-circle"
-                                                        src="assets/images/avatars/1.jpg"
-                                                        alt=""
-                                                    />
-                                                    <i className="fa fa-angle-down ml-2 opacity-8"></i>
+                                                <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" className="p-0 btn">
+                                                    <img width="42" className="rounded-circle" src="assets/images/avatars/1.jpg" alt=""/>
+                                                    <FaUserCog className="user-icon mr-2 opacity-8" />
                                                 </a>
-                                                <div
-                                                    tabindex="-1"
-                                                    role="menu"
-                                                    aria-hidden="true"
-                                                    className="dropdown-menu dropdown-menu-right"
-                                                >
+                                                <div tabindex="-1" role="menu" aria-hidden="true" className="dropdown-menu dropdown-menu-right">
                                                     <button type="button" tabindex="0" className="dropdown-item">
                                                         User Account
                                                     </button>
@@ -131,17 +126,9 @@ const Dashboard = () => {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="widget-content-left  ml-3 header-user-info">
-                                            <div className="widget-heading">Alina Mclourd</div>
-                                            <div className="widget-subheading">VP People Manager</div>
-                                        </div>
-                                        <div className="widget-content-right header-user-info ml-3">
-                                            <button
-                                                type="button"
-                                                className="btn-shadow p-1 btn btn-primary btn-sm show-toastr-example"
-                                            >
-                                                <i className="fa text-white fa-calendar pr-1 pl-1"></i>
-                                            </button>
+                                        <div className="widget-content-left  ml-3 header-user-info pr-3">
+                                            <div className="widget-heading text-capitalize">{username}</div>
+                                            <div className="widget-subheading">Product Manager</div>
                                         </div>
                                     </div>
                                 </div>
@@ -342,7 +329,7 @@ const Dashboard = () => {
                                     <div className="card mb-3 widget-content bg-midnight-bloom">
                                         <div className="widget-content-wrapper text-white">
                                             <div className="widget-content-left">
-                                                <div className="widget-heading">Total Orders</div>
+                                                <div className="widget-heading">Total Post</div>
                                                 <div className="widget-subheading">Last year expenses</div>
                                             </div>
                                             <div className="widget-content-right">
@@ -354,10 +341,10 @@ const Dashboard = () => {
                                     </div>
                                 </div>
                                 <div className="col-md-6 col-xl-4">
-                                    <div className="card mb-3 widget-content bg-arielle-smile">
+                                    <div className="card mb-3 widget-content bg-primary">
                                         <div className="widget-content-wrapper text-white">
                                             <div className="widget-content-left">
-                                                <div className="widget-heading">Clients</div>
+                                                <div className="widget-heading">Total Comment</div>
                                                 <div className="widget-subheading">Total Clients Profit</div>
                                             </div>
                                             <div className="widget-content-right">
@@ -372,7 +359,7 @@ const Dashboard = () => {
                                     <div className="card mb-3 widget-content bg-grow-early">
                                         <div className="widget-content-wrapper text-white">
                                             <div className="widget-content-left">
-                                                <div className="widget-heading">Followers</div>
+                                                <div className="widget-heading">Total Like</div>
                                                 <div className="widget-subheading">People Interested</div>
                                             </div>
                                             <div className="widget-content-right">
@@ -867,7 +854,7 @@ const Dashboard = () => {
                                 <div className="col-md-12">
                                     <div className="main-card mb-3 card">
                                         <div className="card-header">
-                                            Active Users
+                                            Active Post
                                             <div className="btn-actions-pane-right">
                                                 <div role="group" className="btn-group-sm btn-group">
                                                     <button className="active btn btn-focus">Last Week</button>
@@ -879,10 +866,10 @@ const Dashboard = () => {
                                             <table className="align-middle mb-0 table table-borderless table-striped table-hover">
                                                 <thead>
                                                     <tr>
-                                                        <th className="text-center">#</th>
-                                                        <th>Name</th>
-                                                        <th className="text-center">City</th>
-                                                        <th className="text-center">Status</th>
+                                                        <th className="text-center">SL</th>
+                                                        <th>Title</th>
+                                                        <th className="text-center">Like</th>
+                                                        <th className="text-center">Comment</th>
                                                         <th className="text-center">Actions</th>
                                                     </tr>
                                                 </thead>

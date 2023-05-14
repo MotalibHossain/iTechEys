@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Routes, Redirect, Navigate } from "react-router-dom";
+
+// import redux material
+import { useSelector } from "react-redux";
+
+
 import "./App.css";
 import "./style/Style.css";
 
@@ -24,9 +29,6 @@ import AuthorProfile from "./Pages/AuthorProfile";
 import Login from "./Pages/Login";
 import Registration from "./Pages/Registration";
 import Error from "./Pages/Error";
-
-// import redux material
-import { useSelector } from "react-redux";
 
 function App() {
     const { UserInfo } = useSelector((state) => state);
