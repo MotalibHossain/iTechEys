@@ -1,15 +1,16 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
+import axios from "axios";
 
 // import redux material
 import { useSelector } from "react-redux";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
-// Icon 
+// Icon
 import { RiArrowDownSLine, RiListCheck2 } from "react-icons/ri";
-import { FaThumbsUp, FaUserCog, FaEllipsisV } from "react-icons/fa";
-import { MdDashboard} from "react-icons/md";
+import { FaUserCog, FaEllipsisV } from "react-icons/fa";
+import { FiEdit } from "react-icons/fi";
+import { MdDashboard } from "react-icons/md";
 
 import logo1 from "../asset/itecheys-logo-2.png";
 import "../style/Dashboard.css";
@@ -19,6 +20,30 @@ const Dashboard = () => {
     const { UserInfo } = useSelector((state) => state);
     const { user_id, username, email, description } = JSON.parse(UserInfo);
 
+    const [post, setPost] = useState([]);
+    const [Comment, setComment] = useState([]);
+    const url = "http://127.0.0.1:8000/";
+    const urlcomment="http://127.0.0.1:8000/comment/"
+    useEffect(() => {
+        // Blog Post data fetch 
+        axios({
+            method: "get",
+            url: url,
+        }).then(function (response) {
+            setPost(response.data);
+        });
+
+        // Post Comment data fetch 
+        axios({
+            method: "get",
+            url: urlcomment,
+        }).then(function (response) {
+            setComment(response.data);
+        });
+
+    }, []);
+
+    // console.log("post", post.length)
 
     return (
         <div className="Dashboard">
@@ -102,11 +127,26 @@ const Dashboard = () => {
                                     <div className="widget-content-wrapper">
                                         <div className="widget-content-left">
                                             <div className="btn-group">
-                                                <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" className="p-0 btn">
-                                                    <img width="42" className="rounded-circle" src="assets/images/avatars/1.jpg" alt=""/>
+                                                <a
+                                                    data-toggle="dropdown"
+                                                    aria-haspopup="true"
+                                                    aria-expanded="false"
+                                                    className="p-0 btn"
+                                                >
+                                                    <img
+                                                        width="42"
+                                                        className="rounded-circle"
+                                                        src="assets/images/avatars/1.jpg"
+                                                        alt=""
+                                                    />
                                                     <FaUserCog className="user-icon mr-2 opacity-8" />
                                                 </a>
-                                                <div tabindex="-1" role="menu" aria-hidden="true" className="dropdown-menu dropdown-menu-right">
+                                                <div
+                                                    tabindex="-1"
+                                                    role="menu"
+                                                    aria-hidden="true"
+                                                    className="dropdown-menu dropdown-menu-right"
+                                                >
                                                     <button type="button" tabindex="0" className="dropdown-item">
                                                         User Account
                                                     </button>
@@ -140,7 +180,7 @@ const Dashboard = () => {
                     <div className="app-sidebar sidebar-shadow">
                         <div className="app-header__logo">
                             <div className="logo-src">
-                            <img src={logo1} alt="logo" width="120px" />
+                                <img src={logo1} alt="logo" width="120px" />
                             </div>
                             <div className="header__pane ml-auto">
                                 <div>
@@ -183,17 +223,16 @@ const Dashboard = () => {
                                     <li className="app-sidebar__heading">Dashboards</li>
                                     <li>
                                         <a href="elements-utilities.html" className="mm-active">
-                                        <MdDashboard className="metismenu-icon text-center"/>
+                                            <MdDashboard className="metismenu-icon text-center" />
                                             Dashboard
                                         </a>
                                     </li>
                                     <li className="app-sidebar__heading">Blog Post</li>
                                     <li>
                                         <a href="elements-utilities.html">
-                                            <RiListCheck2 className="metismenu-icon"/>
+                                            <RiListCheck2 className="metismenu-icon" />
                                             Post List
-                                            <RiArrowDownSLine className="metismenu-state-icon caret-left"/>
-                                            
+                                            <RiArrowDownSLine className="metismenu-state-icon caret-left" />
                                         </a>
                                         <ul>
                                             <li>
@@ -203,9 +242,7 @@ const Dashboard = () => {
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="elements-dropdowns.html">
-                                                Post Like
-                                                </a>
+                                                <a href="elements-dropdowns.html">Post Like</a>
                                             </li>
                                         </ul>
                                     </li>
@@ -330,11 +367,11 @@ const Dashboard = () => {
                                         <div className="widget-content-wrapper text-white">
                                             <div className="widget-content-left">
                                                 <div className="widget-heading">Total Post</div>
-                                                <div className="widget-subheading">Last year expenses</div>
+                                                {/* <div className="widget-subheading">Last year expenses</div> */}
                                             </div>
                                             <div className="widget-content-right">
                                                 <div className="widget-numbers text-white">
-                                                    <span>1896</span>
+                                                    <span>{post && post.length}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -345,11 +382,11 @@ const Dashboard = () => {
                                         <div className="widget-content-wrapper text-white">
                                             <div className="widget-content-left">
                                                 <div className="widget-heading">Total Comment</div>
-                                                <div className="widget-subheading">Total Clients Profit</div>
+                                                {/* <div className="widget-subheading">Total Clients Profit</div> */}
                                             </div>
                                             <div className="widget-content-right">
                                                 <div className="widget-numbers text-white">
-                                                    <span>$ 568</span>
+                                                    <span>{Comment.length}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -360,11 +397,11 @@ const Dashboard = () => {
                                         <div className="widget-content-wrapper text-white">
                                             <div className="widget-content-left">
                                                 <div className="widget-heading">Total Like</div>
-                                                <div className="widget-subheading">People Interested</div>
+                                                {/* <div className="widget-subheading">People Interested</div> */}
                                             </div>
                                             <div className="widget-content-right">
                                                 <div className="widget-numbers text-white">
-                                                    <span>46%</span>
+                                                    <span>4642</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -874,164 +911,48 @@ const Dashboard = () => {
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td className="text-center text-muted">#345</td>
-                                                        <td>
-                                                            <div className="widget-content p-0">
-                                                                <div className="widget-content-wrapper">
-                                                                    <div className="widget-content-left mr-3">
-                                                                        <div className="widget-content-left">
-                                                                            <img
-                                                                                width="40"
-                                                                                className="rounded-circle"
-                                                                                src="assets/images/avatars/4.jpg"
-                                                                                alt=""
-                                                                            />
+                                                    {post && post.map((item, index)=>{
+                                                        const {title, Post_Comment, category}=item
+                                                        return(
+                                                            <tr key={index}>
+                                                                <td className="text-center text-muted">{index}</td>
+                                                                <td>
+                                                                    <div className="widget-content p-0">
+                                                                        <div className="widget-content-wrapper">
+                                                                            <div className="widget-content-left mr-3">
+                                                                                <div className="widget-content-left">
+                                                                                    <img
+                                                                                        width="40"
+                                                                                        className="rounded-circle"
+                                                                                        src="assets/images/avatars/4.jpg"
+                                                                                        alt=""
+                                                                                    />
+                                                                                </div>
+                                                                            </div>
+                                                                            <div className="widget-content-left flex2">
+                                                                                <div className="widget-heading">{title}</div>
+                                                                                <div className="widget-subheading opacity-7">
+                                                                                    {category.name}
+                                                                                </div>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
-                                                                    <div className="widget-content-left flex2">
-                                                                        <div className="widget-heading">John Doe</div>
-                                                                        <div className="widget-subheading opacity-7">
-                                                                            Web Developer
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td className="text-center">Madrid</td>
-                                                        <td className="text-center">
-                                                            <div className="badge badge-warning">Pending</div>
-                                                        </td>
-                                                        <td className="text-center">
-                                                            <button
-                                                                type="button"
-                                                                id="PopoverCustomT-1"
-                                                                className="btn btn-primary btn-sm"
-                                                            >
-                                                                Details
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td className="text-center text-muted">#347</td>
-                                                        <td>
-                                                            <div className="widget-content p-0">
-                                                                <div className="widget-content-wrapper">
-                                                                    <div className="widget-content-left mr-3">
-                                                                        <div className="widget-content-left">
-                                                                            <img
-                                                                                width="40"
-                                                                                className="rounded-circle"
-                                                                                src="assets/images/avatars/3.jpg"
-                                                                                alt=""
-                                                                            />
-                                                                        </div>
-                                                                    </div>
-                                                                    <div className="widget-content-left flex2">
-                                                                        <div className="widget-heading">
-                                                                            Ruben Tillman
-                                                                        </div>
-                                                                        <div className="widget-subheading opacity-7">
-                                                                            Etiam sit amet orci eget
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td className="text-center">Berlin</td>
-                                                        <td className="text-center">
-                                                            <div className="badge badge-success">Completed</div>
-                                                        </td>
-                                                        <td className="text-center">
-                                                            <button
-                                                                type="button"
-                                                                id="PopoverCustomT-2"
-                                                                className="btn btn-primary btn-sm"
-                                                            >
-                                                                Details
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td className="text-center text-muted">#321</td>
-                                                        <td>
-                                                            <div className="widget-content p-0">
-                                                                <div className="widget-content-wrapper">
-                                                                    <div className="widget-content-left mr-3">
-                                                                        <div className="widget-content-left">
-                                                                            <img
-                                                                                width="40"
-                                                                                className="rounded-circle"
-                                                                                src="assets/images/avatars/2.jpg"
-                                                                                alt=""
-                                                                            />
-                                                                        </div>
-                                                                    </div>
-                                                                    <div className="widget-content-left flex2">
-                                                                        <div className="widget-heading">
-                                                                            Elliot Huber
-                                                                        </div>
-                                                                        <div className="widget-subheading opacity-7">
-                                                                            Lorem ipsum dolor sic
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td className="text-center">London</td>
-                                                        <td className="text-center">
-                                                            <div className="badge badge-danger">In Progress</div>
-                                                        </td>
-                                                        <td className="text-center">
-                                                            <button
-                                                                type="button"
-                                                                id="PopoverCustomT-3"
-                                                                className="btn btn-primary btn-sm"
-                                                            >
-                                                                Details
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td className="text-center text-muted">#55</td>
-                                                        <td>
-                                                            <div className="widget-content p-0">
-                                                                <div className="widget-content-wrapper">
-                                                                    <div className="widget-content-left mr-3">
-                                                                        <div className="widget-content-left">
-                                                                            <img
-                                                                                width="40"
-                                                                                className="rounded-circle"
-                                                                                src="assets/images/avatars/1.jpg"
-                                                                                alt=""
-                                                                            />
-                                                                        </div>
-                                                                    </div>
-                                                                    <div className="widget-content-left flex2">
-                                                                        <div className="widget-heading">
-                                                                            Vinnie Wagstaff
-                                                                        </div>
-                                                                        <div className="widget-subheading opacity-7">
-                                                                            UI Designer
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td className="text-center">Amsterdam</td>
-                                                        <td className="text-center">
-                                                            <div className="badge badge-info">On Hold</div>
-                                                        </td>
-                                                        <td className="text-center">
-                                                            <button
-                                                                type="button"
-                                                                id="PopoverCustomT-4"
-                                                                className="btn btn-primary btn-sm"
-                                                            >
-                                                                Details
-                                                            </button>
-                                                        </td>
-                                                    </tr>
+                                                                </td>
+                                                                <td className="text-center">{Post_Comment.length}</td>
+                                                                <td className="text-center">
+                                                                    <div className="">{Post_Comment.length}</div>
+                                                                </td>
+                                                                <td className="text-center">
+                                                                    <button type="button" id="PopoverCustomT-1" className="btn btn-info btn-sm mr-2">
+                                                                        <FiEdit />
+                                                                    </button>
+                                                                    <button type="button" id="PopoverCustomT-1" className="btn btn-primary btn-sm">
+                                                                        Details
+                                                                    </button>
+                                                                </td>
+                                                            </tr>
+                                                        )
+                                                    })}
                                                 </tbody>
                                             </table>
                                         </div>
