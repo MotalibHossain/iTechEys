@@ -22,7 +22,7 @@ const SubmitPost = () => {
     const [slug, setSlug] = useState("");
     const [description, setDescription] = useState("");
     const [category, setCategory] = useState("");
-    const [publish, setPublish] = useState("");
+    const [Published, setPublished] = useState("");
 
     const HandelChange = (e) => {
         setTitle(e.target.value);
@@ -38,7 +38,7 @@ const SubmitPost = () => {
     };
 
     const HandelChange5 = (e) => {
-        setPublish(e.target.value);
+        setPublished(e.target.value);
     };
     
     const onImageChange = (event) => {
@@ -53,7 +53,7 @@ const SubmitPost = () => {
         form_data.append("description", description);
         form_data.append("category", category);
         form_data.append("author", authorName.current.value);
-        form_data.append("publish", publish);
+        form_data.append("Published", Published);
         form_data.append("image", image);
 
         for (var [key, value] of form_data.entries()) {
@@ -213,7 +213,7 @@ const SubmitPost = () => {
                         <label>
                             <input
                                 type="checkbox"
-                                name="publish"
+                                name="Published"
                                 value="True"
                                 id="newsletter"
                                 onChange={HandelChange5}

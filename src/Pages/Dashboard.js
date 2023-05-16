@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import Form from "react-bootstrap/Form";
+import Modal from "react-bootstrap/Modal";
 import axios from "axios";
 
 // import redux material
@@ -23,6 +25,7 @@ const Dashboard = () => {
     const { UserInfo } = useSelector((state) => state);
     const { user_id, username, email, description } = JSON.parse(UserInfo);
 
+    const [edit, setEdit] = useState(false);
     const [post, setPost] = useState([]);
     const [Comment, setComment] = useState([]);
     const url = "http://127.0.0.1:8000/";
@@ -44,8 +47,8 @@ const Dashboard = () => {
             setComment(response.data);
         });
     }, []);
+    console.log("post", post)
 
-    // console.log("post", post.length)
 
     return (
         <div className="Dashboard">
@@ -906,8 +909,8 @@ const Dashboard = () => {
                                                 <thead>
                                                     <tr>
                                                         <th className="text-center">SL</th>
-                                                        <th>Title</th>
-                                                        <th>Publish</th>
+                                                        <th className="pl-4">Title</th>
+                                                        <th>Published</th>
                                                         <th className="text-center">Like</th>
                                                         <th className="text-center">Comment</th>
                                                         <th className="text-center">Actions</th>
@@ -916,7 +919,7 @@ const Dashboard = () => {
                                                 <tbody>
                                                     {post &&
                                                         post.map((item, index) => {
-                                                            const { slug, title, Post_Comment, category } = item;
+                                                            const { slug, title, Post_Comment, category, published } = item;
                                                             return (
                                                                 <tr key={index}>
                                                                     <td className="text-center text-muted">{index}</td>
@@ -944,7 +947,16 @@ const Dashboard = () => {
                                                                             </div>
                                                                         </div>
                                                                     </td>
-                                                                    <td className="text-center"></td>
+                                                                    <td className="text-center">
+                                                                        <Form>
+                                                                            <Form.Check
+                                                                                type="checkbox"
+                                                                                value=""
+                                                                                // checked={`"${published}"`}
+                                                                                checked="false"
+                                                                            />
+                                                                        </Form>
+                                                                    </td>
                                                                     <td className="text-center">
                                                                         {Post_Comment.length}
                                                                     </td>
@@ -954,6 +966,7 @@ const Dashboard = () => {
                                                                     <td className="text-center">
                                                                         <button
                                                                             type="button"
+                                                                            onClick={() => setEdit(true)}
                                                                             id="PopoverCustomT-1"
                                                                             className="btn btn-info btn-sm mr-2"
                                                                         >
@@ -1146,6 +1159,21 @@ const Dashboard = () => {
                     </div>
                     <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
                 </div>
+            </div>
+
+            {/* <!-- Post edit Modal --> */}
+            <div className="EditModal">
+                <Modal show={edit} onHide={() => setEdit(false)}>
+                    <Modal.Header className="bg-primary text-white" closeButton>
+                        <Modal.Title>Edit</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body></Modal.Body>
+                    <Modal.Footer className="pt-0 pe-4 border-0">
+                        <button type="submit" className="btn btn-xs btn-primary" variant="primary">
+                            Edit
+                        </button>
+                    </Modal.Footer>
+                </Modal>
             </div>
         </div>
     );
