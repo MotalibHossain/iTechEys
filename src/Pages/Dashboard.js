@@ -1,17 +1,20 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 // import redux material
 import { useSelector } from "react-redux";
 
+// Font
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // Icon
 import { RiArrowDownSLine, RiListCheck2 } from "react-icons/ri";
-import { FaUserCog, FaEllipsisV } from "react-icons/fa";
+import { FaUserCog, FaEllipsisV, FaAngleDoubleRight } from "react-icons/fa";
 import { FiEdit } from "react-icons/fi";
 import { MdDashboard } from "react-icons/md";
 
+// File import
 import logo1 from "../asset/itecheys-logo-2.png";
 import "../style/Dashboard.css";
 import "../style/Dashboardmin.css";
@@ -23,9 +26,9 @@ const Dashboard = () => {
     const [post, setPost] = useState([]);
     const [Comment, setComment] = useState([]);
     const url = "http://127.0.0.1:8000/";
-    const urlcomment="http://127.0.0.1:8000/comment/"
+    const urlcomment = "http://127.0.0.1:8000/comment/";
     useEffect(() => {
-        // Blog Post data fetch 
+        // Blog Post data fetch
         axios({
             method: "get",
             url: url,
@@ -33,14 +36,13 @@ const Dashboard = () => {
             setPost(response.data);
         });
 
-        // Post Comment data fetch 
+        // Post Comment data fetch
         axios({
             method: "get",
             url: urlcomment,
         }).then(function (response) {
             setComment(response.data);
         });
-
     }, []);
 
     // console.log("post", post.length)
@@ -905,62 +907,80 @@ const Dashboard = () => {
                                                     <tr>
                                                         <th className="text-center">SL</th>
                                                         <th>Title</th>
+                                                        <th>Publish</th>
                                                         <th className="text-center">Like</th>
                                                         <th className="text-center">Comment</th>
                                                         <th className="text-center">Actions</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    {post && post.map((item, index)=>{
-                                                        const {title, Post_Comment, category}=item
-                                                        return(
-                                                            <tr key={index}>
-                                                                <td className="text-center text-muted">{index}</td>
-                                                                <td>
-                                                                    <div className="widget-content p-0">
-                                                                        <div className="widget-content-wrapper">
-                                                                            <div className="widget-content-left mr-3">
-                                                                                <div className="widget-content-left">
-                                                                                    <img
-                                                                                        width="40"
-                                                                                        className="rounded-circle"
-                                                                                        src="assets/images/avatars/4.jpg"
-                                                                                        alt=""
-                                                                                    />
+                                                    {post &&
+                                                        post.map((item, index) => {
+                                                            const { slug, title, Post_Comment, category } = item;
+                                                            return (
+                                                                <tr key={index}>
+                                                                    <td className="text-center text-muted">{index}</td>
+                                                                    <td>
+                                                                        <div className="widget-content p-0">
+                                                                            <div className="widget-content-wrapper">
+                                                                                <div className="widget-content-left mr-3">
+                                                                                    <div className="widget-content-left">
+                                                                                        <img
+                                                                                            width="40"
+                                                                                            className="rounded-circle"
+                                                                                            src="assets/images/avatars/4.jpg"
+                                                                                            alt=""
+                                                                                        />
+                                                                                    </div>
                                                                                 </div>
-                                                                            </div>
-                                                                            <div className="widget-content-left flex2">
-                                                                                <div className="widget-heading">{title}</div>
-                                                                                <div className="widget-subheading opacity-7">
-                                                                                    {category.name}
+                                                                                <div className="widget-content-left flex2">
+                                                                                    <div className="widget-heading">
+                                                                                        {title}
+                                                                                    </div>
+                                                                                    <div className="widget-subheading opacity-7">
+                                                                                        {category.name}
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                    </div>
-                                                                </td>
-                                                                <td className="text-center">{Post_Comment.length}</td>
-                                                                <td className="text-center">
-                                                                    <div className="">{Post_Comment.length}</div>
-                                                                </td>
-                                                                <td className="text-center">
-                                                                    <button type="button" id="PopoverCustomT-1" className="btn btn-info btn-sm mr-2">
-                                                                        <FiEdit />
-                                                                    </button>
-                                                                    <button type="button" id="PopoverCustomT-1" className="btn btn-primary btn-sm">
-                                                                        Details
-                                                                    </button>
-                                                                </td>
-                                                            </tr>
-                                                        )
-                                                    })}
+                                                                    </td>
+                                                                    <td className="text-center"></td>
+                                                                    <td className="text-center">
+                                                                        {Post_Comment.length}
+                                                                    </td>
+                                                                    <td className="text-center">
+                                                                        <div className="">{Post_Comment.length}</div>
+                                                                    </td>
+                                                                    <td className="text-center">
+                                                                        <button
+                                                                            type="button"
+                                                                            id="PopoverCustomT-1"
+                                                                            className="btn btn-info btn-sm mr-2"
+                                                                        >
+                                                                            <FiEdit />
+                                                                        </button>
+                                                                        <Link
+                                                                            id="PopoverCustomT-1"
+                                                                            className="btn btn-primary btn-sm"
+                                                                            to={`../blog-details/${slug}`}
+                                                                        >
+                                                                            Details
+                                                                        </Link>
+                                                                    </td>
+                                                                </tr>
+                                                            );
+                                                        })}
                                                 </tbody>
                                             </table>
                                         </div>
                                         <div className="d-block text-center card-footer">
-                                            <button className="mr-2 btn-icon btn-icon-only btn btn-outline-danger">
+                                            {/* <button className="mr-2 btn-icon btn-icon-only btn btn-outline-danger">
                                                 <i className="pe-7s-trash btn-icon-wrapper"> </i>
+                                            </button> */}
+                                            <button className="btn-wide btn btn-success">
+                                                Load more
+                                                <FaAngleDoubleRight className="ml-1" />
                                             </button>
-                                            <button className="btn-wide btn btn-success">Save</button>
                                         </div>
                                     </div>
                                 </div>
