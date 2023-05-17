@@ -214,7 +214,7 @@ const SubmitPost = () => {
                             <input
                                 type="checkbox"
                                 name="Published"
-                                value="True"
+                                value="true"
                                 id="newsletter"
                                 onChange={HandelChange5}
                             />{" "}

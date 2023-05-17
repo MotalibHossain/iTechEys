@@ -28,6 +28,8 @@ const Dashboard = () => {
     const [edit, setEdit] = useState(false);
     const [post, setPost] = useState([]);
     const [Comment, setComment] = useState([]);
+    const [editPost, setEditPost] = useState([]);
+    const [editCheck, setEditCheck]=useState()
     const url = "http://127.0.0.1:8000/";
     const urlcomment = "http://127.0.0.1:8000/comment/";
     useEffect(() => {
@@ -47,8 +49,17 @@ const Dashboard = () => {
             setComment(response.data);
         });
     }, []);
-    console.log("post", post)
+    // console.log("post", post);
 
+    // Handle edit
+    const HandleEdit = (id) => {
+        const filterData = post.filter((item) => item.id === id);
+        setEditPost(filterData);
+        setEditCheck(filterData[0].published)
+        console.log("check", filterData[0].published);
+    };
+
+    console.log("edit post", editPost[0]?.title);
 
     return (
         <div className="Dashboard">
@@ -919,7 +930,14 @@ const Dashboard = () => {
                                                 <tbody>
                                                     {post &&
                                                         post.map((item, index) => {
-                                                            const { slug, title, Post_Comment, category, published } = item;
+                                                            const {
+                                                                id,
+                                                                slug,
+                                                                title,
+                                                                Post_Comment,
+                                                                category,
+                                                                published,
+                                                            } = item;
                                                             return (
                                                                 <tr key={index}>
                                                                     <td className="text-center text-muted">{index}</td>
@@ -952,8 +970,7 @@ const Dashboard = () => {
                                                                             <Form.Check
                                                                                 type="checkbox"
                                                                                 value=""
-                                                                                // checked={`"${published}"`}
-                                                                                checked="false"
+                                                                                checked={published}
                                                                             />
                                                                         </Form>
                                                                     </td>
@@ -966,7 +983,10 @@ const Dashboard = () => {
                                                                     <td className="text-center">
                                                                         <button
                                                                             type="button"
-                                                                            onClick={() => setEdit(true)}
+                                                                            onClick={() => {
+                                                                                setEdit(true);
+                                                                                HandleEdit(id);
+                                                                            }}
                                                                             id="PopoverCustomT-1"
                                                                             className="btn btn-info btn-sm mr-2"
                                                                         >
@@ -1163,16 +1183,129 @@ const Dashboard = () => {
 
             {/* <!-- Post edit Modal --> */}
             <div className="EditModal">
-                <Modal show={edit} onHide={() => setEdit(false)}>
+                <Modal show={edit} onHide={() => setEdit(false)} size="lg">
                     <Modal.Header className="bg-primary text-white" closeButton>
-                        <Modal.Title>Edit</Modal.Title>
+                        <Modal.Title>Edit your Article</Modal.Title>
                     </Modal.Header>
-                    <Modal.Body></Modal.Body>
-                    <Modal.Footer className="pt-0 pe-4 border-0">
-                        <button type="submit" className="btn btn-xs btn-primary" variant="primary">
-                            Edit
-                        </button>
-                    </Modal.Footer>
+                    <Modal.Body>
+                        {/* <div className="container"> */}
+                        <form className="submit-post">
+                            <div className="row">
+                                <div className="col-md-6">
+                                    <div className="form-group">
+                                        <label> Title</label>
+                                        <input
+                                            type="text"
+                                            name="title"
+                                            value={editPost[0]?.title}
+                                            className="form-control"
+                                            placeholder=""
+                                            // onChange={HandelChange}
+                                        />
+                                    </div>
+                                </div>
+                                <div className="col-md-6">
+                                    <div className="form-group">
+                                        <label> Slug</label>
+                                        <input
+                                            type="text"
+                                            name="slug"
+                                            value={editPost[0]?.slug}
+                                            className="form-control"
+                                            placeholder=""
+                                            // onChange={HandelChange2}
+                                        />
+                                    </div>
+                                </div>
+                                <div className="col-md-6">
+                                    <div className="form-group">
+                                        <label> Image</label>
+                                        <input
+                                            type="file"
+                                            name="image"
+                                            className="form-control"
+                                            placeholder=""
+                                            // onChange={onImageChange}
+                                        />
+                                    </div>
+                                </div>
+
+                                <div className="col-md-6">
+                                    <div className="form-group">
+                                        <label>Catagory</label>
+                                        <select
+                                            className="form-select"
+                                            name="category"
+                                            // onChange={HandelChange4}
+                                        >
+                                            <option>Catagory</option>
+                                            <option>
+                                                {editPost[0]?.category.name}
+                                            </option>
+                                            {/* {blogCategory.map((Item, index) => {
+                                                    return (
+                                                        <option value={Item.id} key={index}>
+                                                            {Item.name}
+                                                        </option>
+                                                    );
+                                                })} */}
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="col-md-6">
+                                    <div className="form-group">
+                                        <label>Author</label>
+                                        <input
+                                            // ref={authorName}
+                                            type="text"
+                                            name="author"
+                                            className="form-control"
+                                            placeholder=""
+                                            value={editPost[0]?.author.id}
+                                            readOnly
+                                        />
+                                    </div>
+                                </div>
+                                <div className="col-md-6">
+                                    <div className="checkbox pt-5">
+                                        <label>
+                                            <input
+                                                type="checkbox"
+                                                name="Published"
+                                                id="newsletter"
+                                                checked={editCheck}
+                                                onClick={()=>setEditCheck(!editCheck)}
+                                                // onChange={HandelChange5}
+                                            />{" "}
+                                            Published.
+                                        </label>
+                                    </div>
+                                </div>
+                                <div className="col-md-12">
+                                    <div className="form-group">
+                                        <label>Description</label>
+                                        <textarea
+                                            type="text"
+                                            name="description"
+                                            value={editPost[0]?.description}
+                                            className="form-control"
+                                            id="description"
+                                            placeholder="Description"
+                                            // onChange={HandelChange3}
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                            <Modal.Footer className="pt-0 pe-4 border-0">
+                                <button type="submit" className="btn btn-xs btn-primary" variant="primary">
+                                    Edit
+                                </button>
+                            </Modal.Footer>
+                        </form>
+                        {/* </div> */}
+                    </Modal.Body>
                 </Modal>
             </div>
         </div>
