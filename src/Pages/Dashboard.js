@@ -1298,8 +1298,8 @@ const Dashboard = () => {
                                     </div>
                                 </div>
                             </div>
-                            <Modal.Footer className="pt-0 pe-4 border-0">
-                                <button type="submit" className="btn btn-xs btn-primary" variant="primary">
+                            <Modal.Footer className="border-0 px-0">
+                                <button type="submit" className="btn btn-xs btn-primary me-0" variant="primary">
                                     Edit
                                 </button>
                             </Modal.Footer>

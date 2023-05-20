@@ -10,7 +10,6 @@ const SubmitPost = () => {
     const authorName = useRef();
     const effectRan = useRef(false);
     const user=JSON.parse(localStorage.getItem("UserInfo"));
-    console.log(user);
     // Error alert 
     const [show, setShow] = useState(true);
     const [message, setMessage]=useState();
@@ -40,6 +39,7 @@ const SubmitPost = () => {
     const HandelChange5 = (e) => {
         setPublished(e.target.value);
     };
+    console.log("Published", Published);
     
     const onImageChange = (event) => {
         setImage(event.currentTarget.files[0]);
@@ -48,16 +48,16 @@ const SubmitPost = () => {
     const HandleSubmit = (e) => {
         e.preventDefault();
         var form_data = new FormData();
+        form_data.append("author", authorName.current.value);
+        form_data.append("category", category);
         form_data.append("title", title);
         form_data.append("slug", slug);
         form_data.append("description", description);
-        form_data.append("category", category);
-        form_data.append("author", authorName.current.value);
-        form_data.append("Published", Published);
         form_data.append("image", image);
+        form_data.append("Published", Published);
 
         for (var [key, value] of form_data.entries()) {
-            console.log(key, ":", value);
+            console.log("form_data==========", key, ":", value);
         }
         axios
             .post("http://127.0.0.1:8000/blog/", form_data, {
@@ -214,7 +214,6 @@ const SubmitPost = () => {
                             <input
                                 type="checkbox"
                                 name="Published"
-                                value="true"
                                 id="newsletter"
                                 onChange={HandelChange5}
                             />{" "}
