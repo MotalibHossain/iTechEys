@@ -22,6 +22,7 @@ const SubmitPost = () => {
     const [description, setDescription] = useState("");
     const [category, setCategory] = useState("");
     const [Published, setPublished] = useState("");
+    const [pubisCheck, setPubisCheck]=useState(false)
 
     const HandelChange = (e) => {
         setTitle(e.target.value);
@@ -36,9 +37,17 @@ const SubmitPost = () => {
         setCategory(e.target.value);
     };
 
-    const HandelChange5 = (e) => {
-        setPublished(e.target.value);
-    };
+    // const HandelChange5 = (e) => {
+    //     setPublished(e.target.value);
+    // };
+    useEffect(()=>{
+        if(pubisCheck === false){
+            setPublished(0)
+        }else{
+            setPublished(1)
+
+        }
+    },[pubisCheck])
     console.log("Published", Published);
     
     const onImageChange = (event) => {
@@ -215,8 +224,9 @@ const SubmitPost = () => {
                                 type="checkbox"
                                 name="Published"
                                 id="newsletter"
-                                onChange={HandelChange5}
-                            />{" "}
+                                value={pubisCheck?1:0}
+                                onClick={(()=>setPubisCheck(!pubisCheck))}
+                            />
                             Published.
                         </label>
                     </div>
