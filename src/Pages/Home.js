@@ -25,7 +25,6 @@ const Home = () => {
 			setLatestPost(response.data[0])
         })
 	}, [])
-	const { id, title, slug, description, image } = latestPost
 
 	return (
 		<div className='Main-Container container-fluid '>
@@ -101,20 +100,20 @@ const Home = () => {
 							<MdOutlineDoubleArrow />
 							{/* <marquee behavior="scroll" direction="left"> */}
 							<h6 className='m-0'>
-								<Link to={`blog-details/${slug}`}>{latestPost.title}</Link>
+								<Link to={`blog-details/${latestPost?.slug}`}>{latestPost?.title}</Link>
 							</h6>
 							{/* </marquee> */}
-							<a href={`blog-details/${slug}`} class='button button-pulse ms-auto'>
+							<a href={`blog-details/${latestPost?.slug}`} className='button button-pulse ms-auto'>
 								বিস্তারিত
 							</a>
 						</div>
 					</div>
 
 					<div className='col-lg-4 col-md-4'>
-						<div class='search mt-sm-2 mt-md-0 mt-lg-0'>
+						<div className='search mt-sm-2 mt-md-0 mt-lg-0'>
 							<MdOutlineSearch className='fa fa-search' />
 							<input type='text' className='form-control' placeholder='সার্চ করুন iTecheys জুড়ে' />
-							<button class='btn btn-primary p-0'>Search</button>
+							<button className='btn btn-primary p-0'>Search</button>
 						</div>
 					</div>
 				</div>
