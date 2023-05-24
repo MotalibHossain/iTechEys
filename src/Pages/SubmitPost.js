@@ -21,7 +21,7 @@ const SubmitPost = () => {
     const [slug, setSlug] = useState("");
     const [description, setDescription] = useState("");
     const [category, setCategory] = useState("");
-    const [Published, setPublished] = useState("");
+    const [Published, setPublished] = useState();
     const [pubisCheck, setPubisCheck]=useState(false)
 
     const HandelChange = (e) => {
@@ -42,9 +42,9 @@ const SubmitPost = () => {
     // };
     useEffect(()=>{
         if(pubisCheck === false){
-            setPublished(0)
+            setPublished(false)
         }else{
-            setPublished(1)
+            setPublished(true)
 
         }
     },[pubisCheck])
@@ -223,11 +223,9 @@ const SubmitPost = () => {
                             <input
                                 type="checkbox"
                                 name="Published"
-                                id="newsletter"
-                                value={pubisCheck?1:0}
                                 onClick={(()=>setPubisCheck(!pubisCheck))}
                             />
-                            Published.
+                            <span className="ps-2">Published</span>
                         </label>
                     </div>
                     <button type="submit" className="btn btn-primary">

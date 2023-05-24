@@ -24,9 +24,9 @@ class BlogPost(models.Model):
     title = models.CharField(max_length=80)
     slug = models.SlugField(max_length=80, unique=True)
     description = models.CharField(max_length=500, default="")
+    published = models.BooleanField(default=True)
     image = models.ImageField(upload_to="Articles/", default='Articles/defualt.jpg',
                               null=True, blank=True, verbose_name="Image")
-    published = models.BooleanField()
     publish_date = models.DateTimeField(auto_now_add=True)
     update_date = models.DateTimeField(auto_now=True)
 
