@@ -26,7 +26,7 @@ class BlogPost(models.Model):
     description = models.CharField(max_length=500, default="")
     image = models.ImageField(upload_to="Articles/", default='Articles/defualt.jpg',
                               null=True, blank=True, verbose_name="Image")
-    published = models.CharField(max_length=1)
+    published = models.BooleanField()
     publish_date = models.DateTimeField(auto_now_add=True)
     update_date = models.DateTimeField(auto_now=True)
 
