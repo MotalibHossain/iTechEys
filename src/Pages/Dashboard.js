@@ -29,7 +29,7 @@ const Dashboard = () => {
     const [post, setPost] = useState([]);
     const [Comment, setComment] = useState([]);
     const [editPost, setEditPost] = useState([]);
-    const [editCheck, setEditCheck]=useState()
+    const [editCheck, setEditCheck] = useState();
     const url = "http://127.0.0.1:8000/";
     const urlcomment = "http://127.0.0.1:8000/comment/";
     useEffect(() => {
@@ -55,11 +55,16 @@ const Dashboard = () => {
     const HandleEdit = (id) => {
         const filterData = post.filter((item) => item.id === id);
         setEditPost(filterData);
-        setEditCheck(filterData[0].published)
+        setEditCheck(filterData[0].published);
         console.log("check", filterData[0].published);
     };
 
     console.log("edit post", editPost[0]?.title);
+
+    // ---------------------------------------------------------
+    //                  Post Eidt functionality
+    // --------------------------------------------------------- 
+    
 
     return (
         <div className="Dashboard">
@@ -1239,9 +1244,7 @@ const Dashboard = () => {
                                             // onChange={HandelChange4}
                                         >
                                             <option>Catagory</option>
-                                            <option>
-                                                {editPost[0]?.category.name}
-                                            </option>
+                                            <option>{editPost[0]?.category.name}</option>
                                             {/* {blogCategory.map((Item, index) => {
                                                     return (
                                                         <option value={Item.id} key={index}>
@@ -1276,7 +1279,7 @@ const Dashboard = () => {
                                                 name="Published"
                                                 id="newsletter"
                                                 checked={editCheck}
-                                                onClick={()=>setEditCheck(!editCheck)}
+                                                onClick={() => setEditCheck(!editCheck)}
                                                 // onChange={HandelChange5}
                                             />{" "}
                                             Published.

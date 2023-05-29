@@ -11,6 +11,7 @@ from App_Article.views import (
     PostPutUpdateDelete, 
     BlogCategories, 
     ArticlePost, 
+    ArticlePostEdit, 
     BlogLiked, 
     BlogCommentPost,
     BlogCommentView,
@@ -21,6 +22,7 @@ from App_Article.views import (
 urlpatterns = [
     path('', Article.as_view(), name='article'),
     path('blog/', ArticlePost.as_view(), name='article'),
+    path('blog-edit/<int:id>', ArticlePostEdit.as_view(), name='articleEdit'),
     path('articles/<int:id>',PostPutUpdateDelete, name="PostPutUpdateDelete"),
     path('blog-category/', BlogCategories.as_view(), name='BlogCategories'),
 

@@ -42,6 +42,21 @@ class ArticlePost(generics.ListCreateAPIView):
     parser_classes = [parsers.FormParser, parsers.MultiPartParser]
 
 
+class ArticlePostEdit(APIView):
+    def get(self, request, id):
+        Item=BlogPost.objects.filter(pk=id).first()
+        serializer=PostSerializer(Item)
+        return Response(serializer.data)
+
+    def put(self, request, id):
+        editItem=BlogPost.objects.filter(pk=id).first()
+        serializer = PostSerializer(editItem, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+
+
 class BlogCategories(generics.ListCreateAPIView):
     queryset = BlogPostCategory.objects.all()
     serializer_class = BlogPostCategorySerializer
