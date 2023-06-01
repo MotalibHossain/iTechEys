@@ -56,7 +56,6 @@ class BlogPostSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         return BlogPost.objects.create(**validated_data)
 
-
 # only blog post
 class PostSerializer(serializers.ModelSerializer):
     class Meta:

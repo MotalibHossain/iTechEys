@@ -28,7 +28,7 @@ const Dashboard = () => {
     const [edit, setEdit] = useState(false);
     const [post, setPost] = useState([]);
     const [Comment, setComment] = useState([]);
-    const [editPost, setEditPost] = useState([]);
+    const [editPost, setEditPost] = useState();
     const [editCheck, setEditCheck] = useState();
     const url = "http://127.0.0.1:8000/";
     const urlcomment = "http://127.0.0.1:8000/comment/";
@@ -54,17 +54,24 @@ const Dashboard = () => {
     // Handle edit
     const HandleEdit = (id) => {
         const filterData = post.filter((item) => item.id === id);
-        setEditPost(filterData);
+        setEditPost(filterData[0]);
         setEditCheck(filterData[0].published);
-        console.log("check", filterData[0].published);
     };
 
-    console.log("edit post", editPost[0]?.title);
+    console.log("edit post", editPost?.title);
 
     // ---------------------------------------------------------
     //                  Post Eidt functionality
     // --------------------------------------------------------- 
-    
+    const [currentPostEdit, setCurrentPostEdit]=useState()
+
+    const HandleCurrentEdit=(e)=>{
+        const {name, value}=e.target
+        setCurrentPostEdit((prev)=>{
+            return {...prev, [name]:value}
+        })
+    }
+    console.log("currentPostEdit-------",currentPostEdit);
 
     return (
         <div className="Dashboard">
@@ -1202,10 +1209,10 @@ const Dashboard = () => {
                                         <input
                                             type="text"
                                             name="title"
-                                            value={editPost[0]?.title}
+                                            defaultValue={editPost?.title}
                                             className="form-control"
                                             placeholder=""
-                                            // onChange={HandelChange}
+                                            onChange={HandleCurrentEdit}
                                         />
                                     </div>
                                 </div>
@@ -1215,10 +1222,10 @@ const Dashboard = () => {
                                         <input
                                             type="text"
                                             name="slug"
-                                            value={editPost[0]?.slug}
+                                            value={editPost?.slug}
                                             className="form-control"
                                             placeholder=""
-                                            // onChange={HandelChange2}
+                                            onChange={HandleCurrentEdit}
                                         />
                                     </div>
                                 </div>
@@ -1241,10 +1248,10 @@ const Dashboard = () => {
                                         <select
                                             className="form-select"
                                             name="category"
-                                            // onChange={HandelChange4}
+                                            onChange={HandleCurrentEdit}
                                         >
-                                            <option>Catagory</option>
-                                            <option>{editPost[0]?.category.name}</option>
+                                            <option disabled>Catagory</option>
+                                            <option selected>{editPost?.category.name}</option>
                                             {/* {blogCategory.map((Item, index) => {
                                                     return (
                                                         <option value={Item.id} key={index}>
@@ -1266,7 +1273,7 @@ const Dashboard = () => {
                                             name="author"
                                             className="form-control"
                                             placeholder=""
-                                            value={editPost[0]?.author.id}
+                                            value={editPost?.author.id}
                                             readOnly
                                         />
                                     </div>
@@ -1278,9 +1285,10 @@ const Dashboard = () => {
                                                 type="checkbox"
                                                 name="Published"
                                                 id="newsletter"
+                                                defaultValue={editPost?.published}
                                                 checked={editCheck}
                                                 onClick={() => setEditCheck(!editCheck)}
-                                                // onChange={HandelChange5}
+                                                onChange={HandleCurrentEdit}
                                             />{" "}
                                             Published.
                                         </label>
@@ -1292,7 +1300,7 @@ const Dashboard = () => {
                                         <textarea
                                             type="text"
                                             name="description"
-                                            value={editPost[0]?.description}
+                                            value={editPost?.description}
                                             className="form-control"
                                             id="description"
                                             placeholder="Description"

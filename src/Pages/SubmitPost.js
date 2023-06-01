@@ -63,7 +63,7 @@ const SubmitPost = () => {
         form_data.append("slug", slug);
         form_data.append("description", description);
         form_data.append("image", image);
-        form_data.append("Published", Published);
+        form_data.append("published", Published);
 
         for (var [key, value] of form_data.entries()) {
             console.log("form_data==========", key, ":", value);
