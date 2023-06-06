@@ -26,6 +26,7 @@ const Dashboard = () => {
     const { user_id, username, email, description } = JSON.parse(UserInfo);
 
     const [edit, setEdit] = useState(false);
+    const [ID, setId] = useState(false);
     const [post, setPost] = useState([]);
     const [Comment, setComment] = useState([]);
     const [editPost, setEditPost] = useState();
@@ -53,12 +54,13 @@ const Dashboard = () => {
 
     // Handle edit
     const HandleEdit = (id) => {
+        setId(id)
         const filterData = post.filter((item) => item.id === id);
         setEditPost(filterData[0]);
         setEditCheck(filterData[0].published);
     };
 
-    console.log("edit post", editPost?.title);
+    console.log("edit post", editPost && editPost);
 
     // ---------------------------------------------------------
     //                  Post Eidt functionality
@@ -71,7 +73,33 @@ const Dashboard = () => {
             return {...prev, [name]:value}
         })
     }
-    console.log("currentPostEdit-------",currentPostEdit);
+
+    // Submit post 
+    const url53=`http://127.0.0.1:8000/blog-edit/${ID && ID}`
+    const HandleSubmit = (e) => {
+        e.preventDefault();
+        axios({
+            method: "PATCH",
+            url: url53,
+            data: currentPostEdit,
+        })
+        .then(function (response) {
+            console.log("data:", response)
+            // setEdit(false);
+            // toast("Comment update successfully.");
+            // window.location.reload(false);
+        })
+        .catch(function (error) {
+            // toast(error.message);
+        });
+        // e.target.reset();
+    }
+
+
+
+    console.log("editCheck-------", editCheck);
+    console.log("Edit-------", currentPostEdit);
+    console.log("currentPostEdit-------", currentPostEdit);
 
     return (
         <div className="Dashboard">
@@ -170,25 +198,25 @@ const Dashboard = () => {
                                                     <FaUserCog className="user-icon mr-2 opacity-8" />
                                                 </a>
                                                 <div
-                                                    tabindex="-1"
+                                                    tabIndex="-1"
                                                     role="menu"
                                                     aria-hidden="true"
                                                     className="dropdown-menu dropdown-menu-right"
                                                 >
-                                                    <button type="button" tabindex="0" className="dropdown-item">
+                                                    <button type="button" tabIndex="0" className="dropdown-item">
                                                         User Account
                                                     </button>
-                                                    <button type="button" tabindex="0" className="dropdown-item">
+                                                    <button type="button" tabIndex="0" className="dropdown-item">
                                                         Settings
                                                     </button>
-                                                    <h6 tabindex="-1" className="dropdown-header">
+                                                    <h6 tabIndex="-1" className="dropdown-header">
                                                         Header
                                                     </h6>
-                                                    <button type="button" tabindex="0" className="dropdown-item">
+                                                    <button type="button" tabIndex="0" className="dropdown-item">
                                                         Actions
                                                     </button>
-                                                    <div tabindex="-1" className="dropdown-divider"></div>
-                                                    <button type="button" tabindex="0" className="dropdown-item">
+                                                    <div tabIndex="-1" className="dropdown-divider"></div>
+                                                    <button type="button" tabIndex="0" className="dropdown-item">
                                                         Dividers
                                                     </button>
                                                 </div>
@@ -386,7 +414,7 @@ const Dashboard = () => {
                                 </ul>
                             </div>
                         </div>
-                    </div>{" "}
+                    </div>
                     <div className="app-main__outer">
                         <div className="app-main__inner">
                             <div className="row">
@@ -982,7 +1010,7 @@ const Dashboard = () => {
                                                                             <Form.Check
                                                                                 type="checkbox"
                                                                                 value=""
-                                                                                checked={published}
+                                                                                defaultChecked={published}
                                                                             />
                                                                         </Form>
                                                                     </td>
@@ -996,8 +1024,8 @@ const Dashboard = () => {
                                                                         <button
                                                                             type="button"
                                                                             onClick={() => {
-                                                                                setEdit(true);
                                                                                 HandleEdit(id);
+                                                                                setEdit(true);
                                                                             }}
                                                                             id="PopoverCustomT-1"
                                                                             className="btn btn-info btn-sm mr-2"
@@ -1201,11 +1229,11 @@ const Dashboard = () => {
                     </Modal.Header>
                     <Modal.Body>
                         {/* <div className="container"> */}
-                        <form className="submit-post">
+                        <form className="submit-post" onSubmit={HandleSubmit}>
                             <div className="row">
                                 <div className="col-md-6">
                                     <div className="form-group">
-                                        <label> Title</label>
+                                        <label> Title {editPost?.id}</label>
                                         <input
                                             type="text"
                                             name="title"
@@ -1222,7 +1250,7 @@ const Dashboard = () => {
                                         <input
                                             type="text"
                                             name="slug"
-                                            value={editPost?.slug}
+                                            defaultValue={editPost?.slug}
                                             className="form-control"
                                             placeholder=""
                                             onChange={HandleCurrentEdit}
@@ -1248,17 +1276,13 @@ const Dashboard = () => {
                                         <select
                                             className="form-select"
                                             name="category"
+                                            defaultValue={editPost?.category.id}
                                             onChange={HandleCurrentEdit}
                                         >
-                                            <option disabled>Catagory</option>
-                                            <option selected>{editPost?.category.name}</option>
-                                            {/* {blogCategory.map((Item, index) => {
-                                                    return (
-                                                        <option value={Item.id} key={index}>
-                                                            {Item.name}
-                                                        </option>
-                                                    );
-                                                })} */}
+                                            <option>Catagory</option>
+                                            <option value={editPost?.category.id}>
+                                                {editPost?.category.name}
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
@@ -1283,13 +1307,13 @@ const Dashboard = () => {
                                         <label>
                                             <input
                                                 type="checkbox"
-                                                name="Published"
+                                                name="published"
                                                 id="newsletter"
-                                                defaultValue={editPost?.published}
+                                                value={editCheck?false:true}
                                                 checked={editCheck}
                                                 onClick={() => setEditCheck(!editCheck)}
                                                 onChange={HandleCurrentEdit}
-                                            />{" "}
+                                            />
                                             Published.
                                         </label>
                                     </div>
@@ -1300,7 +1324,7 @@ const Dashboard = () => {
                                         <textarea
                                             type="text"
                                             name="description"
-                                            value={editPost?.description}
+                                            defaultValue={editPost?.description}
                                             className="form-control"
                                             id="description"
                                             placeholder="Description"

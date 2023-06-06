@@ -48,7 +48,7 @@ class ArticlePostEdit(APIView):
         serializer=PostSerializer(Item)
         return Response(serializer.data)
 
-    def put(self, request, id):
+    def patch(self, request, id):
         editItem=BlogPost.objects.filter(pk=id).first()
         serializer = PostSerializer(editItem, data=request.data)
         if serializer.is_valid():
