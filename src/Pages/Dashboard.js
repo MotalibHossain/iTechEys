@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import axios from "axios";
 
 // import redux material
 import { useSelector } from "react-redux";
 
-// Font
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// message framework
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 // Icon
 import { RiArrowDownSLine, RiListCheck2 } from "react-icons/ri";
@@ -25,12 +25,13 @@ const Dashboard = () => {
     const { UserInfo } = useSelector((state) => state);
     const { user_id, username, email, description } = JSON.parse(UserInfo);
 
+    const [post, setPost] = useState();
     const [edit, setEdit] = useState(false);
     const [ID, setId] = useState(false);
-    const [post, setPost] = useState([]);
     const [Comment, setComment] = useState([]);
     const [editPost, setEditPost] = useState();
     const [editCheck, setEditCheck] = useState();
+
     const url = "http://127.0.0.1:8000/";
     const urlcomment = "http://127.0.0.1:8000/comment/";
     useEffect(() => {
@@ -50,56 +51,54 @@ const Dashboard = () => {
             setComment(response.data);
         });
     }, []);
-    // console.log("post", post);
 
-    // Handle edit
+    // Close Edit Modal
+    const CloseEditModal = () => {
+        setEdit(false);
+        setCurrentPostEdit("");
+    };
+    // Handle edit. Edit post open in modal form
     const HandleEdit = (id) => {
-        setId(id)
+        setId(id);
         const filterData = post.filter((item) => item.id === id);
         setEditPost(filterData[0]);
         setEditCheck(filterData[0].published);
     };
 
-    console.log("edit post", editPost && editPost);
-
     // ---------------------------------------------------------
     //                  Post Eidt functionality
-    // --------------------------------------------------------- 
-    const [currentPostEdit, setCurrentPostEdit]=useState()
+    // ---------------------------------------------------------
+    const [currentPostEdit, setCurrentPostEdit] = useState();
 
-    const HandleCurrentEdit=(e)=>{
-        const {name, value}=e.target
-        setCurrentPostEdit((prev)=>{
-            return {...prev, [name]:value}
-        })
-    }
+    const HandleCurrentEdit = (e) => {
+        const { name, value } = e.target;
+        setCurrentPostEdit((prev) => {
+            return { ...prev, [name]: value };
+        });
+    };
 
-    // Submit post 
-    const url53=`http://127.0.0.1:8000/blog-edit/${ID && ID}`
+    // Submit post
+    const updateUrl = `http://127.0.0.1:8000/blog-edit/${ID && ID}`;
     const HandleSubmit = (e) => {
         e.preventDefault();
         axios({
             method: "PATCH",
-            url: url53,
+            url: updateUrl,
             data: currentPostEdit,
         })
-        .then(function (response) {
-            console.log("data:", response)
-            // setEdit(false);
-            // toast("Comment update successfully.");
-            // window.location.reload(false);
-        })
-        .catch(function (error) {
-            // toast(error.message);
-        });
-        // e.target.reset();
-    }
+            .then(function (response) {
+                setPost(response.data);
+                setEdit(false);
+                toast("Post update successfully.");
+            })
+            .catch(function (error) {
+                toast(error.message);
+            });
+    };
 
-
-
-    console.log("editCheck-------", editCheck);
-    console.log("Edit-------", currentPostEdit);
-    console.log("currentPostEdit-------", currentPostEdit);
+    // console.log("editCheck-------", editCheck);
+    // console.log("Edit-------", currentPostEdit);
+    // console.log("currentPostEdit-------", currentPostEdit);
 
     return (
         <div className="Dashboard">
@@ -427,7 +426,7 @@ const Dashboard = () => {
                                             </div>
                                             <div className="widget-content-right">
                                                 <div className="widget-numbers text-white">
-                                                    <span>{post && post.length}</span>
+                                                    <span>{post && post?.length}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -442,7 +441,7 @@ const Dashboard = () => {
                                             </div>
                                             <div className="widget-content-right">
                                                 <div className="widget-numbers text-white">
-                                                    <span>{Comment.length}</span>
+                                                    <span>{Comment?.length}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -479,470 +478,7 @@ const Dashboard = () => {
                                     </div>
                                 </div>
                             </div>
-                            {/* <div className="row">
-                                <div className="col-md-12 col-lg-6">
-                                    <div className="mb-3 card">
-                                        <div className="card-header-tab card-header-tab-animation card-header">
-                                            <div className="card-header-title">
-                                                <i className="header-icon lnr-apartment icon-gradient bg-love-kiss">
-                                                    {" "}
-                                                </i>
-                                                Sales Report
-                                            </div>
-                                            <ul className="nav">
-                                                <li className="nav-item">
-                                                    <a href="javascript:void(0);" className="active nav-link">
-                                                        Last
-                                                    </a>
-                                                </li>
-                                                <li className="nav-item">
-                                                    <a
-                                                        href="javascript:void(0);"
-                                                        className="nav-link second-tab-toggle"
-                                                    >
-                                                        Current
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div className="card-body">
-                                            <div className="tab-content">
-                                                <div className="tab-pane fade show active" id="tabs-eg-77">
-                                                    <div className="card mb-3 widget-chart widget-chart2 text-left w-100">
-                                                        <div className="widget-chat-wrapper-outer">
-                                                            <div className="widget-chart-wrapper widget-chart-wrapper-lg opacity-10 m-0">
-                                                                <canvas id="canvas"></canvas>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <h6 className="text-muted text-uppercase font-size-md opacity-5 font-weight-normal">
-                                                        Top Authors
-                                                    </h6>
-                                                    <div className="scroll-area-sm">
-                                                        <div className="scrollbar-container">
-                                                            <ul className="rm-list-borders rm-list-borders-scroll list-group list-group-flush">
-                                                                <li className="list-group-item">
-                                                                    <div className="widget-content p-0">
-                                                                        <div className="widget-content-wrapper">
-                                                                            <div className="widget-content-left mr-3">
-                                                                                <img
-                                                                                    width="42"
-                                                                                    className="rounded-circle"
-                                                                                    src="assets/images/avatars/9.jpg"
-                                                                                    alt=""
-                                                                                />
-                                                                            </div>
-                                                                            <div className="widget-content-left">
-                                                                                <div className="widget-heading">
-                                                                                    Ella-Rose Henry
-                                                                                </div>
-                                                                                <div className="widget-subheading">
-                                                                                    Web Developer
-                                                                                </div>
-                                                                            </div>
-                                                                            <div className="widget-content-right">
-                                                                                <div className="font-size-xlg text-muted">
-                                                                                    <small className="opacity-5 pr-1">
-                                                                                        $
-                                                                                    </small>
-                                                                                    <span>129</span>
-                                                                                    <small className="text-danger pl-2">
-                                                                                        <i className="fa fa-angle-down"></i>
-                                                                                    </small>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li className="list-group-item">
-                                                                    <div className="widget-content p-0">
-                                                                        <div className="widget-content-wrapper">
-                                                                            <div className="widget-content-left mr-3">
-                                                                                <img
-                                                                                    width="42"
-                                                                                    className="rounded-circle"
-                                                                                    src="assets/images/avatars/5.jpg"
-                                                                                    alt=""
-                                                                                />
-                                                                            </div>
-                                                                            <div className="widget-content-left">
-                                                                                <div className="widget-heading">
-                                                                                    Ruben Tillman
-                                                                                </div>
-                                                                                <div className="widget-subheading">
-                                                                                    UI Designer
-                                                                                </div>
-                                                                            </div>
-                                                                            <div className="widget-content-right">
-                                                                                <div className="font-size-xlg text-muted">
-                                                                                    <small className="opacity-5 pr-1">
-                                                                                        $
-                                                                                    </small>
-                                                                                    <span>54</span>
-                                                                                    <small className="text-success pl-2">
-                                                                                        <i className="fa fa-angle-up"></i>
-                                                                                    </small>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li className="list-group-item">
-                                                                    <div className="widget-content p-0">
-                                                                        <div className="widget-content-wrapper">
-                                                                            <div className="widget-content-left mr-3">
-                                                                                <img
-                                                                                    width="42"
-                                                                                    className="rounded-circle"
-                                                                                    src="assets/images/avatars/4.jpg"
-                                                                                    alt=""
-                                                                                />
-                                                                            </div>
-                                                                            <div className="widget-content-left">
-                                                                                <div className="widget-heading">
-                                                                                    Vinnie Wagstaff
-                                                                                </div>
-                                                                                <div className="widget-subheading">
-                                                                                    Java Programmer
-                                                                                </div>
-                                                                            </div>
-                                                                            <div className="widget-content-right">
-                                                                                <div className="font-size-xlg text-muted">
-                                                                                    <small className="opacity-5 pr-1">
-                                                                                        $
-                                                                                    </small>
-                                                                                    <span>429</span>
-                                                                                    <small className="text-warning pl-2">
-                                                                                        <i className="fa fa-dot-circle"></i>
-                                                                                    </small>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li className="list-group-item">
-                                                                    <div className="widget-content p-0">
-                                                                        <div className="widget-content-wrapper">
-                                                                            <div className="widget-content-left mr-3">
-                                                                                <img
-                                                                                    width="42"
-                                                                                    className="rounded-circle"
-                                                                                    src="assets/images/avatars/3.jpg"
-                                                                                    alt=""
-                                                                                />
-                                                                            </div>
-                                                                            <div className="widget-content-left">
-                                                                                <div className="widget-heading">
-                                                                                    Ella-Rose Henry
-                                                                                </div>
-                                                                                <div className="widget-subheading">
-                                                                                    Web Developer
-                                                                                </div>
-                                                                            </div>
-                                                                            <div className="widget-content-right">
-                                                                                <div className="font-size-xlg text-muted">
-                                                                                    <small className="opacity-5 pr-1">
-                                                                                        $
-                                                                                    </small>
-                                                                                    <span>129</span>
-                                                                                    <small className="text-danger pl-2">
-                                                                                        <i className="fa fa-angle-down"></i>
-                                                                                    </small>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li className="list-group-item">
-                                                                    <div className="widget-content p-0">
-                                                                        <div className="widget-content-wrapper">
-                                                                            <div className="widget-content-left mr-3">
-                                                                                <img
-                                                                                    width="42"
-                                                                                    className="rounded-circle"
-                                                                                    src="assets/images/avatars/2.jpg"
-                                                                                    alt=""
-                                                                                />
-                                                                            </div>
-                                                                            <div className="widget-content-left">
-                                                                                <div className="widget-heading">
-                                                                                    Ruben Tillman
-                                                                                </div>
-                                                                                <div className="widget-subheading">
-                                                                                    UI Designer
-                                                                                </div>
-                                                                            </div>
-                                                                            <div className="widget-content-right">
-                                                                                <div className="font-size-xlg text-muted">
-                                                                                    <small className="opacity-5 pr-1">
-                                                                                        $
-                                                                                    </small>
-                                                                                    <span>54</span>
-                                                                                    <small className="text-success pl-2">
-                                                                                        <i className="fa fa-angle-up"></i>
-                                                                                    </small>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-md-12 col-lg-6">
-                                    <div className="mb-3 card">
-                                        <div className="card-header-tab card-header">
-                                            <div className="card-header-title">
-                                                <i className="header-icon lnr-rocket icon-gradient bg-tempting-azure">
-                                                    {" "}
-                                                </i>
-                                                Bandwidth Reports
-                                            </div>
-                                            <div className="btn-actions-pane-right">
-                                                <div className="nav">
-                                                    <a
-                                                        href="javascript:void(0);"
-                                                        className="border-0 btn-pill btn-wide btn-transition active btn btn-outline-alternate"
-                                                    >
-                                                        Tab 1
-                                                    </a>
-                                                    <a
-                                                        href="javascript:void(0);"
-                                                        className="ml-1 btn-pill btn-wide border-0 btn-transition  btn btn-outline-alternate second-tab-toggle-alt"
-                                                    >
-                                                        Tab 2
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="tab-content">
-                                            <div className="tab-pane fade active show" id="tab-eg-55">
-                                                <div className="widget-chart p-3">
-                                                 <div style="height: 350px">
-                                                        <canvas id="line-chart"></canvas>
-                                                    </div>
-                                                    <div className="widget-chart-content text-center mt-5">
-                                                        <div className="widget-description mt-0 text-warning">
-                                                            <i className="fa fa-arrow-left"></i>
-                                                            <span className="pl-1">175.5%</span>
-                                                            <span className="text-muted opacity-8 pl-1">
-                                                                increased server resources
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="pt-2 card-body">
-                                                    <div className="row">
-                                                        <div className="col-md-6">
-                                                            <div className="widget-content">
-                                                                <div className="widget-content-outer">
-                                                                    <div className="widget-content-wrapper">
-                                                                        <div className="widget-content-left">
-                                                                            <div className="widget-numbers fsize-3 text-muted">
-                                                                                63%
-                                                                            </div>
-                                                                        </div>
-                                                                        <div className="widget-content-right">
-                                                                            <div className="text-muted opacity-6">
-                                                                                Generated Leads
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div className="widget-progress-wrapper mt-1">
-                                                                        <div className="progress-bar-sm progress-bar-animated-alt progress">
-                                                                             <div
-                                                                                className="progress-bar bg-danger"
-                                                                                role="progressbar"
-                                                                                aria-valuenow="63"
-                                                                                aria-valuemin="0"
-                                                                                aria-valuemax="100"
-                                                                                style="width: 63%;"
-                                                                            ></div> 
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div className="col-md-6">
-                                                            <div className="widget-content">
-                                                                <div className="widget-content-outer">
-                                                                    <div className="widget-content-wrapper">
-                                                                        <div className="widget-content-left">
-                                                                            <div className="widget-numbers fsize-3 text-muted">
-                                                                                32%
-                                                                            </div>
-                                                                        </div>
-                                                                        <div className="widget-content-right">
-                                                                            <div className="text-muted opacity-6">
-                                                                                Submitted Tickers
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div className="widget-progress-wrapper mt-1">
-                                                                        <div className="progress-bar-sm progress-bar-animated-alt progress">
-                                                                         <div
-                                                                                className="progress-bar bg-success"
-                                                                                role="progressbar"
-                                                                                aria-valuenow="32"
-                                                                                aria-valuemin="0"
-                                                                                aria-valuemax="100"
-                                                                                style="width: 32%;"
-                                                                            ></div> 
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div className="col-md-6">
-                                                            <div className="widget-content">
-                                                                <div className="widget-content-outer">
-                                                                    <div className="widget-content-wrapper">
-                                                                        <div className="widget-content-left">
-                                                                            <div className="widget-numbers fsize-3 text-muted">
-                                                                                71%
-                                                                            </div>
-                                                                        </div>
-                                                                        <div className="widget-content-right">
-                                                                            <div className="text-muted opacity-6">
-                                                                                Server Allocation
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div className="widget-progress-wrapper mt-1">
-                                                                        <div className="progress-bar-sm progress-bar-animated-alt progress">
-                                                                         <div
-                                                                                className="progress-bar bg-primary"
-                                                                                role="progressbar"
-                                                                                aria-valuenow="71"
-                                                                                aria-valuemin="0"
-                                                                                aria-valuemax="100"
-                                                                                style="width: 71%;"
-                                                                            ></div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div className="col-md-6">
-                                                            <div className="widget-content">
-                                                                <div className="widget-content-outer">
-                                                                    <div className="widget-content-wrapper">
-                                                                        <div className="widget-content-left">
-                                                                            <div className="widget-numbers fsize-3 text-muted">
-                                                                                41%
-                                                                            </div>
-                                                                        </div>
-                                                                        <div className="widget-content-right">
-                                                                            <div className="text-muted opacity-6">
-                                                                                Generated Leads
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div className="widget-progress-wrapper mt-1">
-                                                                        <div className="progress-bar-sm progress-bar-animated-alt progress">
-                                                                            <div
-                                                                                className="progress-bar bg-warning"
-                                                                                role="progressbar"
-                                                                                aria-valuenow="41"
-                                                                                aria-valuemin="0"
-                                                                                aria-valuemax="100"
-                                                                                style="width: 41%;"
-                                                                            ></div> 
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> */}
-                            {/* <div className="row">
-                                <div className="col-md-6 col-xl-4">
-                                    <div className="card mb-3 widget-content">
-                                        <div className="widget-content-outer">
-                                            <div className="widget-content-wrapper">
-                                                <div className="widget-content-left">
-                                                    <div className="widget-heading">Total Orders</div>
-                                                    <div className="widget-subheading">Last year expenses</div>
-                                                </div>
-                                                <div className="widget-content-right">
-                                                    <div className="widget-numbers text-success">1896</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-md-6 col-xl-4">
-                                    <div className="card mb-3 widget-content">
-                                        <div className="widget-content-outer">
-                                            <div className="widget-content-wrapper">
-                                                <div className="widget-content-left">
-                                                    <div className="widget-heading">Products Sold</div>
-                                                    <div className="widget-subheading">Revenue streams</div>
-                                                </div>
-                                                <div className="widget-content-right">
-                                                    <div className="widget-numbers text-warning">$3M</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-md-6 col-xl-4">
-                                    <div className="card mb-3 widget-content">
-                                        <div className="widget-content-outer">
-                                            <div className="widget-content-wrapper">
-                                                <div className="widget-content-left">
-                                                    <div className="widget-heading">Followers</div>
-                                                    <div className="widget-subheading">People Interested</div>
-                                                </div>
-                                                <div className="widget-content-right">
-                                                    <div className="widget-numbers text-danger">45,9%</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="d-xl-none d-lg-block col-md-6 col-xl-4">
-                                    <div className="card mb-3 widget-content">
-                                        <div className="widget-content-outer">
-                                            <div className="widget-content-wrapper">
-                                                <div className="widget-content-left">
-                                                    <div className="widget-heading">Income</div>
-                                                    <div className="widget-subheading">Expected totals</div>
-                                                </div>
-                                                <div className="widget-content-right">
-                                                    <div className="widget-numbers text-focus">$147</div>
-                                                </div>
-                                            </div>
-                                            <div className="widget-progress-wrapper">
-                                                <div className="progress-bar-sm progress-bar-animated-alt progress">
-                                                    <div
-                                                        className="progress-bar bg-info"
-                                                        role="progressbar"
-                                                        aria-valuenow="54"
-                                                        aria-valuemin="0"
-                                                        aria-valuemax="100"
-                                                        style="width: 54%;"
-                                                    ></div>
-                                                </div>
-                                                <div className="progress-sub-label">
-                                                    <div className="sub-label-left">Expenses</div>
-                                                    <div className="sub-label-right">100%</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> */}
+
                             <div className="row">
                                 <div className="col-md-12">
                                     <div className="main-card mb-3 card">
@@ -978,6 +514,7 @@ const Dashboard = () => {
                                                                 category,
                                                                 published,
                                                             } = item;
+                                                            console.log("update", published);
                                                             return (
                                                                 <tr key={index}>
                                                                     <td className="text-center text-muted">{index}</td>
@@ -999,26 +536,20 @@ const Dashboard = () => {
                                                                                         {title}
                                                                                     </div>
                                                                                     <div className="widget-subheading opacity-7">
-                                                                                        {category.name}
+                                                                                        {category?.name}
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                     </td>
                                                                     <td className="text-center">
-                                                                        <Form>
-                                                                            <Form.Check
-                                                                                type="checkbox"
-                                                                                value=""
-                                                                                defaultChecked={published}
-                                                                            />
-                                                                        </Form>
+                                                                        <input type="checkbox" checked={published} />
                                                                     </td>
                                                                     <td className="text-center">
-                                                                        {Post_Comment.length}
+                                                                        {Post_Comment?.length}
                                                                     </td>
                                                                     <td className="text-center">
-                                                                        <div className="">{Post_Comment.length}</div>
+                                                                        <div className="">{Post_Comment?.length}</div>
                                                                     </td>
                                                                     <td className="text-center">
                                                                         <button
@@ -1223,7 +754,7 @@ const Dashboard = () => {
 
             {/* <!-- Post edit Modal --> */}
             <div className="EditModal">
-                <Modal show={edit} onHide={() => setEdit(false)} size="lg">
+                <Modal show={edit} onHide={CloseEditModal} size="lg">
                     <Modal.Header className="bg-primary text-white" closeButton>
                         <Modal.Title>Edit your Article</Modal.Title>
                     </Modal.Header>
@@ -1280,9 +811,7 @@ const Dashboard = () => {
                                             onChange={HandleCurrentEdit}
                                         >
                                             <option>Catagory</option>
-                                            <option value={editPost?.category.id}>
-                                                {editPost?.category.name}
-                                            </option>
+                                            <option value={editPost?.category.id}>{editPost?.category.name}</option>
                                         </select>
                                     </div>
                                 </div>
@@ -1308,13 +837,12 @@ const Dashboard = () => {
                                             <input
                                                 type="checkbox"
                                                 name="published"
-                                                id="newsletter"
-                                                value={editCheck?false:true}
+                                                value={editCheck ? false : true}
                                                 checked={editCheck}
                                                 onClick={() => setEditCheck(!editCheck)}
                                                 onChange={HandleCurrentEdit}
                                             />
-                                            Published.
+                                            <span className="ps-2">Published.</span>
                                         </label>
                                     </div>
                                 </div>
@@ -1326,9 +854,8 @@ const Dashboard = () => {
                                             name="description"
                                             defaultValue={editPost?.description}
                                             className="form-control"
-                                            id="description"
                                             placeholder="Description"
-                                            // onChange={HandelChange3}
+                                            onChange={HandleCurrentEdit}
                                         />
                                     </div>
                                 </div>

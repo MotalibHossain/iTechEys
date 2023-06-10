@@ -49,12 +49,16 @@ class ArticlePostEdit(APIView):
         return Response(serializer.data)
 
     def patch(self, request, id):
+        
         editItem=BlogPost.objects.filter(pk=id).first()
-        serializer = PostSerializer(editItem, data=request.data)
+        serializer = PostSerializer(editItem, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+
+        allPost=BlogPost.objects.all()
+        allPostSerializer=BlogPostSerializer(allPost, many=True)
+        return Response(allPostSerializer.data)
+        # return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
 
 
 class BlogCategories(generics.ListCreateAPIView):

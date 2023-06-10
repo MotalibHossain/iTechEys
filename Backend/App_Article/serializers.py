@@ -77,3 +77,6 @@ class BlogCommentPostSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         return BlogComment.objects.create(**validated_data)
+    
+    def patch(self, request, *args, **kwargs):
+        return self.partial_update(request, *args, **kwargs)
