@@ -112,13 +112,13 @@ class BlogCommentEditDelete(APIView):
         serializer=BlogCommentViewSerializer(articles, many=True)
         return Response(serializer.data)
     
-    def put(self, request, cid):
+    def patch(self, request, cid):
         articles = BlogComment.objects.get(custom_id=cid)
         allComment=BlogComment.objects.filter(post=articles.post.id)
-        CommentSerializer=BlogCommentViewSerializer(allComment, many=True, partial=True)
+        CommentSerializer=BlogCommentViewSerializer(allComment, many=True)
 
         editItem = BlogComment.objects.filter(custom_id=cid).first()
-        serializer = BlogCommentPostSerializer(editItem, data=request.data)
+        serializer = BlogCommentPostSerializer(editItem, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
         else:
@@ -127,8 +127,9 @@ class BlogCommentEditDelete(APIView):
         return Response(CommentSerializer.data)
 
     def delete(self, request, cid):
-        comments=BlogComment.objects.all()
-        serializer=BlogCommentViewSerializer(comments, many=True)
         deleteiItem = BlogComment.objects.get(custom_id=cid)
         deleteiItem.delete()
+        
+        comments=BlogComment.objects.all()
+        serializer=BlogCommentViewSerializer(comments, many=True)
         return Response(serializer.data)

@@ -135,9 +135,9 @@ const BlogDetails = () => {
     const HandelEdit = (e) => {
         e.preventDefault();
         axios({
-            method: "PUT",
+            method: "PATCH",
             url: URL,
-            data: {custom_id:PostComment?.[0]?.custom_id, user: user_id, post: id, comment: commentEdit },
+            data: { comment: commentEdit },
         })
         .then(function (response) {
             // comment sorting 
@@ -164,6 +164,7 @@ const BlogDetails = () => {
         })
         .then(function (response) {
             setIscomment(false)
+             console.log("debug_ Post_Comment-----------------", response.data);
             setPostComment(response.data)
             setDelete(false);
             toast("Comment delete successfully.");
