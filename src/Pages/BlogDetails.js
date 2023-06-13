@@ -85,7 +85,7 @@ const BlogDetails = () => {
     //                Post comment and fetch comment
     // =============================================================
     const { UserInfo } = useSelector((state) => state);
-    const isAdmin= JSON.parse(UserInfo);
+    // const isAdmin= JSON.parse(UserInfo);
     const [user_id, setUserId] = useState("");
     const [username, setUsername] = useState("");
     const [comment, setComment] = useState("");
@@ -292,7 +292,7 @@ const BlogDetails = () => {
                                                             <FiEdit />
                                                         </a>
                                                         <a onClick={() => setDelete(true)}>
-                                                            {isAdmin?.is?<RiDeleteBin5Line />:''}
+                                                            <RiDeleteBin5Line />
                                                         </a>
                                                     </div>
                                                 </div>
