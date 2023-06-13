@@ -113,12 +113,18 @@ class BlogCommentEditDelete(APIView):
         return Response(serializer.data)
     
     def put(self, request, cid):
+        articles = BlogComment.objects.get(custom_id=cid)
+        allComment=BlogComment.objects.filter(post=articles.post.id)
+        CommentSerializer=BlogCommentViewSerializer(allComment, many=True, partial=True)
+
         editItem = BlogComment.objects.filter(custom_id=cid).first()
         serializer = BlogCommentPostSerializer(editItem, data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+        
+        return Response(CommentSerializer.data)
 
     def delete(self, request, cid):
         comments=BlogComment.objects.all()
