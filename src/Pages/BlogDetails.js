@@ -85,6 +85,7 @@ const BlogDetails = () => {
     //                Post comment and fetch comment
     // =============================================================
     const { UserInfo } = useSelector((state) => state);
+    const isAdmin= JSON.parse(UserInfo);
     const [user_id, setUserId] = useState("");
     const [username, setUsername] = useState("");
     const [comment, setComment] = useState("");
@@ -117,7 +118,6 @@ const BlogDetails = () => {
             data: { custom_id:uid, user: user_id, post: id, comment: comment },
         })
         .then(function (response) {
-            console.log("response", response)
             setPostComment([{custom_id:uid, user: { username: username }, post: id, comment: comment }, ...PostComment]);
             // Comment button disable and enable
             const isCommentExits = PostComment.filter((item) => item.user.username === username);
@@ -140,14 +140,21 @@ const BlogDetails = () => {
             data: {custom_id:PostComment?.[0]?.custom_id, user: user_id, post: id, comment: commentEdit },
         })
         .then(function (response) {
+            // comment sorting 
+            let allComments=response.data
+            const findCurrentUser = allComments.findIndex((r) => r.user.username === username);
+            const SortedComment = allComments.splice(findCurrentUser);
+
+            // marge sorted and all comments array
+            const comments = SortedComment.concat(allComments);
+
+            setPostComment(comments);
             setEdit(false);
             toast("Comment update successfully.");
-            window.location.reload(false);
         })
         .catch(function (error) {
             toast(error.message);
         });
-        // e.target.reset();
     };
     // Comment delete 
     const HandleDelete=(e)=>{
@@ -167,7 +174,7 @@ const BlogDetails = () => {
     }
     // console.log("debug_ comment***********************", PostComment?.[0]?.custom_id);
     // console.log("debug_ Post_Comment-----------------", PostComment);
-    // console.log("debug_ isComment-----------------", isComment);
+    // console.log("debug_ singlePost-----------------", singlePost);
 
     return (
         <>
@@ -284,7 +291,7 @@ const BlogDetails = () => {
                                                             <FiEdit />
                                                         </a>
                                                         <a onClick={() => setDelete(true)}>
-                                                            <RiDeleteBin5Line />
+                                                            {isAdmin?.is?<RiDeleteBin5Line />:''}
                                                         </a>
                                                     </div>
                                                 </div>
