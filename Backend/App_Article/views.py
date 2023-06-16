@@ -91,10 +91,28 @@ def PostPutUpdateDelete(request, id):
 #      Post like and Comment part
 # ------------------------------------
 
-class BlogLiked(generics.ListCreateAPIView):
-    queryset = BlogLike.objects.all()
-    serializer_class = BlogLikedSerializer
+class BlogLiked(APIView):
+    def get(self, request):
+        AllLike=BlogLike.objects.all()
+        serializer=BlogLikedSerializer(AllLike, many=True)
+        return Response(serializer.data)
+    
+    def post(self, request):
+        PostLike=BlogLike.objects.all()
+        serializer=BlogLikedSerializer(PostLike, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    def delete(self, request, did):
+        DeleteLiked=BlogLike.objects.filter(id=did)
+        DeleteLiked.delete()
 
+        like=BlogLike.objects.all()
+        serializer=BlogLikedSerializer(like, many=True)
+        return Response(serializer.data)
+        
 
 class BlogCommentView(generics.ListCreateAPIView):
     queryset = BlogComment.objects.all()

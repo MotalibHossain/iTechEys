@@ -17,7 +17,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 // import redux material
 import { useSelector, useDispatch } from "react-redux";
-import { AiOutlineLike, AiOutlineDislike } from "react-icons/ai";
+import { AiOutlineLike, AiFillLike, AiOutlineDislike, AiFillDislike } from "react-icons/ai";
 
 // File import
 import "../style/blogdetails.css";
@@ -173,9 +173,48 @@ const BlogDetails = () => {
             toast(error.message);
         });
     }
+
+    // ============================================================
+    //                Post comment and fetch comment
+    // =============================================================
+    const [like, setLike]=useState()
+    const [isLike, setIsLike]=useState(null)
+
+    let LikeUrl="http://127.0.0.1:8000/liked"
+    useEffect(()=>{
+        axios({
+            "method":'GET',
+            "url":LikeUrl,
+            // "data":{"user":user_id, "post":id,"like":true}
+        })
+        .then(function(response){
+            setLike(response.data)
+
+        })
+        .catch(function(error){
+            toast(error.message); 
+        })
+    },[])
+
+    useEffect(()=>{
+        if(id !== undefined && like !== undefined){
+            let liked=like?.filter((item)=>{
+                return (item.post === id && item.user === user_id)
+            })
+            console.log("liked------------", liked);
+            if(liked.length !== 0){
+                setIsLike(true)
+            }else{
+                setIsLike(null)
+            }
+        }
+    },[like, id])
+
+
+
     // console.log("debug_ comment***********************", PostComment?.[0]?.custom_id);
     // console.log("debug_ Post_Comment-----------------", PostComment);
-    // console.log("debug_ singlePost-----------------", singlePost);
+    console.log("debug_ isLike-----------------", isLike);
 
     return (
         <>
@@ -219,14 +258,18 @@ const BlogDetails = () => {
                                 <hr />
                                 <div className="row">
                                     <div className="col-lg-6 like">
-                                        <a href="#">
-                                            {/* <AiFillLike /> */}
-                                            <AiOutlineLike />
-                                        </a>
-                                        <a href="#">
-                                            {/* <AiFillDislike /> */}
-                                            <AiOutlineDislike className="mt-1" />
-                                        </a>
+                                        {isLike === null?
+                                        <>
+                                            <a ><AiOutlineLike /></a>
+                                            <a><AiOutlineDislike className="mt-1" /></a>
+                                        </>
+                                        :
+                                        <>
+                                            <a disabled><AiFillLike /></a>
+                                            <a><AiOutlineDislike className="mt-1" /></a>
+                                        </>
+                                        }
+                                        
                                     </div>
                                     <div className="col-lg-6">
                                         <div className="row">
