@@ -17,6 +17,9 @@ class BlogLikedSerializer(serializers.ModelSerializer):
         model = BlogLike
         fields = "__all__"
 
+    def create(self, validated_data):
+        return BlogLike.objects.create(**validated_data)
+
 
 class BlogCommentViewSerializer(serializers.ModelSerializer):
     # user = UserProfileSerializers(read_only=True)

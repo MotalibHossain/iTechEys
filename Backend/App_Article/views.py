@@ -98,15 +98,17 @@ class BlogLiked(APIView):
         return Response(serializer.data)
     
     def post(self, request):
-        PostLike=BlogLike.objects.all()
-        serializer=BlogLikedSerializer(PostLike, data=request.data)
+        serializer=BlogLikedSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        PostLike=BlogLike.objects.all()
+        serializer=BlogLikedSerializer(PostLike, many=True)
+        return Response(serializer.data)
+        # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
-    def delete(self, request, did):
-        DeleteLiked=BlogLike.objects.filter(id=did)
+    def delete(self, request, id):
+        DeleteLiked=BlogLike.objects.filter(id=id)
         DeleteLiked.delete()
 
         like=BlogLike.objects.all()

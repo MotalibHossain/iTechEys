@@ -249,10 +249,23 @@
     font-size: 40px;
     cursor: pointer;
 }
+.like a{
+    cursor: pointer;
+}
+.like__btn {
+    display: block;
+    padding: 8px 15px 10px 15px;
+    font-size: 18px;
+    font-family: "Open Sans", sans-serif;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+  }
 .like svg {
     width: 32px;
     height: 32px;
-    margin: 5px 10px 0px 0px;
+    margin: -6px 10px 0px 0px;
     color: var(--primaryColor);
 }
 .article .article-content blockquote p {

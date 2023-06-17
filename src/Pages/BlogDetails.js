@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { v4 as uuid } from 'uuid';
+import { v4 as uuid } from "uuid";
 
 // bootstrap
 import Modal from "react-bootstrap/Modal";
@@ -17,6 +17,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 // import redux material
 import { useSelector, useDispatch } from "react-redux";
+import { FaThumbsUp, FaRegThumbsUp } from "react-icons/fa";
 import { AiOutlineLike, AiFillLike, AiOutlineDislike, AiFillDislike } from "react-icons/ai";
 
 // File import
@@ -109,25 +110,28 @@ const BlogDetails = () => {
         setCommentEdit(e.target.value);
     };
     // Submit comment
-    const uid=uuid().slice(0,8)
+    const uid = uuid().slice(0, 8);
     const HandelSubmit = (e) => {
         e.preventDefault();
         axios({
             method: "post",
             url: "http://127.0.0.1:8000/comment/",
-            data: { custom_id:uid, user: user_id, post: id, comment: comment },
+            data: { custom_id: uid, user: user_id, post: id, comment: comment },
         })
-        .then(function (response) {
-            setPostComment([{custom_id:uid, user: { username: username }, post: id, comment: comment }, ...PostComment]);
-            // Comment button disable and enable
-            const isCommentExits = PostComment.filter((item) => item.user.username === username);
-            if (isCommentExits !== null) {
-                setIscomment(true);
-            }
-        })
-        .catch(function (error) {
-            toast("Without login, you can't write comment.");
-        });
+            .then(function (response) {
+                setPostComment([
+                    { custom_id: uid, user: { username: username }, post: id, comment: comment },
+                    ...PostComment,
+                ]);
+                // Comment button disable and enable
+                const isCommentExits = PostComment.filter((item) => item.user.username === username);
+                if (isCommentExits !== null) {
+                    setIscomment(true);
+                }
+            })
+            .catch(function (error) {
+                toast("Without login, you can't write comment.");
+            });
         e.target.reset();
     };
     // Comment update
@@ -139,82 +143,112 @@ const BlogDetails = () => {
             url: URL,
             data: { comment: commentEdit },
         })
-        .then(function (response) {
-            // comment sorting 
-            let allComments=response.data
-            const findCurrentUser = allComments.findIndex((r) => r.user.username === username);
-            const SortedComment = allComments.splice(findCurrentUser);
+            .then(function (response) {
+                // comment sorting
+                let allComments = response.data;
+                const findCurrentUser = allComments.findIndex((r) => r.user.username === username);
+                const SortedComment = allComments.splice(findCurrentUser);
 
-            // marge sorted and all comments array
-            const comments = SortedComment.concat(allComments);
+                // marge sorted and all comments array
+                const comments = SortedComment.concat(allComments);
 
-            setPostComment(comments);
-            setEdit(false);
-            toast("Comment update successfully.");
-        })
-        .catch(function (error) {
-            toast(error.message);
-        });
+                setPostComment(comments);
+                setEdit(false);
+                toast("Comment update successfully.");
+            })
+            .catch(function (error) {
+                toast(error.message);
+            });
     };
-    // Comment delete 
-    const HandleDelete=(e)=>{
+    // Comment delete
+    const HandleDelete = (e) => {
         axios({
             method: "DELETE",
             url: URL,
         })
-        .then(function (response) {
-            setIscomment(false)
-             console.log("debug_ Post_Comment-----------------", response.data);
-            setPostComment(response.data)
-            setDelete(false);
-            toast("Comment delete successfully.");
-        })
-        .catch(function (error) {
-            toast(error.message);
-        });
-    }
+            .then(function (response) {
+                setIscomment(false);
+                console.log("debug_ Post_Comment-----------------", response.data);
+                setPostComment(response.data);
+                setDelete(false);
+                toast("Comment delete successfully.");
+            })
+            .catch(function (error) {
+                toast(error.message);
+            });
+    };
 
     // ============================================================
     //                Post comment and fetch comment
     // =============================================================
-    const [like, setLike]=useState()
-    const [isLike, setIsLike]=useState(null)
+    const [like, setLike] = useState();
+    const [deleteCommentId, setDeleteCommentId] = useState();
+    const [isLike, setIsLike] = useState(null);
 
-    let LikeUrl="http://127.0.0.1:8000/liked"
-    useEffect(()=>{
+    let LikeUrl = "http://127.0.0.1:8000/liked/";
+    useEffect(() => {
         axios({
-            "method":'GET',
-            "url":LikeUrl,
+            method: "GET",
+            url: LikeUrl,
             // "data":{"user":user_id, "post":id,"like":true}
         })
-        .then(function(response){
-            setLike(response.data)
-
-        })
-        .catch(function(error){
-            toast(error.message); 
-        })
-    },[])
-
-    useEffect(()=>{
-        if(id !== undefined && like !== undefined){
-            let liked=like?.filter((item)=>{
-                return (item.post === id && item.user === user_id)
+            .then(function (response) {
+                setLike(response.data);
             })
-            console.log("liked------------", liked);
-            if(liked.length !== 0){
-                setIsLike(true)
-            }else{
-                setIsLike(null)
+            .catch(function (error) {
+                toast(error.message);
+            });
+    }, []);
+
+    useEffect(() => {
+        if (id !== undefined && like !== undefined) {
+            console.log("like------------", like);
+            let liked = like.filter((item) => {
+                return item.post === id && item.user === user_id;
+            });
+            if (liked.length !== 0) {
+                setIsLike(true);
+                setDeleteCommentId(liked[0].id);
+            } else {
+                setIsLike(null);
             }
         }
-    },[like, id])
+    }, [like, id]);
 
+    // Handle like
+    const HandlePost = () => {
+        axios({
+            method: "post",
+            url: LikeUrl,
+            data: { user: user_id, post: id, like: true },
+        })
+            .then(function (response) {
+                setLike(response.data);
+            })
+            .catch(function (error) {
+                toast(error.message);
+            });
+    };
 
+    // Handle post like delete
+    let DeleteLikeUrl = `http://127.0.0.1:8000/liked/${deleteCommentId}`;
+    const HandlePostDelete = () => {
+        axios({
+            method: "delete",
+            url: DeleteLikeUrl,
+            // "data":{"user":user_id, "post":id,"like":true}
+        })
+            .then(function (response) {
+                setLike(response.data);
+            })
+            .catch(function (error) {
+                toast(error.message);
+            });
+    };
 
     // console.log("debug_ comment***********************", PostComment?.[0]?.custom_id);
     // console.log("debug_ Post_Comment-----------------", PostComment);
-    console.log("debug_ isLike-----------------", isLike);
+    console.log("debug_ isLike-----------------", deleteCommentId, DeleteLikeUrl);
 
     return (
         <>
@@ -257,20 +291,26 @@ const BlogDetails = () => {
                                 </div>
                                 <hr />
                                 <div className="row">
-                                    <div className="col-lg-6 like">
-                                        {isLike === null?
-                                        <>
-                                            <a ><AiOutlineLike /></a>
-                                            <a><AiOutlineDislike className="mt-1" /></a>
-                                        </>
-                                        :
-                                        <>
-                                            <a disabled><AiFillLike /></a>
-                                            <a><AiOutlineDislike className="mt-1" /></a>
-                                        </>
-                                        }
-                                        
+                                    <div className="col-lg-5 like">
+                                        {isLike === null ? (
+                                            <>
+                                                <a class="like__btn" onClick={HandlePost}>
+                                                <FaRegThumbsUp />
+                                                    <span id="count">{like?.length}</span> Like
+                                                </a>
+                                                {/* <a disabled><AiOutlineDislike className="mt-1" /></a> */}
+                                            </>
+                                        ) : (
+                                            <>
+                                                <a class="like__btn" onClick={HandlePostDelete}>
+                                                <FaThumbsUp />
+                                                    <span id="count">{like?.length} Liked</span>
+                                                </a>
+                                                {/* <a onClick={HandlePostDelete}><AiOutlineDislike className="mt-1" /></a> */}
+                                            </>
+                                        )}
                                     </div>
+                                    
                                     <div className="col-lg-6">
                                         <div className="row">
                                             <div className=" col-lg-12">

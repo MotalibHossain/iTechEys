@@ -28,7 +28,7 @@ urlpatterns = [
 
     # Post like and Comment part
     path('liked/', BlogLiked.as_view(), name='BlogLike'),
-    path('liked/<int:did>', BlogLiked.as_view(), name='BlogLikeDelete'),
+    path('liked/<int:id>', BlogLiked.as_view(), name='BlogLikeDelete'),
     path('comment/', BlogCommentPost.as_view(), name='BlogPost'),
     path('comment-view/', BlogCommentView.as_view(), name='BlogComment'),
     path('comment/delete/<str:cid>', BlogCommentEditDelete.as_view(), name='BlogCommentEditDelete'),
