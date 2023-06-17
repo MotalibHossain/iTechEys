@@ -179,9 +179,10 @@ const BlogDetails = () => {
     };
 
     // ============================================================
-    //                Post comment and fetch comment
+    //                Post Like and fetch comment
     // =============================================================
     const [like, setLike] = useState();
+    const [thisPostLike, setThisPostLike] = useState();
     const [deleteCommentId, setDeleteCommentId] = useState();
     const [isLike, setIsLike] = useState(null);
 
@@ -202,10 +203,15 @@ const BlogDetails = () => {
 
     useEffect(() => {
         if (id !== undefined && like !== undefined) {
-            console.log("like------------", like);
             let liked = like.filter((item) => {
                 return item.post === id && item.user === user_id;
             });
+
+            let thisPostLiked = like.filter((item) => {
+                return item.post === id;
+            });
+            setThisPostLike(thisPostLiked);
+            
             if (liked.length !== 0) {
                 setIsLike(true);
                 setDeleteCommentId(liked[0].id);
@@ -248,7 +254,7 @@ const BlogDetails = () => {
 
     // console.log("debug_ comment***********************", PostComment?.[0]?.custom_id);
     // console.log("debug_ Post_Comment-----------------", PostComment);
-    console.log("debug_ isLike-----------------", deleteCommentId, DeleteLikeUrl);
+    // console.log("debug_ isLike-----------------", deleteCommentId, DeleteLikeUrl);
 
     return (
         <>
@@ -293,24 +299,18 @@ const BlogDetails = () => {
                                 <div className="row">
                                     <div className="col-lg-5 like">
                                         {isLike === null ? (
-                                            <>
-                                                <a class="like__btn" onClick={HandlePost}>
+                                            <a class="like__btn" onClick={HandlePost}>
                                                 <FaRegThumbsUp />
-                                                    <span id="count">{like?.length}</span> Like
-                                                </a>
-                                                {/* <a disabled><AiOutlineDislike className="mt-1" /></a> */}
-                                            </>
+                                                <span id="count">{thisPostLike?.length}</span> Like
+                                            </a>
                                         ) : (
-                                            <>
-                                                <a class="like__btn" onClick={HandlePostDelete}>
+                                            <a class="like__btn" onClick={HandlePostDelete}>
                                                 <FaThumbsUp />
-                                                    <span id="count">{like?.length} Liked</span>
-                                                </a>
-                                                {/* <a onClick={HandlePostDelete}><AiOutlineDislike className="mt-1" /></a> */}
-                                            </>
+                                                <span id="count">{thisPostLike?.length} Liked</span>
+                                            </a>
                                         )}
                                     </div>
-                                    
+
                                     <div className="col-lg-6">
                                         <div className="row">
                                             <div className=" col-lg-12">
