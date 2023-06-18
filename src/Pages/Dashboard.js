@@ -511,6 +511,7 @@ const Dashboard = () => {
                                                                 slug,
                                                                 title,
                                                                 Post_Comment,
+                                                                Post_Liked,
                                                                 category,
                                                                 published,
                                                             } = item;
@@ -546,7 +547,7 @@ const Dashboard = () => {
                                                                         <input type="checkbox" checked={published} />
                                                                     </td>
                                                                     <td className="text-center">
-                                                                        {Post_Comment?.length}
+                                                                        {Post_Liked?.length}
                                                                     </td>
                                                                     <td className="text-center">
                                                                         <div className="">{Post_Comment?.length}</div>

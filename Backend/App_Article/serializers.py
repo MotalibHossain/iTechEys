@@ -51,6 +51,7 @@ class BlogPostSerializer(serializers.ModelSerializer):
     category = BlogPostCategorySerializer(read_only=True)
     author = UserProfileSerializers(read_only=True)
     Post_Comment = BlogCommentViewSerializer(many=True, read_only=True)
+    Post_Liked=BlogLikedSerializer(many=True, read_only=True)
 
     class Meta:
         model = BlogPost
