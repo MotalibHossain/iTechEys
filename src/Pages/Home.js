@@ -11,10 +11,12 @@ import { IoChevronForwardOutline } from 'react-icons/io5'
 import Sidebar from '../components/Home/Sidebar.js'
 
 const Home = () => {
+	const SERVER_URL=process.env.BACKEND_SERVER_URL
 	const [post, setPost] = useState([])
 	const [latestPost, setLatestPost] = useState([])
 
-	const url = 'http://127.0.0.1:8000/'
+	const url =`'${SERVER_URL}'`
+	console.log("home url---", SERVER_URL);
 	useEffect(() => {
 		axios({
             method: "get",
