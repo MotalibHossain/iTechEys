@@ -28,6 +28,7 @@ import Share from "../components/BlogPost/Share";
 import FetchDataFromApi from "../Utils/DataFetch";
 
 const BlogDetails = () => {
+    const SERVER_URL=process.env.REACT_APP_SERVER_URL
     // modal
     const [edit, setEdit] = useState(false);
     const [dalete, setDelete] = useState(false);
@@ -39,7 +40,7 @@ const BlogDetails = () => {
     const [PostComment, setPostComment] = useState();
     const [isComment, setIscomment] = useState(false);
 
-    const url = "http://127.0.0.1:8000/";
+    const url = `${SERVER_URL}`;
     useEffect(() => {
         if (effectRan.current === false) {
             // this is for not load two time "Strict mood"
@@ -135,7 +136,7 @@ const BlogDetails = () => {
         e.target.reset();
     };
     // Comment update
-    let URL = `http://127.0.0.1:8000/comment/delete/${PostComment?.[0]?.custom_id}`;
+    let URL = `${SERVER_URL}/comment/delete/${PostComment?.[0]?.custom_id}`;
     const HandelEdit = (e) => {
         e.preventDefault();
         axios({
@@ -186,7 +187,7 @@ const BlogDetails = () => {
     const [deleteCommentId, setDeleteCommentId] = useState();
     const [isLike, setIsLike] = useState(null);
 
-    let LikeUrl = "http://127.0.0.1:8000/liked/";
+    let LikeUrl = `${SERVER_URL}/liked/`;
     useEffect(() => {
         axios({
             method: "GET",
@@ -237,7 +238,7 @@ const BlogDetails = () => {
     };
 
     // Handle post like delete
-    let DeleteLikeUrl = `http://127.0.0.1:8000/liked/${deleteCommentId}`;
+    let DeleteLikeUrl = `${SERVER_URL}/liked/${deleteCommentId}`;
     const HandlePostDelete = () => {
         axios({
             method: "delete",

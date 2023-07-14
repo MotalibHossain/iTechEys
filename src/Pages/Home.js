@@ -11,12 +11,12 @@ import { IoChevronForwardOutline } from 'react-icons/io5'
 import Sidebar from '../components/Home/Sidebar.js'
 
 const Home = () => {
-	const SERVER_URL=process.env.BACKEND_SERVER_URL
+	const SERVER_URL=process.env.REACT_APP_SERVER_URL
 	const [post, setPost] = useState([])
 	const [latestPost, setLatestPost] = useState([])
 
-	const url =`'${SERVER_URL}'`
-	console.log("home url---", SERVER_URL);
+	const url =`${SERVER_URL}`
+	console.log("home url---", url);
 	useEffect(() => {
 		axios({
             method: "get",
@@ -39,7 +39,7 @@ const Home = () => {
 									post.map((Item, index) => {
 										const { id, title, slug, description, image, category } = Item
 										return (
-											<Carousel.Item>
+											<Carousel.Item key={index}>
 												<div className='banner-img-overla'>
 													<img className='d-block w-100' src={image} alt='First slide' />
 												</div>
@@ -77,7 +77,7 @@ const Home = () => {
 							{post.map((Item, index) => {
 								const { id, title, slug, description, image, category } = Item
 								return (
-									<li key={id}>
+									<li key={index}>
 										<Link
 											className='d-flex align-items-center'
 											to={`blog-details/${slug}`}
@@ -105,9 +105,9 @@ const Home = () => {
 								<Link to={`blog-details/${latestPost?.slug}`}>{latestPost?.title}</Link>
 							</h6>
 							{/* </marquee> */}
-							<a href={`blog-details/${latestPost?.slug}`} className='button button-pulse ms-auto'>
+							<Link to={`blog-details/${latestPost?.slug}`} className='button button-pulse ms-auto'>
 								বিস্তারিত
-							</a>
+							</Link>
 						</div>
 					</div>
 

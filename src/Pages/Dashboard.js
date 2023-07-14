@@ -22,6 +22,7 @@ import "../style/Dashboard.css";
 import "../style/Dashboardmin.css";
 
 const Dashboard = () => {
+    const SERVER_URL=process.env.REACT_APP_SERVER_URL
     const { UserInfo } = useSelector((state) => state);
     const { user_id, username, email, description } = JSON.parse(UserInfo);
 
@@ -32,8 +33,8 @@ const Dashboard = () => {
     const [editPost, setEditPost] = useState();
     const [editCheck, setEditCheck] = useState();
 
-    const url = "http://127.0.0.1:8000/";
-    const urlcomment = "http://127.0.0.1:8000/comment/";
+    const url = `${SERVER_URL}`
+    const urlcomment = `${SERVER_URL}/comment/`;
     useEffect(() => {
         // Blog Post data fetch
         axios({
@@ -78,7 +79,7 @@ const Dashboard = () => {
     };
 
     // Submit post
-    const updateUrl = `http://127.0.0.1:8000/blog-edit/${ID && ID}`;
+    const updateUrl = `${SERVER_URL}/blog-edit/${ID && ID}`;
     const HandleSubmit = (e) => {
         e.preventDefault();
         axios({
