@@ -12,11 +12,12 @@ import Sidebar from '../components/Home/Sidebar.js'
 
 const Home = () => {
 	const SERVER_URL=process.env.REACT_APP_SERVER_URL
+	console.log(process.env)
 	const [post, setPost] = useState([])
 	const [latestPost, setLatestPost] = useState([])
 
 	const url =`${SERVER_URL}`
-	console.log("home url---", url);
+	console.log("home url---", url, SERVER_URL);
 	useEffect(() => {
 		axios({
             method: "get",
