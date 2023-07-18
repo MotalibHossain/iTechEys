@@ -11,22 +11,21 @@ import { IoChevronForwardOutline } from 'react-icons/io5'
 import Sidebar from '../components/Home/Sidebar.js'
 
 const Home = () => {
-	const SERVER_URL=process.env.REACT_APP_SERVER_URL
-	console.log(process.env)
+	const SERVER_URL = process.env.REACT_APP_SERVER_URL
 	const [post, setPost] = useState([])
 	const [latestPost, setLatestPost] = useState([])
 
-	const url =`${SERVER_URL}`
-	console.log("home url---", url, SERVER_URL);
+	const url = `${SERVER_URL}`
+	console.log("home url------", process.env);
 	useEffect(() => {
 		axios({
-            method: "get",
-            url: url,
-        })
-        .then(function (response) {
-			setPost(response.data)
-			setLatestPost(response.data[0])
-        })
+			method: "get",
+			url: url,
+		})
+			.then(function (response) {
+				setPost(response.data)
+				setLatestPost(response.data[0])
+			})
 	}, [])
 
 	return (
@@ -142,7 +141,32 @@ const Home = () => {
 			<section className='Section-4'>
 				<div className='row mb-30'>
 					<div className='col-lg-8 col-md-8'>
-						<div className='boxes'>Category Boxes Goes Here</div>
+						<div className='Post__gallary'>
+							<div class="gallery-item bg-info horizontal__big">
+								<span>{post[0]?.title}</span>
+								<img src={post[0]?.image} />
+							</div>
+							<div class="gallery-item bg-gray">
+								<span>{post[2]?.title}</span>
+								<img src={post[2]?.image} />
+							</div>
+							<div class="gallery-item bg-dark">
+								<span>{post[3]?.title}</span>
+								<img src={post[3]?.image} />
+							</div>
+							<div class="gallery-item bg-info horizontal__big">
+								<span>{post[2]?.title}</span>
+								<img src={post[2]?.image} />
+							</div>
+							<div class="gallery-item bg-info">
+								<span>{post[0]?.title}</span>
+								<img src={post[0]?.image} />
+							</div>
+							<div class="gallery-item bg-dark vertical horizontal ">
+								<span>{post[3]?.title}</span>
+								<img src={post[3]?.image} />
+							</div>
+						</div>
 					</div>
 					<div className='col-lg-4 col-md-4'></div>
 				</div>

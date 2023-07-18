@@ -2,6 +2,7 @@
                     Common css in whole side
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 @import url('https://fonts.maateen.me/kalpurush/font.css');
+
 :root {
 	--primaryColor: #93b874;
 	/* --primaryBackground:#F5F5F5; */
@@ -23,9 +24,11 @@ body {
 .container-sm {
 	max-width: 1017px !important;
 }
-button:disabled{
+
+button:disabled {
 	cursor: not-allowed;
 }
+
 section {
 	margin-bottom: 10px;
 }
@@ -38,6 +41,7 @@ a {
 a:hover {
 	color: var(--primaryHover) !important;
 }
+
 .post-title {
 	text-align: justify;
 	font-size: 1.2rem;
@@ -47,6 +51,7 @@ a:hover {
 ul {
 	list-style: none;
 }
+
 .post_title {
 	--max-lines: 1;
 	display: -webkit-box !important;
@@ -61,6 +66,7 @@ ul {
 .home-slider .carousel .carousel-inner .carousel-item img {
 	height: 265px;
 }
+
 .home-slider .carousel .carousel-inner .carousel-item .banner-img-overla {
 	height: 100%;
 	width: 100%;
@@ -108,6 +114,7 @@ ul {
 	font-size: 17px;
 	font-weight: 500;
 }
+
 .side-title ul li svg {
 	margin-right: 5px;
 	width: 20px;
@@ -311,6 +318,62 @@ ul {
 	height: 20px;
 }
 
+/*========================================================
+                    Post__gallary
+=========================================================*/
+/* ! Grid styling */
+.Post__gallary {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+	grid-gap: 1rem;
+	grid-auto-flow: masonry;
+}
+
+.horizontal {
+	grid-column: span 1;
+}
+
+.vertical {
+	grid-row: span 2;
+}
+
+.horizontal__big {
+	grid-column: span 3;
+}
+
+.vertical__big {
+	grid-row: span 6;
+}
+
+/* ! gallery styling */
+.Post__gallary {
+	border: 5px solid white;
+	/* width: 650px; */
+	height: 400px;
+	/* padding: 1rem; */
+}
+
+.Post__gallary .gallery-item {
+	border: 3px solid white;
+	padding: 1ch 1rem;
+	position: relative;
+	overflow: hidden;
+}
+
+.gallery-item img {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.gallery-item span {
+	position: relative;
+	z-index: 1;
+}
+
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++
                     Media Query
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
@@ -331,15 +394,19 @@ ul {
 	.Sec-2-title {
 		display: none !important;
 	}
+
 	.banner-sec {
 		display: none !important;
 	}
+
 	.Sec-2-title .button {
 		right: 3% !important;
 	}
+
 	.search {
 		margin: 0 auto;
 	}
+
 	/* .search input{
         padding: 10px;
     }
@@ -353,19 +420,23 @@ ul {
         font-size: 15px;
     } */
 }
+
 @media screen and (max-width: 992px) {
 	.side-title {
 		display: none !important;
 	}
 }
+
 @media (min-width: 768px) and (max-width: 992px) {
 	.search button {
 		width: 24% !important;
 	}
+
 	.search input::placeholder {
 		font-weight: bold;
 		font-size: 10px !important;
 	}
+
 	.Sidebar .nav .nav-link {
 		display: block;
 		font-size: 11px;
