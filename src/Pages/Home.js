@@ -142,11 +142,11 @@ const Home = () => {
 				<div className='row mb-30'>
 					<div className='col-lg-8 col-md-8'>
 						<div className='Post__gallary'>
-							<div class="gallery-item bg-info horizontal__big">
+							<div class="gallery-item bg-info horizontal vertical">
 								<span>{post[0]?.title}</span>
 								<img src={post[0]?.image} />
 							</div>
-							<div class="gallery-item bg-gray">
+							<div class="gallery-item bg-gray vertical">
 								<span>{post[2]?.title}</span>
 								<img src={post[2]?.image} />
 							</div>
@@ -154,7 +154,7 @@ const Home = () => {
 								<span>{post[3]?.title}</span>
 								<img src={post[3]?.image} />
 							</div>
-							<div class="gallery-item bg-info horizontal__big">
+							<div class="gallery-item bg-info vertical">
 								<span>{post[2]?.title}</span>
 								<img src={post[2]?.image} />
 							</div>
@@ -162,7 +162,7 @@ const Home = () => {
 								<span>{post[0]?.title}</span>
 								<img src={post[0]?.image} />
 							</div>
-							<div class="gallery-item bg-dark vertical horizontal ">
+							<div class="gallery-item bg-dark horizontal">
 								<span>{post[3]?.title}</span>
 								<img src={post[3]?.image} />
 							</div>

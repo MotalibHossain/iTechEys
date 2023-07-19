@@ -324,33 +324,27 @@ ul {
 /* ! Grid styling */
 .Post__gallary {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-	grid-gap: 1rem;
-	grid-auto-flow: masonry;
+	grid-template-columns: repeat(auto-fit, minmax(192px, 1fr));
+	grid-template-rows: repeat(159px);
+	grid-gap: 1.5rem;
+	width: 100%;
+	grid-auto-flow: dense;
 }
 
 .horizontal {
-	grid-column: span 1;
+	grid-column: span 2;
 }
 
 .vertical {
 	grid-row: span 2;
 }
 
-.horizontal__big {
-	grid-column: span 3;
-}
-
-.vertical__big {
-	grid-row: span 6;
-}
-
 /* ! gallery styling */
 .Post__gallary {
 	border: 5px solid white;
-	/* width: 650px; */
-	height: 400px;
-	/* padding: 1rem; */
+	width: 100%;
+	height: 100%;
+	padding: 1rem;
 }
 
 .Post__gallary .gallery-item {
