@@ -124,7 +124,7 @@
 	object-fit: cover;
 	border-radius: 10px;
 }
-.post-card .post-card-img .post-card-meta {
+.post-card-meta {
 	position: absolute;
 	bottom: 0;
 	left: 0;
@@ -135,24 +135,24 @@
 	padding: 10px;
 	transition: opacity 0.3s linear;
 }
-.post-card .post-card-img .post-card-meta .post-card-author {
+.post-card-meta .post-card-author {
 	display: flex;
 	gap: 7px;
 	align-items: flex-end;
 }
-.post-card .post-card-img .post-card-meta .post-card-author .post-author-username {
+.post-card-meta .post-card-author .post-author-username {
 	font-weight: 500;
 	font-size: 16px;
 	color: #f9f9f9;
 }
-.post-card .post-card-img .post-card-meta .post-card-author .post-author-image {
+.post-card-meta .post-card-author .post-author-image {
 	width: 40px;
 	height: 40px;
 	background: #f9f9f9;
 	border-radius: 5px;
 	overflow: hidden;
 }
-.post-card .post-card-img .post-card-meta .post-tag {
+.post-card-meta .post-tag {
 	margin-bottom: 0;
 	font-weight: 500;
 	font-size: 14px;
