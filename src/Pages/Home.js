@@ -141,32 +141,45 @@ const Home = () => {
                 <div className="row mb-30">
                     <div className="col-lg-8 col-md-8">
                         <div className="Post__gallary">
-							{post && post.slice(0, 6).map((item, index)=>{
-								const {title, author, category, image}=item;
-								const gridClass = (index === 0? 'big':'' ||index === 1? 'vertical':'' || index === 3? 'vertical':'' || index === 5? 'horizontal':'');
-								
-                                return(
-                                    <div className={`gallery-item ${gridClass}`}>
-                                        <span>{title}</span>
-                                        <img src={image} />
-                                        <div className="post-card-meta">
-                                            <Link to={`/author-profile/${author.username}`}>
-                                                <div className="post-card-author">
-                                                    <div className="post-author-image">
-                                                        <img
-                                                            src="https://bootdey.com/img/Content/avatar/avatar7.png"
-                                                            alt="author profile image"
-                                                        />
-                                                    </div>
-                                                    <div className="post-author-username">{author.username}</div>
-                                                </div>
+                            {post &&
+                                post.slice(0, 6).map((item, index) => {
+                                    const { title, slug, author, category, image } = item;
+                                    const gridClass =
+                                        index === 0
+                                            ? "big"
+                                            : "" || index === 1
+                                            ? "vertical"
+                                            : "" || index === 3
+                                            ? "vertical"
+                                            : "" || index === 5
+                                            ? "horizontal"
+                                            : "";
+
+                                    return (
+                                        <div className={`gallery-item ${gridClass}`}>
+                                            <Link to={`blog-details/${slug}`}>
+                                                <span>{title}</span>
                                             </Link>
-                                            <p className="post-tag">{category.name}</p>
+                                            <img src={image} />
+                                            <div className="post-card-meta">
+                                                <Link to={`/author-profile/${author.username}`}>
+                                                    <div className="post-card-author">
+                                                        <div className="post-author-image">
+                                                            <img
+                                                                src="https://bootdey.com/img/Content/avatar/avatar7.png"
+                                                                alt="author profile image"
+                                                            />
+                                                        </div>
+                                                        <div className="post-author-username">{author.username}</div>
+                                                    </div>
+                                                </Link>
+                                                <p className="post-tag">
+                                                <Link to={`blog-details/${slug}`}>Read More</Link>
+                                                </p>
+                                            </div>
                                         </div>
-                                    </div>
-                                )
-							})}
-                            
+                                    );
+                                })}
                         </div>
                     </div>
                     <div className="col-lg-4 col-md-4"></div>
