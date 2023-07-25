@@ -370,7 +370,7 @@ ul {
 	font-size: 1.2rem;
 	/* position: absolute; */
 	line-height: normal;
-	padding: 15px 11px 15px 10px;
+	padding: 15px 0px 0px 11px;
 	letter-spacing: -0.024rem;
 
 	word-break: break-word;
