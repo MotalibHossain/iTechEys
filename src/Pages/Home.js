@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import TextTruncate from "react-text-truncate";
 import Carousel from "react-bootstrap/Carousel";
 import axios from "axios";
 import "../style/homepage.css";
@@ -145,15 +146,7 @@ const Home = () => {
                                 post.slice(0, 6).map((item, index) => {
                                     const { title, slug, author, category, image } = item;
                                     const gridClass =
-                                        index === 0
-                                            ? "big"
-                                            : "" || index === 1
-                                                ? "vertical"
-                                                : "" || index === 3
-                                                    ? "vertical"
-                                                    : "" || index === 5
-                                                        ? "horizontal"
-                                                        : "";
+                                        index === 0 ? "big" : "" || index === 1 ? "vertical" : "" || index === 3 ? "vertical" : "" || index === 5 ? "horizontal" : "";
 
                                     return (
                                         <div className={`gallery-item ${gridClass}`}>
@@ -162,9 +155,14 @@ const Home = () => {
                                             </div>
                                             <div className="overlay">
                                                 <Link to={`blog-details/${slug}`}>
-                                                    <p className="post-body">{title}</p>
+                                                    <TextTruncate
+                                                        className="post-body"
+                                                        line={2}
+                                                        element="p"
+                                                        text={title}
+                                                    />
                                                 </Link>
-                                                <div className="post-card-meta">
+                                                <div className="post-card-meta pb-1">
                                                     <Link to={`/author-profile/${author.username}`}>
                                                         <div className="post-card-author">
                                                             <div className="post-author-image">
@@ -173,7 +171,9 @@ const Home = () => {
                                                                     alt="author profile image"
                                                                 />
                                                             </div>
-                                                            <div className="post-author-username">{author.username}</div>
+                                                            <div className="post-author-username">
+                                                                {author.username}
+                                                            </div>
                                                         </div>
                                                     </Link>
                                                     <p className="post-tag">
