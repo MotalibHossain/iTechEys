@@ -162,7 +162,7 @@ const Home = () => {
                                             </div>
                                             <div className="overlay">
                                                 <Link to={`blog-details/${slug}`}>
-                                                    <p>{title}</p>
+                                                    <p className="post-body">{title}</p>
                                                 </Link>
                                                 <div className="post-card-meta">
                                                     <Link to={`/author-profile/${author.username}`}>

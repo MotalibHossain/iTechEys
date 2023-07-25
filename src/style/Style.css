@@ -64,11 +64,11 @@ ul {
                     Section 1
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 .home-slider .carousel .carousel-inner .carousel-item img {
-	height: 265px;
+	height: 100%;
 }
 
 .home-slider .carousel .carousel-inner .carousel-item .banner-img-overla {
-	height: 100%;
+	height: 265px;
 	width: 100%;
 	background: black;
 	box-shadow: 0 3px 10px rgb(31 45 61 / 13%);
