@@ -148,34 +148,38 @@ const Home = () => {
                                         index === 0
                                             ? "big"
                                             : "" || index === 1
-                                            ? "vertical"
-                                            : "" || index === 3
-                                            ? "vertical"
-                                            : "" || index === 5
-                                            ? "horizontal"
-                                            : "";
+                                                ? "vertical"
+                                                : "" || index === 3
+                                                    ? "vertical"
+                                                    : "" || index === 5
+                                                        ? "horizontal"
+                                                        : "";
 
                                     return (
                                         <div className={`gallery-item ${gridClass}`}>
-                                            <Link to={`blog-details/${slug}`}>
-                                                <span>{title}</span>
-                                            </Link>
-                                            <img src={image} />
-                                            <div className="post-card-meta">
-                                                <Link to={`/author-profile/${author.username}`}>
-                                                    <div className="post-card-author">
-                                                        <div className="post-author-image">
-                                                            <img
-                                                                src="https://bootdey.com/img/Content/avatar/avatar7.png"
-                                                                alt="author profile image"
-                                                            />
-                                                        </div>
-                                                        <div className="post-author-username">{author.username}</div>
-                                                    </div>
+                                            <div className="gallery_img">
+                                                <img src={image} />
+                                            </div>
+                                            <div className="overlay">
+                                                <Link to={`blog-details/${slug}`}>
+                                                    <p>{title}</p>
                                                 </Link>
-                                                <p className="post-tag">
-                                                <Link to={`blog-details/${slug}`}>Read More</Link>
-                                                </p>
+                                                <div className="post-card-meta">
+                                                    <Link to={`/author-profile/${author.username}`}>
+                                                        <div className="post-card-author">
+                                                            <div className="post-author-image">
+                                                                <img
+                                                                    src="https://bootdey.com/img/Content/avatar/avatar7.png"
+                                                                    alt="author profile image"
+                                                                />
+                                                            </div>
+                                                            <div className="post-author-username">{author.username}</div>
+                                                        </div>
+                                                    </Link>
+                                                    <p className="post-tag">
+                                                        {/* <Link to={`blog-details/${slug}`}>Read More</Link> */}
+                                                    </p>
+                                                </div>
                                             </div>
                                         </div>
                                     );
