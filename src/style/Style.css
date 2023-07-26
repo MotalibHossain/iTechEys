@@ -391,6 +391,31 @@ ul {
 	height: 25px;
 }
 
+/* `````````````````````END``````````````````````````````` */
+.Post__gallary_sidebar h3 {
+	overflow: hidden;
+	/* color: #484848; */
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	-webkit-line-clamp: 4;
+	-webkit-box-orient: vertical;
+
+	/* &::first-letter {
+		font-size: 28px;
+		color: #93b874;
+		font-weight: bold;
+		line-height: .75;
+	} */
+}
+
+/* .Post__gallary_sidebar h4::first-letter {
+	font-size: 28px;
+	color: #e80222;
+	font-weight: bold;
+	line-height: .75;
+  } */
+
+
 
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++
                     Media Query

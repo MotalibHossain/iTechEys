@@ -186,7 +186,26 @@ const Home = () => {
                                 })}
                         </div>
                     </div>
-                    <div className="col-lg-4 col-md-4"></div>
+                    <div className="col-lg-4 col-md-4 Post__gallary_sidebar">
+                        {post && post.slice(0, 4).map((item, index) => {
+                            const { title, description, slug, author, category, image } = item;
+                            return (
+                                <div className="row" key={index}>
+                                    <div className="col-lg-4 col-md-4">
+                                        <img src={image} alt="" />
+                                    </div>
+                                    <div className="col-lg-8 col-md-8">
+                                        <h3 className="post-title">{title}</h3>
+                                        <TextTruncate
+                                            line={2}
+                                            element="p"
+                                            text={description}
+                                        />
+                                    </div>
+                                </div>
+                            )
+                        })}
+                    </div>
                 </div>
             </section>
         </div>
