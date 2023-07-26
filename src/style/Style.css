@@ -348,10 +348,8 @@ ul {
 
 .Post__gallary .gallery-item {
 	position: relative;
+	min-height: 125px;
 }
-/* .Post__gallary div:not(.big, .horizontal, .vertical){
-	height: 300px;
-} */
 .Post__gallary .gallery_img{
 	width: 100%;
 	height: 100%;
