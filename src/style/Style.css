@@ -346,7 +346,7 @@ ul {
 /* ! gallery styling */
 .Post__gallary .gallery-item {
 	position: relative;
-	min-height: 125px;
+	min-height: 120px;
 }
 
 .Post__gallary .overlay {
@@ -392,20 +392,27 @@ ul {
 }
 
 /* `````````````````````END``````````````````````````````` */
-.Post__gallary_sidebar h3 {
-	overflow: hidden;
-	color: #000000;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	-webkit-line-clamp: 4;
-	-webkit-box-orient: vertical;
+.Post__gallary_sidebar {
+	&h3 {
+		overflow: hidden;
+		color: #000000;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		-webkit-line-clamp: 4;
+		-webkit-box-orient: vertical;
+	}
 
-	/* &::first-letter {
-		font-size: 28px;
+	&p {
+		margin: 1px 0px 0px 18px;
+		border-left: 2px solid #ffff;
+	}
+
+	&::first-letter {
+		font-size: 22px;
 		color: #93b874;
 		font-weight: bold;
 		line-height: .75;
-	} */
+	}
 }
 
 /* .Post__gallary_sidebar h4::first-letter {

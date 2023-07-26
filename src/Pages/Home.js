@@ -156,7 +156,7 @@ const Home = () => {
                                             <div className="overlay">
                                                 <Link to={`blog-details/${slug}`}>
                                                     <TextTruncate
-                                                        className="post-body"
+                                                        className="post-title"
                                                         line={2}
                                                         element="p"
                                                         text={title}
