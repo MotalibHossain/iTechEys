@@ -42,12 +42,6 @@ a:hover {
 	color: var(--primaryHover) !important;
 }
 
-.post-title {
-	text-align: justify;
-	font-size: 1.2rem;
-	font-weight: bold;
-}
-
 ul {
 	list-style: none;
 }
@@ -249,8 +243,7 @@ ul {
                     Side Bar
 =========================================================*/
 .Sidebar {
-	/* border: 1px solid white; */
-	border-radius: 5px 5px 0px 0px;
+	border-radius: 5px;
 	box-shadow: 0 3px 10px rgb(31 45 61 / 13%);
 }
 
@@ -407,9 +400,11 @@ ul {
 		line-height: .75;
 	}
 }
+
 .Post__gallary_sidebar p {
-	margin: 1px 0px 0px 18px;
-	border-left: 2px solid #ffff;
+	padding-left: 6px;
+	margin: 0px 0px 0px 10px;
+	border-left: 4px solid #dee1e6;
 }
 
 /* .Post__gallary_sidebar h4::first-letter {

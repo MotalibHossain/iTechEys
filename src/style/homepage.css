@@ -171,9 +171,11 @@
 	text-decoration: none;
 	cursor: pointer;
 }
-.post-card .post-card-body h4.post-title {
+.post-title {
 	font-weight: 700;
 	font-size: 20px;
+	line-height: normal;
+    letter-spacing: -0.0135rem;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;

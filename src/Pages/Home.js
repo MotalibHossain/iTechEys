@@ -10,6 +10,7 @@ import { IoChevronForwardOutline } from "react-icons/io5";
 
 // Component import
 import Sidebar from "../components/Home/Sidebar.js";
+import Image_with_title_sidebar from "../components/Home/Image_with_title_sidebar";
 
 const Home = () => {
     const SERVER_URL = process.env.REACT_APP_SERVER_URL;
@@ -134,6 +135,9 @@ const Home = () => {
                     </div>
                     <div className="col-lg-4 col-md-4 blog-aside">
                         <Sidebar post={post} />
+                        <div className="Sidebar bg-white p-3 mt-4">
+                            <Image_with_title_sidebar post={post} />
+                        </div>
                     </div>
                 </div>
             </section>
@@ -146,7 +150,15 @@ const Home = () => {
                                 post.slice(0, 6).map((item, index) => {
                                     const { title, slug, author, category, image } = item;
                                     const gridClass =
-                                        index === 0 ? "big" : "" || index === 1 ? "vertical" : "" || index === 3 ? "vertical" : "" || index === 5 ? "horizontal" : "";
+                                        index === 0
+                                            ? "big"
+                                            : "" || index === 1
+                                            ? "vertical"
+                                            : "" || index === 3
+                                            ? "vertical"
+                                            : "" || index === 5
+                                            ? "horizontal"
+                                            : "";
 
                                     return (
                                         <div className={`gallery-item ${gridClass}`}>
@@ -156,7 +168,6 @@ const Home = () => {
                                             <div className="overlay">
                                                 <Link to={`blog-details/${slug}`}>
                                                     <TextTruncate
-                                                        className="post-title"
                                                         line={2}
                                                         element="p"
                                                         text={title}
@@ -186,25 +197,8 @@ const Home = () => {
                                 })}
                         </div>
                     </div>
-                    <div className="col-lg-4 col-md-4 Post__gallary_sidebar">
-                        {post && post.slice(0, 4).map((item, index) => {
-                            const { title, description, slug, author, category, image } = item;
-                            return (
-                                <div className="row" key={index}>
-                                    <div className="col-lg-4 col-md-4">
-                                        <img src={image} alt="" />
-                                    </div>
-                                    <div className="col-lg-8 col-md-8">
-                                        <h3 className="post-title">{title}</h3>
-                                        <TextTruncate
-                                            line={2}
-                                            element="p"
-                                            text={description}
-                                        />
-                                    </div>
-                                </div>
-                            )
-                        })}
+                    <div className="col-lg-4 col-md-4">
+                    
                     </div>
                 </div>
             </section>
