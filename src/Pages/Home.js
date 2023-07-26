@@ -177,7 +177,7 @@ const Home = () => {
                                                         </div>
                                                     </Link>
                                                     <p className="post-tag">
-                                                        {/* <Link to={`blog-details/${slug}`}>Read More</Link> */}
+                                                        <Link to={`blog-details/${slug}`}>Read More</Link>
                                                     </p>
                                                 </div>
                                             </div>

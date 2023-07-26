@@ -321,14 +321,13 @@ ul {
 /*========================================================
                     Post__gallary
 =========================================================*/
-/* ! Grid styling */
 .Post__gallary {
 	display: grid;
-	grid-template-columns: repeat(4, minmax(20%, 1fr));
-	grid-template-rows: repeat(2, 1fr);
-	object-fit: cover;
 	grid-gap: 1rem;
+	grid-template-rows: repeat(2, 1fr);
+	grid-template-columns: repeat(4, minmax(20%, 1fr));
 	grid-auto-flow: dense;
+	object-fit: cover;
 }
 
 .big {
@@ -345,16 +344,12 @@ ul {
 }
 
 /* ! gallery styling */
-
 .Post__gallary .gallery-item {
 	position: relative;
 	min-height: 125px;
 }
-.Post__gallary .gallery_img{
-	width: 100%;
-	height: 100%;
-}
-.Post__gallary .overlay{
+
+.Post__gallary .overlay {
 	width: 100%;
 	height: 100%;
 	bottom: 0;
@@ -366,7 +361,12 @@ ul {
 	background: rgb(10 15 18 / 55%) 100%;
 }
 
-.gallery-item p {
+.Post__gallary .gallery_img {
+	width: 100%;
+	height: 100%;
+}
+
+.Post__gallary .gallery-item .overlay a>p {
 	color: white;
 	font-size: 1.5rem;
 	margin-bottom: 0px;
@@ -374,10 +374,18 @@ ul {
 	letter-spacing: -0.024rem;
 }
 
-.gallery-item img {
+.Post__gallary .gallery-item .overlay .post-tag {
+	padding-bottom: 0px;
+	margin-bottom: 5px;
+	font-size: 10px !important;
+	background: #d4d4d478 !important;
+}
+
+.Post__gallary .gallery-item img {
 	height: 100%;
 	width: 100%;
 }
+
 .Post__gallary .post-card-meta .post-card-author .post-author-image {
 	width: 25px;
 	height: 25px;
@@ -451,9 +459,10 @@ ul {
 		grid-gap: 10px;
 		object-fit: cover;
 	}
-	.gallery-item p {
+
+	/* .gallery-item .overlay p {
 		font-size: 1.7rem;
-	}
+	} */
 	.Post__gallary .gallery-item {
 		min-height: 125px;
 	}
@@ -462,5 +471,11 @@ ul {
 @media (min-width: 524px) and (max-width: 768px) {
 	.Post__gallary {
 		grid-template-columns: repeat(auto-fit, minmax(20%, 1fr)) !important;
+	}
+}
+
+@media screen and (max-width:1199px) {
+	.Post__gallary .post-tag {
+		display: none;
 	}
 }
