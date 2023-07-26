@@ -394,7 +394,7 @@ ul {
 /* `````````````````````END``````````````````````````````` */
 .Post__gallary_sidebar h3 {
 	overflow: hidden;
-	/* color: #484848; */
+	color: #000000;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	-webkit-line-clamp: 4;
