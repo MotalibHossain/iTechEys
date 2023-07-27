@@ -29,6 +29,14 @@ const Home = () => {
         });
     }, []);
 
+    // Load more functionality 
+    const [loadIndex, setloadendIndex]=useState(4)
+    function calculateSliceArgs(item) {
+        const endIndex = loadIndex + 2;
+        console.log(endIndex, item)
+        setloadendIndex(endIndex)
+    }
+
     return (
         <div className="Main-Container container-fluid ">
             <section className="Section-1 mt-3">
@@ -127,9 +135,14 @@ const Home = () => {
                     <div className="col-lg-8 col-md-8 Card-container">
                         <div className="Card-body">
                             <div className="row">
-                                {post.slice(0, 4).map((Item, index) => (
+                                {post.slice(0, loadIndex).map((Item, index) => (
                                     <PostCard item={Item} key={index} />
                                 ))}
+                                <div className="col-lg-12 mb-3 text-center">
+                                    <button className="btn-animate" onClick={()=>calculateSliceArgs(2)} disabled={post.length === loadIndex ? 'true':''}>
+                                       <span>Load More</span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -153,12 +166,12 @@ const Home = () => {
                                         index === 0
                                             ? "big"
                                             : "" || index === 1
-                                            ? "vertical"
-                                            : "" || index === 3
-                                            ? "vertical"
-                                            : "" || index === 5
-                                            ? "horizontal"
-                                            : "";
+                                                ? "vertical"
+                                                : "" || index === 3
+                                                    ? "vertical"
+                                                    : "" || index === 5
+                                                        ? "horizontal"
+                                                        : "";
 
                                     return (
                                         <div className={`gallery-item ${gridClass}`}>
@@ -198,7 +211,7 @@ const Home = () => {
                         </div>
                     </div>
                     <div className="col-lg-4 col-md-4">
-                    
+
                     </div>
                 </div>
             </section>

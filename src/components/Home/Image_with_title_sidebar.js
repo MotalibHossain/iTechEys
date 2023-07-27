@@ -17,7 +17,9 @@ const Image_with_title_sidebar = (props) => {
                                     <img src={image} className="rounded-1 w-100 h-100" alt="" />
                                 </div>
                                 <div className="col-lg-8 col-md-8">
-                                    <h3 className="post-title">{title}</h3>
+                                    <Link to={`blog-details/${slug}`}>
+                                        <h3 className="post-title">{title}</h3>
+                                    </Link>
                                     <TextTruncate line={2} element="p" text={description} />
                                 </div>
                             </div>
