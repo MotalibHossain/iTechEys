@@ -4,8 +4,8 @@
 @import url('https://fonts.maateen.me/kalpurush/font.css');
 
 :root {
-	--TextColor:#000000e2;
-	--TitleColor:#000000e2;
+	--TextColor: #000000e2;
+	--TitleColor: #000000e2;
 	--primaryColor: #93b874;
 	/* --primaryBackground:#F5F5F5; */
 	--primaryBackground: #e9e9ed;
@@ -55,44 +55,46 @@ ul {
 	-webkit-box-orient: vertical;
 	overflow: hidden;
 }
+
 /* `````````````````````````````````````````````````````````
                     Common component
 ``````````````````````````````````````````````````````````*/
 .btn-animate {
 	border-radius: 4px;
 	color: white;
-	background-color:#4caf50;
+	background-color: #4caf50;
 	border: none;
 	font-size: 20px;
-    font-weight: bold;
-    padding: 10px 28px;
+	font-family: auto;
+	font-weight: bold;
+	padding: 10px 28px;
 	transition: all 0.5s;
-  }
-  
-  
-  .btn-animate span {
+}
+
+
+.btn-animate span {
 	display: inline-block;
 	position: relative;
 	transition: 0.5s;
-  }
-  
-  .btn-animate span:after {
+}
+
+.btn-animate span:after {
 	content: '»';
 	position: absolute;
 	opacity: 0;
 	top: 0;
 	right: -20px;
 	transition: 0.5s;
-  }
-  
-  .btn-animate:hover span {
+}
+
+.btn-animate:hover span {
 	padding-right: 25px;
-  }
-  
-  .btn-animate:hover span:after {
+}
+
+.btn-animate:hover span:after {
 	opacity: 1;
 	right: 0;
-  }
+}
 
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++
                     Section 1
