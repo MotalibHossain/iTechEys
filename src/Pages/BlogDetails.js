@@ -169,7 +169,7 @@ const BlogDetails = () => {
         })
             .then(function (response) {
                 setIscomment(false);
-                console.log("debug_ Post_Comment-----------------", response.data);
+                // console.log("debug_ Post_Comment-----------------", response.data);
                 setPostComment(response.data);
                 setDelete(false);
                 toast("Comment delete successfully.");
