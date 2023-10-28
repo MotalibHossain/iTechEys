@@ -16,6 +16,7 @@ import { IoChevronForwardOutline } from "react-icons/io5";
 // Component import
 import Sidebar from "../components/Home/Sidebar.js";
 import Image_with_title_sidebar from "../components/Home/Image_with_title_sidebar";
+import { MultiBlogSlider } from "../components/Slider/MultiBlogSlider";
 
 const Home = () => {
     const SERVER_URL = process.env.REACT_APP_SERVER_URL;
@@ -215,75 +216,11 @@ const Home = () => {
                     <div className="col-lg-4 col-md-4"></div>
                 </div>
             </section>
-            {/* <section-5>
-                <div className="row">
-                    <div className="owl-carousel owl-theme">
-                        <div className="card hoverable">
-                            <div className="card-image waves-effect waves-block waves-light">
-                                <img className="activator" src="http://placehold.it/1920/999/fff" />
-                            </div>
-                            <div className="card-content">
-                                <span className="card-title activator grey-text text-darken-4">
-                                    Card Title<i className="material-icons right">more_vert</i>
-                                </span>
-                                <p>
-                                    <a href="https://codepen.io/collection/nbBqgY/" target="_blank">
-                                        This is a link
-                                    </a>
-                                </p>
-                            </div>
-                            <div className="card-reveal">
-                                <span className="card-title grey-text text-darken-4">
-                                    Card Title<i className="material-icons right">close</i>
-                                </span>
-                                <p>
-                                    Here is some more information about this product that is only revealed once clicked
-                                    on.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section-5> */}
-            <OwlCarousel className="owl-theme" loop margin={10} nav>
-                <div className="item">
-                    <h4>1</h4>
-                </div>
-                <div className="item">
-                    <h4>2</h4>
-                </div>
-                <div className="item">
-                    <h4>3</h4>
-                </div>
-                <div className="item">
-                    <h4>4</h4>
-                </div>
-                <div className="item">
-                    <h4>5</h4>
-                </div>
-                <div className="item">
-                    <h4>6</h4>
-                </div>
-                <div className="item">
-                    <h4>7</h4>
-                </div>
-                <div className="item">
-                    <h4>8</h4>
-                </div>
-                <div className="item">
-                    <h4>9</h4>
-                </div>
-                <div className="item">
-                    <h4>10</h4>
-                </div>
-                <div className="item">
-                    <h4>11</h4>
-                </div>
-                <div className="item">
-                    <h4>12</h4>
-                </div>
-            </OwlCarousel>
-            ;
+
+            <section className="section__5">
+                <MultiBlogSlider />
+            </section>
+            
         </div>
     );
 };
