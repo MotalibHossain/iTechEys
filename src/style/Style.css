@@ -460,6 +460,36 @@ ul {
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++
                     Section 5
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+.slide__card{
+	border: none !important;
+	border-radius: 10px !important;
+	overflow: hidden;
+    box-shadow: 0 8px 12px rgba(68,74,85,.12), 0 4px 8px rgba(68,74,85,.08), 0 0 8px rgba(68,74,85,.08);
+}
+.slide__card .card_img{
+	height: 167px;
+}
+.slide__card .card-body .time{
+	color: #3b8bea;
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1;
+    margin-bottom: 8px;
+	font-family: Inter,sans-serif !important;
+    text-transform: uppercase;
+}
+.slide-btn:hover svg:after{
+	content: "";
+    background-position: 50%;
+    display: inline-block;
+    height: 11px;
+    margin-left: 8px;
+    transition-duration: .3s;
+    transition-property: all;
+    transition-timing-function: cubic-bezier(.4,0,.2,1);
+    width: 15px;
+}
 
 
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++
