@@ -218,7 +218,7 @@ const Home = () => {
             </section>
 
             <section className="section__5">
-                <MultiBlogSlider />
+                <MultiBlogSlider posts={post}/>
             </section>
             
         </div>
