@@ -1,13 +1,19 @@
 import React from "react";
 import Slider from "react-slick";
 
+import { Link } from "react-router-dom";
+import TextTruncate from "react-text-truncate";
 
-import { AiOutlineArrowRight } from "react-icons/ai";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 export const MultiBlogSlider = ({posts}) => {
+    function formatDate(inputDate) {
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        const formattedDate = new Date(inputDate).toLocaleDateString(undefined, options);
+        return formattedDate;
+    }
     console.log(posts)
     const settings = {
         autoplay: true,
@@ -22,49 +28,32 @@ export const MultiBlogSlider = ({posts}) => {
     return (
         <>
             <div className="row">
-                {/* <Slider {...settings}> */}
+                <Slider {...settings}>
                     {posts &&
-                        posts.slice(0,4).map((post, index) => {
-                            const { title, description, image } = post;
+                        posts.slice(0,10).map((post, index) => {
+                            const { title, slug, description, publish_date, image } = post;
                             return(
-                            // <div key={index} className="col-lg-3 px-3">
-                            //     <div class="card">
-                            //         <img
-                            //             src={image}
-                            //             class="card-img-top"
-                            //             alt="..."
-                            //         />
-                            //         <div class="card-body">
-                            //             <h5 class="card-title">{title}</h5>
-                            //             <p class="card-text">
-                            //                 Some quick example text to build on
-                            //                 the card title and make up the bulk
-                            //                 of the card's content.
-                            //             </p>
-                            //             <a href="#" class="btn btn-primary">
-                            //                 Go somewhere
-                            //             </a>
-                            //         </div>
-                            //     </div>
-                            // </div>
-                            <div className="col-lg-3 col-md-3 col-sm-3">
-                                <div class="card slide__card">
-                                    <div className="card_img">
-                                        <img src={image} class="w-100 h-100" alt="slider-image" />
-                                    </div>
-                                    <div class="card-body mt-2">
-                                        <span className="time">April 6, 2022</span>
-                                        <h5 class="card-title">Card title</h5>
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                        <a href="#" className="slide-btn">
-                                            Read now
-                                        </a>
+                                <div className="col-lg-3 col-md-3 col-sm-3 px-2">
+                                    <div class="card slide__card">
+                                        <div className="card_img">
+                                            <img src={image} class="w-100 h-100" alt="slider-image" />
+                                        </div>
+                                        <div class="card-body mt-2">
+                                            <span className="time">{formatDate(publish_date)}</span>
+                                            {/* <h3 class="card-title">{title}</h3> */}
+                                            <Link to={`blog-details/${slug}`} className="card-body-title">
+                                                <TextTruncate line={2} element="p" text={title} />
+                                            </Link>
+                                            {/* <p class="card-text">{description}</p> */}
+                                            <Link className="slide-btn" to={`blog-details/${slug}`}>
+                                                Read now
+                                            </Link>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                             )
                         })}
-                {/* </Slider> */}
+                </Slider>
             </div>
         </>
     );
