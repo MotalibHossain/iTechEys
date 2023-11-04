@@ -10,12 +10,13 @@ import { ImBlog } from "react-icons/im";
 import { useSelector, useDispatch } from "react-redux";
 
 const UserProfile = () => {
+    const SERVER_URL = process.env.REACT_APP_SERVER_URL;
     const { UserInfo } = useSelector((state) => state);
     const { user_id, username, email, description } = JSON.parse(UserInfo);
 
     // Blog post fetch
+    const url = `${SERVER_URL}/blog`;
     const [Post, setPost] = useState([]);
-    const url = "http://127.0.0.1:8000/blog";
     useEffect(() => {
         axios({
             method: "get",

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const Registration = () => {
+    const SERVER_URL = process.env.REACT_APP_SERVER_URL;
     const [message, setMessage]=useState()
     const [userinfo, setUserInfo] = useState({
         email: "",
@@ -15,12 +16,12 @@ const Registration = () => {
         });
     };
     // console.log("user info", userinfo);
-
+    const url = `${SERVER_URL}/user/`;
     const HandelSubmit = (e) => {
         e.preventDefault();
         axios({
             method: "post",
-            url: "http://127.0.0.1:8000/user/",
+            url: url,
             data: userinfo,
         }).then(function (response) {
             console.log("post data response", response);

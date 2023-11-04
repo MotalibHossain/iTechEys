@@ -8,12 +8,13 @@ import moment from "moment";
 import { ImBlog } from "react-icons/im";
 
 const AuthorProfile = () => {
+    const SERVER_URL = process.env.REACT_APP_SERVER_URL;
     const { authname } = useParams();
     const [authinfo, setAuthinfo]=useState([])
     const [Post, setPost]=useState([])
 
     // Fetch author information 
-    const url = "http://127.0.0.1:8000/user";
+    const url = `${SERVER_URL}/user`;
     useEffect(() => {
         axios({
             method: "get",
@@ -27,7 +28,7 @@ const AuthorProfile = () => {
     }, []);
 
     // Fetch author articals 
-    const blogUrl = "http://127.0.0.1:8000/blog";
+    const blogUrl = `${SERVER_URL}/blog`;
     useEffect(() => {
         axios({
             method: "get",
