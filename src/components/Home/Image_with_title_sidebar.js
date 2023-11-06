@@ -14,8 +14,7 @@ const Image_with_title_sidebar = (props) => {
                         return (
                             <div className="row mb-4" key={index}>
                                 <div className="col-lg-4 col-md-4">
-                                    <img src={image} className="rounded-1 npm run watch
-                                    w-100 h-100" alt="" />
+                                    <img src={image} className="rounded-1 w-100 h-100" alt="" />
                                 </div>
                                 <div className="col-lg-8 col-md-8">
                                     <Link to={`blog-details/${slug}`}>

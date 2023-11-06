@@ -40,11 +40,9 @@ export const MultiBlogSlider = ({posts}) => {
                                         </div>
                                         <div class="card-body mt-2">
                                             <span className="time">{formatDate(publish_date)}</span>
-                                            {/* <h3 class="card-title">{title}</h3> */}
-                                            <Link to={`blog-details/${slug}`} className="card-body-title">
+                                            <Link to={`blog-details/${slug}`} className="card-body-title post_title">
                                                 <TextTruncate line={2} element="p" text={title} />
                                             </Link>
-                                            {/* <p class="card-text">{description}</p> */}
                                             <Link className="slide-btn" to={`blog-details/${slug}`}>
                                                 Read now
                                             </Link>
