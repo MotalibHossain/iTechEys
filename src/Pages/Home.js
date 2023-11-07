@@ -39,7 +39,6 @@ const Home = () => {
     const [loadIndex, setloadendIndex] = useState(4);
     function calculateSliceArgs(item) {
         const endIndex = loadIndex + 2;
-        console.log(endIndex, item);
         setloadendIndex(endIndex);
     }
 
