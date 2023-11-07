@@ -3,7 +3,6 @@ import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import { IoChevronForwardOutline } from "react-icons/io5";
 
-import Post from "../BlogPost/Post";
 import { Link } from "react-router-dom";
 
 const Sidebar = (props) => {

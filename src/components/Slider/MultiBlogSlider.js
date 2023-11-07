@@ -14,7 +14,6 @@ export const MultiBlogSlider = ({posts}) => {
         const formattedDate = new Date(inputDate).toLocaleDateString(undefined, options);
         return formattedDate;
     }
-    console.log(posts)
     const settings = {
         autoplay: true,
         infinite: true,
