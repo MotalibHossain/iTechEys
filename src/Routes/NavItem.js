@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 // import redux material
 import { useSelector } from "react-redux";
 // import redux material
@@ -19,6 +19,7 @@ const NavItem = () => {
     // Authentication
     const { UserInfo } = useSelector((state) => state);
     const isauthentication = localStorage.getItem("IsAuthenticate");
+
     const isAdmin = JSON.parse(UserInfo);
     // redux
     const dispatch = useDispatch();
@@ -26,6 +27,36 @@ const NavItem = () => {
         RemoveAuthCredintial("IsAuthenticate", "UserInfo");
         dispatch(LogoutAction());
     };
+
+    // Show and hide dropdown menue 
+    let dropdownRef = useRef(null)
+    const outSideClick = (event) => {
+       if(!dropdownRef.current.contains(event.target) ){
+            console.log("false")
+            setDropdown(false)
+            dropdownRef.current = null;
+        }
+        
+    }
+
+    // Handle drop down menu
+    const handleMenu=(e)=>{
+        if(dropdownRef.current === null){
+            dropdownRef.current = e.target
+            setDropdown(true)
+        }
+        else{
+            dropdownRef.current = null
+            setDropdown(false)
+        }
+    }
+
+    useEffect(()=>{
+        document.addEventListener("click", outSideClick);
+        return () => {
+            document.removeEventListener('click', outSideClick);
+          };
+    },[dropdownRef])
 
     return (
         <>
@@ -53,7 +84,7 @@ const NavItem = () => {
                                 যোগাযোগ
                             </NavLink>
                         </li>
-                        <li className="NavItem" onClick={() => setDropdown(!dropDown)}>
+                        <li className="NavItem" onClick={ handleMenu}>
                             <NavLink className="NavLink" href="#">
                                 সব ক্যাটেগরি
                                 <i className="ms-1 icond" id={dropDown ? "iconDropdown" : ""}>
@@ -81,14 +112,14 @@ const NavItem = () => {
                         <li className="NavItem">
                             <BiSearch />
                         </li>
-                        <li className="NavItem" onClick={() => setDropdown1(!dropDown1)}>
+                        <li className="NavItem" onClick={handleMenu}>
                             <NavLink className="NavLink d-flex" href="#">
                                 <CgProfile size="20" />
-                                <i className="ms-1 icond" id={dropDown1 ? "iconDropdown1" : ""}>
+                                <i className="ms-1 icond" id={dropDown ? "iconDropdown" : ""}>
                                     <BiCaretUp />
                                 </i>
                             </NavLink>
-                            <ul className="DropDown Profile-dropdown" id={dropDown1 ? "ShowDropDown" : ""}>
+                            <ul className="DropDown Profile-dropdown" id={dropDown ? "ShowDropDown" : ""}>
                                 {isAdmin?.is ? (
                                     <li className="NavItem">
                                         <NavLink className="NavLink nav-link" to="/Dashboard">
