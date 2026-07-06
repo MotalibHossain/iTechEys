@@ -24,7 +24,7 @@ const Home = () => {
     const [latestPost, setLatestPost] = useState([]);
 
     const url = `${SERVER_URL}`;
-    console.log("home url------", process.env);
+
     useEffect(() => {
         axios({
             method: "get",
@@ -50,7 +50,7 @@ const Home = () => {
                         <div className="home-slider">
                             <Carousel>
                                 {post &&
-                                    post.map((Item, index) => {
+                                    post?.map((Item, index) => {
                                         const { id, title, slug, description, image, category } = Item;
                                         return (
                                             <Carousel.Item key={index}>
@@ -88,7 +88,7 @@ const Home = () => {
                     </div>
                     <div className="col-lg-4 col-md-4 col-sm-4 pl-0 side-title">
                         <ul className="ps-0">
-                            {post.map((Item, index) => {
+                            {post?.map((Item, index) => {
                                 const { id, title, slug, description, image, category } = Item;
                                 return (
                                     <li key={index}>
@@ -138,14 +138,14 @@ const Home = () => {
                     <div className="col-lg-8 col-md-8 Card-container">
                         <div className="Card-body">
                             <div className="row">
-                                {post.slice(0, loadIndex).map((Item, index) => (
+                                {post?.slice(0, loadIndex).map((Item, index) => (
                                     <PostCard item={Item} key={index} />
                                 ))}
                                 <div className="col-lg-12 mb-3 text-center">
                                     <button
                                         className="btn-animate"
                                         onClick={() => calculateSliceArgs(2)}
-                                        disabled={post.length === loadIndex ? "true" : ""}
+                                        disabled={post?.length === loadIndex ? "true" : ""}
                                     >
                                         <span>Load More</span>
                                     </button>
@@ -166,7 +166,7 @@ const Home = () => {
                     <div className="col-lg-8 col-md-8">
                         <div className="Post__gallary">
                             {post &&
-                                post.slice(0, 6).map((item, index) => {
+                                post?.slice(0, 6).map((item, index) => {
                                     const { title, slug, author, category, image } = item;
                                     const gridClass =
                                         index === 0
